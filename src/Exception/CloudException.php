@@ -1,14 +1,15 @@
 <?php
 /**
  * Skycentrics.
- * Portal package
+ * Cloud project
  * User: Alexander Bondars <alexander.bondars@cactussoft.biz>
  */
 
-namespace SkyCentrics\Cloud;
+
+namespace SkyCentrics\Cloud\Exception;
 
 
-interface CloudInterface
+class CloudException extends \Exception
 {
 
 }

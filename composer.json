@@ -1,0 +1,22 @@
+{
+  "name": "skycentrics/cloud",
+  "version": "0.0.1",
+  "authors": [
+    {
+      "name": "Alexander Bondars",
+      "email": "alexander.bondars@cactussoft.biz"
+    }
+  ],
+  "require": {
+    "php" : ">=7",
+    "guzzle/http" : "3.9.*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "6.1.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "SkyCentrics\\Cloud\\" : "src/"
+    }
+  }
+}

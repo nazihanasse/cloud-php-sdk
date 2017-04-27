@@ -43,6 +43,8 @@ abstract class AbstractSecurityProvider
         ]);
 
         $request->setHeaders($headers);
+
+        return $request;
     }
 
     abstract public function getAccount() : AccountInterface;

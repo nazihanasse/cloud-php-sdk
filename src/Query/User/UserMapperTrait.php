@@ -26,13 +26,13 @@ trait UserMapperTrait
     {
         $user = new CloudUser(
             $responseData['email'],
-            $responseData['password']
+            $responseData['auth']
         );
 
         $user->setControl($responseData['control']);
-        $user->setOrganization($responseData['control']);
+        $user->setOrganization($responseData['organization']);
         $user->setSync($responseData['sync']);
-        $user->setTimeZone($responseData['timezone']);
+        $user->setTimeZone(new \DateTimeZone($responseData['timezone']));
         $user->setCountry($responseData['address']['country']);
         $user->setZip($responseData['address']['zip']);
         $user->setCity($responseData['address']['city']);

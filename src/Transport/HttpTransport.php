@@ -13,8 +13,12 @@ use Guzzle\Common\Exception\GuzzleException;
 use Guzzle\Http\Client;
 use Guzzle\Http\Message\Request;
 use Guzzle\Http\Message\Response as GuzzleResponse;
+use SkyCentrics\Cloud\Exception\CloudResponseException;
 use SkyCentrics\Cloud\Transport\Response\Response;
 use SkyCentrics\Cloud\Transport\Request\RequestInterface;
+use Zend\Http\Headers;
+use Zend\Stdlib\Parameters;
+use Zend\Uri\Http;
 
 /**
  * Class HttpTransport
@@ -25,43 +29,39 @@ class HttpTransport implements TransportInterface
     /**
      * @param RequestInterface $request
      * @return Response
+     * @throws CloudResponseException
      */
     public function send(RequestInterface $request)
     {
-        $client = new Client();
+        $transportRequest = new \Zend\Http\Request();
+        $transportRequest->setHeaders((new Headers())->addHeaders($request->getHeaders()));
+        $transportRequest->setMethod($request->getMethod());
+        $transportRequest->setUri($request->getUri() . ltrim($request->getPath(), '/'));
+        $transportRequest->setQuery(new Parameters($request->getQuery()));
+        $transportRequest->setContent(json_encode($request->getData()));
 
-        /** @var Request $guzzleRequest */
-        $guzzleRequest = $client->createRequest(
-            $request->getMethod(),
-            $request->getUri(),
-            $request->getHeaders(),
-            json_encode($request->getData())
-        );
+        $client = new \Zend\Http\Client();
 
-        /** @var GuzzleResponse $response */
-        $response = $guzzleRequest->send();
+        $transportResponse = $client->send($transportRequest);
 
-        $body = $response->getBody(true);
-
-        if(empty($body)){
-            $data = [];
-        }else{
-            $data = json_decode($body, true);
+        if(!$transportResponse->isSuccess()){
+            $response = new Response($transportResponse->getStatusCode(), []);
+            throw new CloudResponseException($response);
         }
 
-        if($response->getStatusCode() === 201){
-            preg_match_all("/([\d]+)/", $response->getLocation(), $matches);
+        $data = $transportResponse->getContent() ?? [];
+
+        if($transportResponse->getStatusCode() === 201){
+            preg_match_all("/([\d]+)/", $transportResponse->getHeaders()->get('Location'), $matches);
 
             if(!empty($matches[0][0])){
                 $data['id'] = (int)$matches[0][0];
             }
         }
 
-
-
         return new Response(
-            $response->getStatusCode(),
-            $data
+            $transportResponse->getStatusCode(),
+            json_decode($data, true)
         );
     }
 }

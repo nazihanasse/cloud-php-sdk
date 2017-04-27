@@ -12,7 +12,7 @@ namespace SkyCentrics\Cloud\DTO;
  * Class CloudUser
  * @package SkyCentrics\Cloud\DTO
  */
-class CloudUser extends AbstractCloudDTO
+class CloudUser
 {
     /**
      * @var int

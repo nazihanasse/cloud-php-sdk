@@ -42,7 +42,7 @@ class RemoveUserQuery implements QueryInterface
     public function createRequest(): RequestInterface
     {
         return Request::createFromParams([
-            'uri' => "/users/{$this->id}/"
+            'path' => "/users/{$this->id}/"
         ]);
     }
 

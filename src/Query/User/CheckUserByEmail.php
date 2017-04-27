@@ -2,40 +2,37 @@
 /**
  * Created by IntelliJ IDEA.
  * User: Admin
- * Date: 14.04.2017
- * Time: 19:30
+ * Date: 27.04.2017
+ * Time: 10:02
  */
 
 namespace SkyCentrics\Cloud\Query\User;
 
 
 use SkyCentrics\Cloud\Query\QueryInterface;
+use SkyCentrics\Cloud\Security\Account;
 use SkyCentrics\Cloud\Transport\Request\Request;
 use SkyCentrics\Cloud\Transport\Request\RequestInterface;
 use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
 
-/**
- * Class GetUserQuery
- * @package SkyCentrics\Cloud\Query\User
- */
-class GetUserQuery implements QueryInterface
+class CheckUserByEmail implements QueryInterface
 {
     use UserMapperTrait;
 
     /**
-     * @var
+     * @var string
      */
-    protected $id;
+    protected $email;
 
     /**
-     * GetUserQuery constructor.
-     * @param int $id
+     * GetUserByEmail constructor.
+     * @param string $email
      */
     public function __construct(
-        int $id
+        string $email
     )
     {
-        $this->id = $id;
+        $this->email = $email;
     }
 
     /**
@@ -44,10 +41,9 @@ class GetUserQuery implements QueryInterface
     public function createRequest(): RequestInterface
     {
         return Request::createFromParams([
-            'path' => '/users/' . $this->id . '/',
-            'headers' => [
-                'Content-Type' => 'application/vnd.cloudbeam-v2+json',
-                'Accept' => 'application/vnd.cloudbeam-v2+json'
+            'path' => '/users/',
+            'query' => [
+                'email' => base64_encode($this->email)
             ]
         ]);
     }
@@ -57,6 +53,6 @@ class GetUserQuery implements QueryInterface
      */
     public function mapResponse(ResponseInterface $response)
     {
-        return $this->fromResponse($response->getData());
+        return new Account($response->getData()['n'], $response->getData()['a']);
     }
 }

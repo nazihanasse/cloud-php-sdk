@@ -30,6 +30,11 @@ class Request implements RequestInterface
     protected $uri;
 
     /**
+     * @var string
+     */
+    protected $path;
+
+    /**
      * @var array
      */
     protected $headers;
@@ -46,15 +51,15 @@ class Request implements RequestInterface
 
     /**
      * Request constructor.
-     * @param string $uri
+     * @param string $path
      * @param array $data
      * @param array $query
      * @param string $method
      * @param array $headers
      */
-    public function __construct(string $uri, array $data =[], array $query = [], string $method = self::METHOD_GET, array $headers = [])
+    public function __construct(string $path, array $data =[], array $query = [], string $method = self::METHOD_GET, array $headers = [])
     {
-        $this->uri = $uri;
+        $this->path = $path;
         $this->method = $method;
         $this->data = $data;
 
@@ -74,7 +79,7 @@ class Request implements RequestInterface
     public static function createFromParams(array $params): RequestInterface
     {
         $params = array_merge([
-            'uri' => '',
+            'path' => '',
             'data' => [],
             'query' => [],
             'method' => self::METHOD_GET,
@@ -82,7 +87,7 @@ class Request implements RequestInterface
         ], $params);
 
         return new self(
-            $params['uri'],
+            $params['path'],
             $params['data'],
             $params['query'],
             $params['method'],
@@ -95,9 +100,9 @@ class Request implements RequestInterface
         return $this->method;
     }
 
-    public function getUri(): string
+    public function getPath(): string
     {
-        return $this->uri;
+        return $this->path;
     }
 
     public function getHeaders(): array
@@ -113,5 +118,30 @@ class Request implements RequestInterface
     public function setHeaders(array $headers)
     {
         $this->headers = $headers;
+    }
+
+    public function setPath(string $path)
+    {
+        $this->path = $path;
+    }
+
+    public function getUri(): string
+    {
+        return $this->uri;
+    }
+
+    public function setUri(string $uri)
+    {
+        $this->uri = $uri;
+    }
+
+    public function getQuery(): array
+    {
+        return $this->query;
+    }
+
+    public function setQuery(array $query): array
+    {
+        $this->query = $query;
     }
 }

@@ -45,7 +45,7 @@ class AuthorizeUserQuery implements QueryInterface
     public function createRequest(): RequestInterface
     {
         return Request::createFromParams([
-            'url' => '/users/',
+            'path' => '/users/',
             'query' => [
                 'auth' => base64_encode(sprintf("%s:%s", $this->account->getEmail(), $this->account->getPassword()))
             ],

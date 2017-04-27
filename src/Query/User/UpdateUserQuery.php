@@ -45,7 +45,7 @@ class UpdateUserQuery implements QueryInterface
     public function createRequest(): RequestInterface
     {
         return Request::createFromParams([
-            'uri' => "/users/{$this->cloudUser->getId()}/",
+            'path' => "/users/{$this->cloudUser->getId()}/",
             'method' => 'PUT',
             'data' => $this->toRequest($this->cloudUser)
         ]);

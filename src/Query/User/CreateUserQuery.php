@@ -1,16 +1,12 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: Admin
- * Date: 14.04.2017
- * Time: 19:30
- */
+
 
 namespace SkyCentrics\Cloud\Query\User;
 
 
 use SkyCentrics\Cloud\DTO\CloudUser;
 use SkyCentrics\Cloud\Query\QueryInterface;
+use SkyCentrics\Cloud\src\Exception\QueryException;
 use SkyCentrics\Cloud\Transport\Request\Request;
 use SkyCentrics\Cloud\Transport\Request\RequestInterface;
 use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
@@ -31,11 +27,16 @@ class CreateUserQuery implements QueryInterface
     /**
      * CreateUserQuery constructor.
      * @param CloudUser $cloudUser
+     * @throws QueryException
      */
     public function __construct(
         CloudUser $cloudUser
     )
     {
+        if(!empty($cloudUser->getId())){
+            throw new QueryException("You can't create user with ID.");
+        }
+
         $this->cloudUser = $cloudUser;
     }
 
@@ -45,7 +46,7 @@ class CreateUserQuery implements QueryInterface
     public function createRequest(): RequestInterface
     {
         return Request::createFromParams([
-            'url' => '/users/',
+            'path' => '/users/',
             'body' => $this->toRequest($this->cloudUser)
         ]);
     }

@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: Admin
- * Date: 26.04.2017
- * Time: 11:49
- */
+
 
 namespace SkyCentrics\Cloud;
 

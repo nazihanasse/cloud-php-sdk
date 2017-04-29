@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: Admin
- * Date: 27.04.2017
- * Time: 10:02
- */
+
 
 namespace SkyCentrics\Cloud\Query\User;
 
@@ -15,6 +10,10 @@ use SkyCentrics\Cloud\Transport\Request\Request;
 use SkyCentrics\Cloud\Transport\Request\RequestInterface;
 use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
 
+/**
+ * Class CheckUserByEmail
+ * @package SkyCentrics\Cloud\Query\User
+ */
 class CheckUserByEmail implements QueryInterface
 {
     use UserMapperTrait;

@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: Admin
- * Date: 26.04.2017
- * Time: 14:58
- */
+
 
 namespace SkyCentrics\Cloud\Query\User;
 
@@ -26,7 +21,8 @@ trait UserMapperTrait
     {
         $user = new CloudUser(
             $responseData['email'],
-            $responseData['auth']
+            $responseData['auth'],
+            true
         );
 
         $user->setControl($responseData['control']);

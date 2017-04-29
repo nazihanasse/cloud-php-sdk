@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: Admin
- * Date: 17.04.2017
- * Time: 15:12
- */
+
 
 namespace SkyCentrics\Cloud\DTO;
 
@@ -88,20 +83,22 @@ class CloudUser
      * CloudUser constructor.
      * @param string $email
      * @param string $password
+     * @param bool $isHashed
      */
     public function __construct(
         string $email,
-        string $password
+        string $password,
+        bool $isHashed = false
     )
     {
         $this->email = $email;
-        $this->password = $password;
+        $this->setPassword($password, $isHashed);
     }
 
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -140,10 +137,11 @@ class CloudUser
 
     /**
      * @param string $password
+     * @param bool $isHashed
      */
-    public function setPassword(string $password)
+    public function setPassword(string $password, bool $isHashed = false)
     {
-        $this->password = $password;
+        $this->password = $isHashed ? $password : md5($password);
     }
 
     /**

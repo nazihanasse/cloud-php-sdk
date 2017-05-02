@@ -135,7 +135,7 @@ class Request implements RequestInterface
         return $this->query;
     }
 
-    public function setQuery(array $query): array
+    public function setQuery(array $query)
     {
         $this->query = $query;
     }

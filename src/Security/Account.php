@@ -34,4 +34,12 @@ class Account implements AccountInterface
     {
         return $this->password;
     }
+
+    /**
+     * @return string
+     */
+    public function getAuth(): string
+    {
+        return base64_encode(sprintf("%s:%s", $this->getEmail(), $this->getPassword()));
+    }
 }

@@ -7,7 +7,7 @@ namespace SkyCentrics\Cloud\DTO;
  * Class AbstractCloudDevice
  * @package SkyCentrics\Cloud\DTO
  */
-class AbstractCloudDevice
+abstract class AbstractCloudDevice
 {
     /**
      * @var int
@@ -58,7 +58,7 @@ class AbstractCloudDevice
         int $type,
         string $mac,
         int $groupId = 0,
-        int $model = null
+        int $model = 0
     )
     {
         $this->userId = $userId;
@@ -163,6 +163,22 @@ class AbstractCloudDevice
     public function setDeviceModel(int $model)
     {
         $this->model = $model;
+    }
+
+    /**
+     * @param int $groupId
+     */
+    public function setGroupId(int $groupId)
+    {
+        $this->groupId = $groupId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getGroupId(): int
+    {
+        return $this->groupId;
     }
 
     abstract public static function getSupportedTypes() : array;

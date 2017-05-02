@@ -9,7 +9,7 @@ namespace SkyCentrics\Cloud\Transport\Request;
  */
 interface RequestInterface
 {
-    public static function createFromParams(array $params) : self;
+    public static function createFromParams(array $params) : RequestInterface;
 
     public function getMethod() : string;
 
@@ -29,5 +29,5 @@ interface RequestInterface
 
     public function getQuery() : array;
 
-    public function setQuery(array $query) : array;
+    public function setQuery(array $query);
 }

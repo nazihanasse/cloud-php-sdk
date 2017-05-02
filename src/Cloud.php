@@ -4,10 +4,13 @@
 namespace SkyCentrics\Cloud;
 
 
+use SkyCentrics\Cloud\Exception\CloudException;
 use SkyCentrics\Cloud\Exception\CloudResponseException;
 use SkyCentrics\Cloud\Query\QueryInterface;
 use SkyCentrics\Cloud\Security\AccountInterface;
 use SkyCentrics\Cloud\Security\SecurityProvider;
+use SkyCentrics\Cloud\Transport\Request\MultiRequestInterface;
+use SkyCentrics\Cloud\Transport\Request\RequestInterface;
 use SkyCentrics\Cloud\Transport\TransportInterface;
 
 /**
@@ -52,16 +55,28 @@ class Cloud implements CloudInterface
      * @param QueryInterface $query
      * @param AccountInterface|null $account
      * @return mixed
-     * @throws CloudResponseException
+     * @throws CloudException
      */
     public function apply(QueryInterface $query, AccountInterface $account = null)
     {
         $request = $query->createRequest();
 
-        $request->setUri(self::SKYCENTRICS_API_URI);
+        if(!$request instanceof RequestInterface){
+            throw new CloudException(sprintf("Request must be instanced of %s!", RequestInterface::class));
+        }
 
-        $response = $this->transport->send($this->securityProvider->provide($request));
 
+        if($request instanceof MultiRequestInterface) {
+            foreach ($request as $requestItem){
+                $requestItem->setUri(self::SKYCENTRICS_API_URI);
+            }
+
+            $response = $this->transport->sendMulti($request);
+        }else{
+            $request->setUri(self::SKYCENTRICS_API_URI);
+
+            $response = $this->transport->send($this->securityProvider->provide($request));
+        }
 
         $queryResult = $query->mapResponse($response);
 

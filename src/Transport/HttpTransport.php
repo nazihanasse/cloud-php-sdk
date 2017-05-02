@@ -9,6 +9,9 @@ use Guzzle\Http\Client;
 use Guzzle\Http\Message\Request;
 use Guzzle\Http\Message\Response as GuzzleResponse;
 use SkyCentrics\Cloud\Exception\CloudResponseException;
+use SkyCentrics\Cloud\Transport\Request\MultiRequestInterface;
+use SkyCentrics\Cloud\Transport\Response\MultiResponse;
+use SkyCentrics\Cloud\Transport\Response\MultiResponseInterface;
 use SkyCentrics\Cloud\Transport\Response\Response;
 use SkyCentrics\Cloud\Transport\Request\RequestInterface;
 use Zend\Http\Headers;
@@ -58,5 +61,20 @@ class HttpTransport implements TransportInterface
             $transportResponse->getStatusCode(),
             json_decode($data, true)
         );
+    }
+
+    /**
+     * @param MultiRequestInterface $multiRequest
+     * @return MultiResponse
+     */
+    public function sendMulti(MultiRequestInterface $multiRequest) : MultiResponseInterface
+    {
+        $responses = [];
+
+        foreach ($multiRequest as $request){
+            $responses[] = $this->send($request);
+        }
+
+        return new MultiResponse($responses);
     }
 }

@@ -1,24 +1,25 @@
 <?php
 
 
-namespace SkyCentrics\Cloud\Query\Device;
+namespace SkyCentrics\Cloud\Mapper;
 
 
 use SkyCentrics\Cloud\DTO\AbstractCloudDevice;
 use SkyCentrics\Cloud\DTO\CloudDevice;
+use SkyCentrics\Cloud\DTO\CloudDTOInterface;
 use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
 
 /**
  * Class DeviceMapperTrait
  * @package SkyCentrics\Cloud\Query\Device
  */
-trait DeviceMapperTrait
+class DeviceMapper implements MapperInterface
 {
     /**
      * @param array $responseData
-     * @return CloudDevice
+     * @return CloudDTOInterface
      */
-    public function fromResponse(array $responseData)
+    public static function fromResponse(array $responseData) : CloudDTOInterface
     {
         $user = $responseData['user'] ?? $responseData['u'];
         $name = $responseData['name'] ?? $responseData['n'];
@@ -41,9 +42,10 @@ trait DeviceMapperTrait
     }
 
     /**
-     * @param AbstractCloudDevice $cloudDevice
+     * @param CloudDTOInterface $cloudDevice
+     * @return array
      */
-    public function toRequest(AbstractCloudDevice $cloudDevice)
+    public static function toRequest(CloudDTOInterface $cloudDevice) : array
     {
         // @TODO: realize
     }

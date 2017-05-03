@@ -1,23 +1,24 @@
 <?php
 
 
-namespace SkyCentrics\Cloud\Query\User;
+namespace SkyCentrics\Cloud\Mapper;
 
 
+use SkyCentrics\Cloud\DTO\CloudDTOInterface;
 use SkyCentrics\Cloud\DTO\CloudUser;
-use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
+use SkyCentrics\Cloud\Exception\CloudMappingException;
 
 /**
  * Class UserMapperTrait
  * @package SkyCentrics\Cloud\Query\User
  */
-trait UserMapperTrait
+class UserMapper implements MapperInterface
 {
     /**
      * @param array $responseData
-     * @return CloudUser
+     * @return CloudDTOInterface
      */
-    public function fromResponse(array $responseData)
+    public static function fromResponse(array $responseData) : CloudDTOInterface
     {
         $user = new CloudUser(
             $responseData['email'],
@@ -42,12 +43,17 @@ trait UserMapperTrait
     }
 
     /**
-     * @param CloudUser $cloudUser
+     * @param CloudDTOInterface $cloudUser
      * @return array
+     * @throws CloudMappingException
      */
-    public function toRequest(CloudUser $cloudUser)
+    public static function toRequest(CloudDTOInterface $cloudUser) : array
     {
-       return [
+        if(!$cloudUser instanceof CloudUser){
+            throw new CloudMappingException();
+        }
+
+        return [
            'id' => $cloudUser->getId(),
            'auth' => $cloudUser->getPassword(),
            'email' => $cloudUser->getEmail(),

@@ -5,6 +5,7 @@ namespace SkyCentrics\Cloud\Query\Group;
 
 
 use SkyCentrics\Cloud\DTO\CloudGroup;
+use SkyCentrics\Cloud\Mapper\GroupMapper;
 use SkyCentrics\Cloud\Query\QueryInterface;
 use SkyCentrics\Cloud\Security\AccountInterface;
 use SkyCentrics\Cloud\Transport\Request\MultiRequestInterface;
@@ -19,8 +20,6 @@ use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
  */
 class GetUserGroupsQuery implements QueryInterface
 {
-    use GroupMapperTrait;
-
     /**
      * @var AccountInterface
      */
@@ -58,7 +57,7 @@ class GetUserGroupsQuery implements QueryInterface
     {
         $groups = [];
         foreach ($response->getData() as $groupData){
-            $groups[] = $this->fromResponse($groupData);
+            $groups[] = GroupMapper::fromResponse($groupData);
         }
 
         return $groups;

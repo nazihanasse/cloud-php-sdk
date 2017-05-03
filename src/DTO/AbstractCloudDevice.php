@@ -7,7 +7,7 @@ namespace SkyCentrics\Cloud\DTO;
  * Class AbstractCloudDevice
  * @package SkyCentrics\Cloud\DTO
  */
-abstract class AbstractCloudDevice
+abstract class AbstractCloudDevice implements CloudDTOInterface
 {
     /**
      * @var int

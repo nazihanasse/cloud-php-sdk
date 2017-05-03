@@ -1,22 +1,24 @@
 <?php
 
 
-namespace SkyCentrics\Cloud\Query\Group;
+namespace SkyCentrics\Cloud\Mapper;
 
 
+use SkyCentrics\Cloud\DTO\CloudDTOInterface;
 use SkyCentrics\Cloud\DTO\CloudGroup;
+use SkyCentrics\Cloud\Exception\CloudMappingException;
 
 /**
- * Class GroupMapperTrait
+ * Class GroupMapper
  * @package SkyCentrics\Cloud\Query\Group
  */
-trait GroupMapperTrait
+class GroupMapper implements MapperInterface
 {
     /**
      * @param array $responseData
-     * @return CloudGroup
+     * @return CloudDTOInterface
      */
-    public function fromResponse(array $responseData)
+    public static function fromResponse(array $responseData) : CloudDTOInterface
     {
         $group = new CloudGroup(
             $responseData['n'],
@@ -30,11 +32,16 @@ trait GroupMapperTrait
     }
 
     /**
-     * @param CloudGroup $group
+     * @param CloudDTOInterface $group
      * @return array
+     * @throws CloudMappingException
      */
-    public function toRequest(CloudGroup $group)
+    public static function toRequest(CloudDTOInterface $group) : array
     {
+        if(!$group instanceof CloudGroup){
+            throw new CloudMappingException();
+        }
+
         return [
             'i' => $group->getId(),
             'u' => $group->getUserId(),

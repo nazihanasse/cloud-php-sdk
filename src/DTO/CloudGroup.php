@@ -8,7 +8,7 @@ namespace SkyCentrics\Cloud\DTO;
  * Class CloudGroup
  * @package SkyCentrics\Cloud\DTO
  */
-class CloudGroup
+class CloudGroup implements CloudDTOInterface
 {
     /**
      * @var int

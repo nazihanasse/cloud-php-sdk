@@ -4,6 +4,7 @@
 namespace SkyCentrics\Cloud\Query\Device;
 
 
+use SkyCentrics\Cloud\Mapper\DeviceMapper;
 use SkyCentrics\Cloud\Query\QueryInterface;
 use SkyCentrics\Cloud\Security\AccountInterface;
 use SkyCentrics\Cloud\Transport\Request\MultiRequest;
@@ -17,8 +18,6 @@ use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
  */
 class GetUserDevicesQuery implements QueryInterface
 {
-    use DeviceMapperTrait;
-
     /**
      * @var AccountInterface
      */
@@ -65,14 +64,14 @@ class GetUserDevicesQuery implements QueryInterface
             /** @var ResponseInterface $responseItem */
             foreach ($response as $responseItem){
                 foreach ($responseItem->getData() as $deviceData){
-                    $devices[] = $this->fromResponse($deviceData);
+                    $devices[] = DeviceMapper::fromResponse($deviceData);
                 }
             }
 
             return $devices;
 
         }else{
-            return $this->fromResponse($response->getData());
+            return DeviceMapper::fromResponse($response->getData());
         }
     }
 }

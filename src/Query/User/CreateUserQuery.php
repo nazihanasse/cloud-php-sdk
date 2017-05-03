@@ -5,6 +5,7 @@ namespace SkyCentrics\Cloud\Query\User;
 
 
 use SkyCentrics\Cloud\DTO\CloudUser;
+use SkyCentrics\Cloud\Mapper\UserMapper;
 use SkyCentrics\Cloud\Query\QueryInterface;
 use SkyCentrics\Cloud\src\Exception\QueryException;
 use SkyCentrics\Cloud\Transport\Request\Request;
@@ -17,8 +18,6 @@ use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
  */
 class CreateUserQuery implements QueryInterface
 {
-    use UserMapperTrait;
-
     /**
      * @var CloudUser
      */
@@ -47,7 +46,7 @@ class CreateUserQuery implements QueryInterface
     {
         return Request::createFromParams([
             'path' => '/users/',
-            'body' => $this->toRequest($this->cloudUser)
+            'body' => UserMapper::toRequest($this->cloudUser)
         ]);
     }
 

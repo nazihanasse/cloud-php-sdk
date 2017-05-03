@@ -7,7 +7,7 @@ namespace SkyCentrics\Cloud\DTO;
  * Class CloudUser
  * @package SkyCentrics\Cloud\DTO
  */
-class CloudUser
+class CloudUser implements CloudDTOInterface
 {
     /**
      * @var int

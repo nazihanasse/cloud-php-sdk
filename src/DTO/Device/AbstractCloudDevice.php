@@ -1,7 +1,9 @@
 <?php
 
 
-namespace SkyCentrics\Cloud\DTO;
+namespace SkyCentrics\Cloud\DTO\Device;
+
+use SkyCentrics\Cloud\DTO\CloudDTOInterface;
 
 /**
  * Class AbstractCloudDevice

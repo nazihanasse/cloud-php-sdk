@@ -5,7 +5,7 @@ namespace SkyCentrics\Cloud\Mapper;
 
 
 use SkyCentrics\Cloud\DTO\AbstractCloudDevice;
-use SkyCentrics\Cloud\DTO\CloudDevice;
+use SkyCentrics\Cloud\DTO\\Device\CloudDevice;
 use SkyCentrics\Cloud\DTO\CloudDTOInterface;
 use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
 

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace SkyCentrics\Cloud\DTO;
+namespace SkyCentrics\Cloud\DTO\Device;
 
 /**
  * Class CloudDevice

@@ -54,7 +54,7 @@ class GetUserDevicesQuery implements QueryInterface
 
     /**
      * @param ResponseInterface $response
-     * @return array|\SkyCentrics\Cloud\DTO\CloudDevice
+     * @return array|\SkyCentrics\Cloud\DTO\\Device\CloudDevice
      */
     public function mapResponse(ResponseInterface $response)
     {

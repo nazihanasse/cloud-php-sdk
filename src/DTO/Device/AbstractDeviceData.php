@@ -33,4 +33,8 @@ abstract class AbstractDeviceData
     {
         return $this->time;
     }
+
+    abstract public function supportType(int $type) : bool;
+
+    abstract public static function fromResponse(array $response) : AbstractDeviceData;
 }

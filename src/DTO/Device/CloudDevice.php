@@ -9,11 +9,5 @@ namespace SkyCentrics\Cloud\DTO\Device;
  */
 class CloudDevice extends AbstractCloudDevice
 {
-    /**
-     * @return array
-     */
-    public static function getSupportedTypes(): array
-    {
-        return [];
-    }
+
 }

@@ -4,24 +4,32 @@
 namespace SkyCentrics\Cloud\Query\Device;
 
 
-use SkyCentrics\Cloud\Query\QueryInterface;
-use SkyCentrics\Cloud\Security\AccountInterface;
+use SkyCentrics\Cloud\DTO\Device\CloudDeviceID;
+use SkyCentrics\Cloud\Mapper\DeviceMapper;
+use SkyCentrics\Cloud\Transport\Request\Request;
 use SkyCentrics\Cloud\Transport\Request\RequestInterface;
 use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
 
-class GetDeviceQuery implements QueryInterface
+/**
+ * Class GetDeviceQuery
+ * @package SkyCentrics\Cloud\Query\Device
+ */
+class GetDeviceQuery extends AbstractDeviceQuery
 {
-    protected $account;
+    /**
+     * @var CloudDeviceID
+     */
+    protected $cloudDeviceID;
 
-    protected $id;
-
+    /**
+     * GetDeviceQuery constructor.
+     * @param CloudDeviceID $cloudDeviceID
+     */
     public function __construct(
-        int $id = null,
-        AccountInterface $account
+        CloudDeviceID $cloudDeviceID
     )
     {
-        $this->id = $id;
-        $this->account = $account;
+        $this->cloudDeviceID = $cloudDeviceID;
     }
 
     /**
@@ -29,7 +37,9 @@ class GetDeviceQuery implements QueryInterface
      */
     public function createRequest(): RequestInterface
     {
-
+        return Request::createFromParams([
+            'path' => sprintf("/%s/%s", $this->getPath(), $this->cloudDeviceID->getId())
+        ]);
     }
 
     /**
@@ -37,6 +47,14 @@ class GetDeviceQuery implements QueryInterface
      */
     public function mapResponse(ResponseInterface $response)
     {
-        // TODO: Implement mapResponse() method.
+        return DeviceMapper::fromResponse($response->getData());
+    }
+
+    /**
+     * @return CloudDeviceID
+     */
+    public function getDevice(): CloudDeviceID
+    {
+        return $this->cloudDeviceID;
     }
 }

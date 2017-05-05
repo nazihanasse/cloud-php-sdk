@@ -183,5 +183,4 @@ abstract class AbstractCloudDevice implements CloudDTOInterface
         return $this->groupId;
     }
 
-    abstract public static function getSupportedTypes() : array;
 }

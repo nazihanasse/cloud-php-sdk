@@ -6,16 +6,19 @@ namespace SkyCentrics\Cloud\Mapper;
 
 use SkyCentrics\Cloud\DTO\CloudDTOInterface;
 
+/**
+ * Class DeviceDataMapper
+ * @package SkyCentrics\Cloud\Mapper
+ */
 class DeviceDataMapper implements MapperInterface
 {
-
     /**
      * @param array $responseData
      * @return mixed
      */
     public static function fromResponse(array $responseData): CloudDTOInterface
     {
-        // TODO: Implement fromResponse() method.
+
     }
 
     /**

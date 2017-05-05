@@ -4,7 +4,7 @@
 namespace SkyCentrics\Cloud\Query\Device;
 
 
-use SkyCentrics\Cloud\DTO\AbstractCloudDevice;
+use SkyCentrics\Cloud\DTO\Device\AbstractCloudDevice;
 use SkyCentrics\Cloud\Transport\Request\Request;
 
 class DeviceRequestFactory

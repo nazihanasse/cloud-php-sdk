@@ -5,13 +5,13 @@ namespace SkyCentrics\Cloud\Query\Device;
 
 
 use SkyCentrics\Cloud\DTO\Device\AbstractCloudDevice;
-use SkyCentrics\Cloud\DTO\Device\ChargerData;
+use SkyCentrics\Cloud\DTO\Device\Data\ChargerData;
 use SkyCentrics\Cloud\DTO\Device\CloudDeviceID;
-use SkyCentrics\Cloud\DTO\Device\PlugData;
-use SkyCentrics\Cloud\DTO\Device\PoolPumpData;
-use SkyCentrics\Cloud\DTO\Device\SkySnapData;
-use SkyCentrics\Cloud\DTO\Device\ThermostatData;
-use SkyCentrics\Cloud\DTO\Device\WaterHeaterData;
+use SkyCentrics\Cloud\DTO\Device\Data\PlugData;
+use SkyCentrics\Cloud\DTO\Device\Data\PoolPumpData;
+use SkyCentrics\Cloud\DTO\Device\Data\SkySnapData;
+use SkyCentrics\Cloud\DTO\Device\Data\ThermostatData;
+use SkyCentrics\Cloud\DTO\Device\Data\WaterHeaterData;
 use SkyCentrics\Cloud\Exception\CloudQueryException;
 use SkyCentrics\Cloud\Transport\Request\MultiRequestInterface;
 use SkyCentrics\Cloud\Transport\Request\Request;
@@ -68,7 +68,7 @@ class GetDeviceDataQuery extends AbstractDeviceQuery
     public function createRequest(): RequestInterface
     {
         return Request::createFromParams([
-            'path' => sprintf("/%s/data", $this->getPath())
+            'path' => sprintf("/%s/%s/data", $this->getPath(), $this->cloudDevice->getId())
         ]);
     }
 
@@ -78,13 +78,18 @@ class GetDeviceDataQuery extends AbstractDeviceQuery
      */
     public function mapResponse(ResponseInterface $response)
     {
-        return $this->cloudDataClass::fromResponse($response->getData());
+        $data = $response->getData();
+
+        $data['type'] = $this->getDeviceID()->getType();
+
+        return $data;
+//        return $this->cloudDataClass::fromResponse($response->getData());
     }
 
     /**
      * @return CloudDeviceID
      */
-    public function getDevice(): CloudDeviceID
+    public function getDeviceID(): CloudDeviceID
     {
         return new CloudDeviceID($this->cloudDevice->getId(), $this->cloudDevice->getDeviceType());
     }

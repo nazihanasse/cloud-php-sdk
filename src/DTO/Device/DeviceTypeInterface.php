@@ -30,4 +30,8 @@ interface DeviceTypeInterface
     const TYPE_SKYPLUG_110 = 3;
     const TYPE_GENERIC_METERING_PLUG = 2;
     const TYPE_PISNAP_3 = 250;
+
+    const TYPE_THERMOSTAT_DEPRECATED = 1;
+    const TYPE_PISNAP_3_DEPRECATED = 4;
+    const TYPE_SKYSNAP_10_DEPRECATED = 5;
 }

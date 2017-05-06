@@ -15,7 +15,7 @@ class CloudDeviceID
         int $type
     )
     {
-        $this->id = $type;
+        $this->id = $id;
         $this->type = $type;
     }
 

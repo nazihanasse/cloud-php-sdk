@@ -4,14 +4,14 @@
 namespace SkyCentrics\Cloud\DTO\Device;
 
 
-abstract class AbstractDeviceData
+abstract class AbstractData
 {
     protected $deviceId;
 
     protected $time;
 
     /**
-     * AbstractDeviceData constructor.
+     * AbstractData constructor.
      * @param $deviceId
      * @param $time
      */
@@ -36,5 +36,5 @@ abstract class AbstractDeviceData
 
     abstract public function supportType(int $type) : bool;
 
-    abstract public static function fromResponse(array $response) : AbstractDeviceData;
+    abstract public static function fromResponse(array $response) : AbstractData;
 }

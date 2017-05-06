@@ -38,7 +38,7 @@ class GetDeviceQuery extends AbstractDeviceQuery
     public function createRequest(): RequestInterface
     {
         return Request::createFromParams([
-            'path' => sprintf("/%s/%s", $this->getPath(), $this->cloudDeviceID->getId())
+            'path' => sprintf("/%s/%s/", $this->getPath(), $this->cloudDeviceID->getId())
         ]);
     }
 
@@ -53,7 +53,7 @@ class GetDeviceQuery extends AbstractDeviceQuery
     /**
      * @return CloudDeviceID
      */
-    public function getDevice(): CloudDeviceID
+    public function getDeviceID(): CloudDeviceID
     {
         return $this->cloudDeviceID;
     }

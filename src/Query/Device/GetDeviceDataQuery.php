@@ -13,6 +13,7 @@ use SkyCentrics\Cloud\DTO\Device\Data\SkySnapData;
 use SkyCentrics\Cloud\DTO\Device\Data\ThermostatData;
 use SkyCentrics\Cloud\DTO\Device\Data\WaterHeaterData;
 use SkyCentrics\Cloud\Exception\CloudQueryException;
+use SkyCentrics\Cloud\Mapper\AnnotationMapper;
 use SkyCentrics\Cloud\Transport\Request\MultiRequestInterface;
 use SkyCentrics\Cloud\Transport\Request\Request;
 use SkyCentrics\Cloud\Transport\Request\RequestInterface;
@@ -81,6 +82,8 @@ class GetDeviceDataQuery extends AbstractDeviceQuery
         $data = $response->getData();
 
         $data['type'] = $this->getDeviceID()->getType();
+
+        AnnotationMapper::fromResponse($response->getData(), $this->cloudDataClass);
 
         return $data;
 //        return $this->cloudDataClass::fromResponse($response->getData());

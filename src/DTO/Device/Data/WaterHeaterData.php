@@ -5,8 +5,10 @@ namespace SkyCentrics\Cloud\DTO\Device\Data;
 
 use SkyCentrics\Cloud\DTO\Device\AbstractData;
 use SkyCentrics\Cloud\DTO\Device\DeviceTypeInterface;
+use SkyCentrics\Cloud\Mapper\Annotation as Annotation;
 
 /**
+ * @Annotation
  * Class WaterHeaterData
  * @package SkyCentrics\Cloud\DTO\Device\Data
  */
@@ -62,7 +64,7 @@ class WaterHeaterData extends AbstractData
 
     /**
      * @param int $relay
-     * @Map={"relay"}
+     * @SkyCentrics\Cloud\Mapper\Annotation\Property(property="relay")
      */
     public function setRelay(int $relay)
     {
@@ -79,7 +81,7 @@ class WaterHeaterData extends AbstractData
 
     /**
      * @param int $override
-     * @Map={"override"}
+     * @Property("override")
      */
     public function setOverride(int $override)
     {
@@ -96,7 +98,7 @@ class WaterHeaterData extends AbstractData
 
     /**
      * @param mixed $power
-     * @Map={"power"}
+     * @Property("power")
      */
     public function setPower($power)
     {

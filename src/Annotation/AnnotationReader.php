@@ -25,6 +25,8 @@ class AnnotationReader implements AnnotationReaderInterface
     public function __construct()
     {
         $this->doctrineReader = new SimpleAnnotationReader(new DocParser());
+
+        $this->doctrineReader->addNamespace(__NAMESPACE__);
     }
 
     /**

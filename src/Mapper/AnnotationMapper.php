@@ -7,6 +7,7 @@ namespace SkyCentrics\Cloud\Mapper;
 use SkyCentrics\Cloud\Annotation\AnnotationReader;
 use SkyCentrics\Cloud\Annotation\AnnotationReaderInterface;
 use SkyCentrics\Cloud\DTO\CloudDTOInterface;
+use SkyCentrics\Cloud\Mapper\Annotation\Property;
 
 /**
  * Class AnnotationMapper
@@ -36,7 +37,7 @@ class AnnotationMapper implements AnnotationMapperInterface
     }
 
     /**
-     * @return AnnotationMapperInterface
+     * @return AnnotationReader
      */
     public static function getReader() : AnnotationReader
     {
@@ -56,6 +57,16 @@ class AnnotationMapper implements AnnotationMapperInterface
         $reader = self::getReader();
 
         $annotations = $reader->read($class);
+
+        foreach ($annotations as $annotation){
+            if($annotation instanceof Property){
+                $propertyName = $annotation->getPropertyName();
+
+                if(isset($responseData[$propertyName])){
+                    $class->{$annotation->getMethod()}($responseData[$propertyName]);
+                }
+            }
+        }
     }
 
     /**

@@ -5,7 +5,7 @@ namespace SkyCentrics\Cloud\DTO\Device\Data;
 
 use SkyCentrics\Cloud\DTO\Device\AbstractData;
 use SkyCentrics\Cloud\DTO\Device\DeviceTypeInterface;
-use SkyCentrics\Cloud\Mapper\Annotation as Annotation;
+use SkyCentrics\Cloud\Annotation\Property;
 
 /**
  * @Annotation
@@ -64,7 +64,7 @@ class WaterHeaterData extends AbstractData
 
     /**
      * @param int $relay
-     * @SkyCentrics\Cloud\Mapper\Annotation\Property(property="relay")
+     * @Property(property="relay", method="setRelay")
      */
     public function setRelay(int $relay)
     {
@@ -81,7 +81,7 @@ class WaterHeaterData extends AbstractData
 
     /**
      * @param int $override
-     * @Property("override")
+     * @Property(property="override", method="setOverride")
      */
     public function setOverride(int $override)
     {
@@ -98,7 +98,7 @@ class WaterHeaterData extends AbstractData
 
     /**
      * @param mixed $power
-     * @Property("power")
+     * @Property(property="power", method="setPower")
      */
     public function setPower($power)
     {
@@ -115,6 +115,7 @@ class WaterHeaterData extends AbstractData
 
     /**
      * @param int $state
+     * @Property(property="state", method="setState")
      */
     public function setState(int $state)
     {
@@ -131,6 +132,7 @@ class WaterHeaterData extends AbstractData
 
     /**
      * @param array $commodity
+     * @Property(property="commodity", method="setCommodity")
      */
     public function setCommodity(array $commodity)
     {
@@ -147,6 +149,7 @@ class WaterHeaterData extends AbstractData
 
     /**
      * @param array $commodities
+     * @Property(property="commodities", method="setCommodities")
      */
     public function setCommodities(array $commodities)
     {
@@ -163,6 +166,7 @@ class WaterHeaterData extends AbstractData
 
     /**
      * @param array $offset
+     * @Property(property="offset", method="setOffset")
      */
     public function setOffset(array $offset)
     {
@@ -179,6 +183,7 @@ class WaterHeaterData extends AbstractData
 
     /**
      * @param array $setpoint
+     * @Property(property="setpoint", method="setSetpoint")
      */
     public function setSetpoint(array $setpoint)
     {

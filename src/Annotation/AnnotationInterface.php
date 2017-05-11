@@ -3,6 +3,8 @@
 
 namespace SkyCentrics\Cloud\Annotation;
 
+use SkyCentrics\Cloud\DTO\CloudDTOInterface;
+
 
 /**
  * Interface AnnotationInterface
@@ -10,19 +12,5 @@ namespace SkyCentrics\Cloud\Annotation;
  */
 interface AnnotationInterface
 {
-    /**
-     * @return string
-     */
-    public static function getName() : string;
 
-    /**
-     * @return array
-     */
-    public function getValues() : array;
-
-    /**
-     * @param array $values
-     * @return mixed
-     */
-    public function setValues(array $values);
 }

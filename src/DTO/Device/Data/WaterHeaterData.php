@@ -57,14 +57,14 @@ class WaterHeaterData extends AbstractData
     /**
      * @return int
      */
-    public function getRelay(): int
+    public function getRelay(): ?int
     {
         return $this->relay;
     }
 
     /**
      * @param int $relay
-     * @Property(property="relay", method="setRelay")
+     * @Property(property="relay", type="int")
      */
     public function setRelay(int $relay)
     {
@@ -74,14 +74,14 @@ class WaterHeaterData extends AbstractData
     /**
      * @return int
      */
-    public function getOverride(): int
+    public function getOverride(): ?int
     {
         return $this->override;
     }
 
     /**
      * @param int $override
-     * @Property(property="override", method="setOverride")
+     * @Property(property="override", type="int")
      */
     public function setOverride(int $override)
     {
@@ -98,7 +98,7 @@ class WaterHeaterData extends AbstractData
 
     /**
      * @param mixed $power
-     * @Property(property="power", method="setPower")
+     * @Property(property="power", type="float")
      */
     public function setPower($power)
     {
@@ -108,14 +108,14 @@ class WaterHeaterData extends AbstractData
     /**
      * @return int
      */
-    public function getState(): int
+    public function getState(): ?int
     {
         return $this->state;
     }
 
     /**
      * @param int $state
-     * @Property(property="state", method="setState")
+     * @Property(property="state", type="int")
      */
     public function setState(int $state)
     {
@@ -125,14 +125,14 @@ class WaterHeaterData extends AbstractData
     /**
      * @return array
      */
-    public function getCommodity(): array
+    public function getCommodity(): ?array
     {
         return $this->commodity;
     }
 
     /**
      * @param array $commodity
-     * @Property(property="commodity", method="setCommodity")
+     * @Property(property="commodity", type="array")
      */
     public function setCommodity(array $commodity)
     {
@@ -142,14 +142,14 @@ class WaterHeaterData extends AbstractData
     /**
      * @return array
      */
-    public function getCommodities(): array
+    public function getCommodities(): ?array
     {
         return $this->commodities;
     }
 
     /**
      * @param array $commodities
-     * @Property(property="commodities", method="setCommodities")
+     * @Property(property="commodities", type="array")
      */
     public function setCommodities(array $commodities)
     {
@@ -159,14 +159,14 @@ class WaterHeaterData extends AbstractData
     /**
      * @return array
      */
-    public function getOffset(): array
+    public function getOffset(): ?array
     {
         return $this->offset;
     }
 
     /**
      * @param array $offset
-     * @Property(property="offset", method="setOffset")
+     * @Property(property="offset", type="array")
      */
     public function setOffset(array $offset)
     {
@@ -176,14 +176,14 @@ class WaterHeaterData extends AbstractData
     /**
      * @return array
      */
-    public function getSetpoint(): array
+    public function getSetpoint(): ?array
     {
         return $this->setpoint;
     }
 
     /**
      * @param array $setpoint
-     * @Property(property="setpoint", method="setSetpoint")
+     * @Property(property="setpoint", type="array")
      */
     public function setSetpoint(array $setpoint)
     {
@@ -202,13 +202,15 @@ class WaterHeaterData extends AbstractData
         ],true);
     }
 
+    /**
+     * @param array $response
+     * @return AbstractData
+     */
     public static function fromResponse(array $response): AbstractData
     {
-        $waterHeaterData = new self(
+        return new self(
             $response['device'],
             new \DateTime($response['time'])
         );
-
-
     }
 }

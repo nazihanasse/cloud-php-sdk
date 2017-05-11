@@ -12,5 +12,8 @@ use SkyCentrics\Cloud\DTO\CloudDTOInterface;
  */
 interface AnnotationInterface
 {
-
+    /**
+     * @param \Reflector $reflection
+     */
+    public function setContext(\Reflector $reflection);
 }

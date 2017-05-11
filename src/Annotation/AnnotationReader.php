@@ -43,7 +43,11 @@ class AnnotationReader implements AnnotationReaderInterface
             $annotation = $this->doctrineReader->getMethodAnnotations($method);
 
             if($annotation){
-                $annotations[] = $annotation;
+                /** @var AnnotationInterface $annotationItem */
+                foreach ($annotation as $annotationItem){
+                    $annotationItem->setContext($method);
+                    $annotations[] = $annotationItem;
+                }
             }
         }
 

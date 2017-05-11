@@ -3,26 +3,54 @@
 
 namespace SkyCentrics\Cloud\DTO\Device\Data;
 
+use SkyCentrics\Cloud\Annotation\Property;
 use SkyCentrics\Cloud\DTO\Device\AbstractData;
 use SkyCentrics\Cloud\DTO\Device\DeviceTypeInterface;
 
 class SkySnapData extends AbstractData
 {
-    protected $currentTransformers;
+    /**
+     * @var array
+     */
+    protected $currentTransformers = [];
 
-    protected $sensors;
+    /**
+     * @var array
+     */
+    protected $sensors = [];
 
-    public function __construct(
-        $deviceId,
-        \DateTime $time,
-        array $currentTransformers,
-        array $sensors
-    )
+    /**
+     * @return array
+     */
+    public function getCurrentTransformers(): ?array
     {
-        parent::__construct($deviceId, $time);
+        return $this->currentTransformers;
+    }
 
-        $this->sensors = $sensors;
+    /**
+     * @param array $currentTransformers
+     * @Property(property="ct", type="array")
+     */
+    public function setCurrentTransformers(array $currentTransformers)
+    {
         $this->currentTransformers = $currentTransformers;
+    }
+
+    /**
+     * @return array
+     */
+    public function getSensors(): ?array
+    {
+        return $this->sensors;
+    }
+
+    /**
+     * @param array $sensors
+     * @Property(property="sensors", type="array")
+     */
+    public function setSensors(array $sensors)
+    {
+        $this->sensors = $sensors;
     }
 
     public function supportType(int $type): bool
@@ -36,9 +64,7 @@ class SkySnapData extends AbstractData
     {
         return new self(
             $response['device'],
-            new \DateTime($response['time']),
-            $response['ct'] ?? [],
-            $response['sensors'] ?? []
+            new \DateTime($response['time'])
         );
     }
 }

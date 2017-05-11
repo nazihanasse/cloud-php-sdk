@@ -7,6 +7,7 @@ namespace SkyCentrics\Cloud\Query\Device;
 use SkyCentrics\Cloud\DTO\Device\AbstractCloudDevice;
 use SkyCentrics\Cloud\DTO\Device\Data\ChargerData;
 use SkyCentrics\Cloud\DTO\Device\CloudDeviceID;
+use SkyCentrics\Cloud\DTO\Device\Data\CTThermostatData;
 use SkyCentrics\Cloud\DTO\Device\Data\PlugData;
 use SkyCentrics\Cloud\DTO\Device\Data\PoolPumpData;
 use SkyCentrics\Cloud\DTO\Device\Data\SkySnapData;
@@ -50,7 +51,8 @@ class GetDeviceDataQuery extends AbstractDeviceQuery
            PlugData::class,
            PoolPumpData::class,
            WaterHeaterData::class,
-           ChargerData::class
+           ChargerData::class,
+           CTThermostatData::class
                 ] as $className){
            if(!class_exists($className)){
                throw new CloudQueryException();
@@ -60,6 +62,10 @@ class GetDeviceDataQuery extends AbstractDeviceQuery
                $this->cloudDataClass = $className;
                break;
            }
+       }
+
+       if(empty($this->cloudDataClass)){
+           throw new CloudQueryException(sprintf("Missing data class for the type %s !", $cloudDevice->getDeviceType()));
        }
     }
 
@@ -79,14 +85,13 @@ class GetDeviceDataQuery extends AbstractDeviceQuery
      */
     public function mapResponse(ResponseInterface $response)
     {
-        $data = $response->getData();
+        $responseData = $response->getData();
 
-        $data['type'] = $this->getDeviceID()->getType();
+        $dataDTO = $this->cloudDataClass::fromResponse($responseData);
 
-        AnnotationMapper::fromResponse($response->getData(), $this->cloudDataClass);
+        AnnotationMapper::fromResponse($responseData, $dataDTO);
 
-        return $data;
-//        return $this->cloudDataClass::fromResponse($response->getData());
+        return $dataDTO;
     }
 
     /**

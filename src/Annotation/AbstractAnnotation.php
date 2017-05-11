@@ -11,29 +11,15 @@ namespace SkyCentrics\Cloud\Annotation;
 abstract class AbstractAnnotation implements AnnotationInterface
 {
     /**
-     * @var array
+     * @var \Reflection
      */
-    protected $values;
+    protected $context;
 
     /**
-     * AbstractAnnotation constructor.
-     * @param array $values
+     * @param \Reflector $reflection
      */
-    public function __construct(array $values)
+    public function setContext(\Reflector $reflection)
     {
-        $this->values = $values;
-    }
-
-    /**
-     * @return array
-     */
-    public function getValues(): array
-    {
-        return $this->values;
-    }
-
-    public function setValues(array $values)
-    {
-        $this->values = $values;
+        $this->context = $reflection;
     }
 }

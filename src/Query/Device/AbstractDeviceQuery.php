@@ -51,14 +51,13 @@ abstract class AbstractDeviceQuery implements QueryInterface
     ];
 
     /**
+     * @param CloudDeviceID $cloudDeviceID
      * @return string
      * @throws CloudQueryException
      */
-    public function getPath() : string
+    public function getPath(CloudDeviceID $cloudDeviceID) : string
     {
-        $device = $this->getDeviceID();
-
-        $deviceType = $device->getType();
+        $deviceType = $cloudDeviceID->getType();
 
         foreach ($this->paths as $path => $types){
             if(in_array($deviceType, $types, true)){
@@ -70,8 +69,4 @@ abstract class AbstractDeviceQuery implements QueryInterface
         throw new CloudQueryException(sprintf("Path for devices type %s doesn't exists !", $deviceType));
     }
 
-    /**
-     * @return CloudDeviceID
-     */
-    abstract public function getDeviceID() : CloudDeviceID;
 }

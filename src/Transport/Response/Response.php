@@ -3,6 +3,8 @@
 
 namespace SkyCentrics\Cloud\Transport\Response;
 
+use SkyCentrics\Cloud\Transport\Request\RequestInterface;
+
 /**
  * Class Response
  * @package SkyCentrics\Cloud\Transport\Response
@@ -20,17 +22,25 @@ class Response implements ResponseInterface
     protected $data;
 
     /**
+     * @var RequestInterface
+     */
+    protected $request;
+
+    /**
      * Response constructor.
      * @param int $statusCode
      * @param array $data
+     * @param RequestInterface $request
      */
     public function __construct(
         int $statusCode,
-        array $data
+        array $data,
+        RequestInterface $request
     )
     {
         $this->statusCode = $statusCode;
         $this->data = $data;
+        $this->request = $request;
     }
 
     /**
@@ -47,5 +57,13 @@ class Response implements ResponseInterface
     public function getData(): array
     {
         return $this->data;
+    }
+
+    /**
+     * @return RequestInterface
+     */
+    public function getRequest()
+    {
+        return $this->request;
     }
 }

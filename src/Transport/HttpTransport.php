@@ -4,16 +4,13 @@
 namespace SkyCentrics\Cloud\Transport;
 
 
-use Guzzle\Common\Exception\GuzzleException;
-use Guzzle\Http\Client;
-use Guzzle\Http\Message\Request;
-use Guzzle\Http\Message\Response as GuzzleResponse;
 use SkyCentrics\Cloud\Exception\CloudResponseException;
 use SkyCentrics\Cloud\Transport\Request\MultiRequestInterface;
 use SkyCentrics\Cloud\Transport\Response\MultiResponse;
 use SkyCentrics\Cloud\Transport\Response\MultiResponseInterface;
 use SkyCentrics\Cloud\Transport\Response\Response;
 use SkyCentrics\Cloud\Transport\Request\RequestInterface;
+use Zend\Http\Client;
 use Zend\Http\Headers;
 use Zend\Stdlib\Parameters;
 use Zend\Uri\Http;
@@ -24,6 +21,21 @@ use Zend\Uri\Http;
  */
 class HttpTransport implements TransportInterface
 {
+    /**
+     * @var Client
+     */
+    protected $client;
+
+    /**
+     * HttpTransport constructor.
+     */
+    public function __construct()
+    {
+        $this->client = new Client(null, [
+            'keepalive' => true
+        ]);
+    }
+
     /**
      * @param RequestInterface $request
      * @return Response
@@ -38,12 +50,12 @@ class HttpTransport implements TransportInterface
         $transportRequest->setQuery(new Parameters($request->getQuery()));
         $transportRequest->setContent(json_encode($request->getData()));
 
-        $client = new \Zend\Http\Client();
+        $client = $this->client;
 
         $transportResponse = $client->send($transportRequest);
 
         if(!$transportResponse->isSuccess()){
-            $response = new Response($transportResponse->getStatusCode(), []);
+            $response = new Response($transportResponse->getStatusCode(), [], $request);
             throw new CloudResponseException($response);
         }
 
@@ -59,7 +71,8 @@ class HttpTransport implements TransportInterface
 
         return new Response(
             $transportResponse->getStatusCode(),
-            json_decode($data, true)
+            json_decode($data, true),
+            $request
         );
     }
 

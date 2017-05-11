@@ -5,6 +5,7 @@ namespace SkyCentrics\Cloud\Query\Device;
 
 
 use SkyCentrics\Cloud\DTO\Device\AbstractCloudDevice;
+use SkyCentrics\Cloud\DTO\Device\CloudDevice;
 use SkyCentrics\Cloud\DTO\Device\Data\ChargerData;
 use SkyCentrics\Cloud\DTO\Device\CloudDeviceID;
 use SkyCentrics\Cloud\DTO\Device\Data\CTThermostatData;
@@ -45,28 +46,7 @@ class GetDeviceDataQuery extends AbstractDeviceQuery
     {
        $this->cloudDevice = $cloudDevice;
 
-       foreach ([
-           ThermostatData::class,
-           SkySnapData::class,
-           PlugData::class,
-           PoolPumpData::class,
-           WaterHeaterData::class,
-           ChargerData::class,
-           CTThermostatData::class
-                ] as $className){
-           if(!class_exists($className)){
-               throw new CloudQueryException();
-           }
-
-           if($className::supportType($cloudDevice->getDeviceType())){
-               $this->cloudDataClass = $className;
-               break;
-           }
-       }
-
-       if(empty($this->cloudDataClass)){
-           throw new CloudQueryException(sprintf("Missing data class for the type %s !", $cloudDevice->getDeviceType()));
-       }
+       $this->cloudDataClass = CloudDevice::getDeviceDataDTO($cloudDevice->getDeviceType());
     }
 
     /**
@@ -75,7 +55,7 @@ class GetDeviceDataQuery extends AbstractDeviceQuery
     public function createRequest(): RequestInterface
     {
         return Request::createFromParams([
-            'path' => sprintf("/%s/%s/data", $this->getPath(), $this->cloudDevice->getId())
+            'path' => sprintf("/%s/%s/data", $this->getPath(new CloudDeviceID($this->cloudDevice->getId(), $this->cloudDevice->getDeviceType())), $this->cloudDevice->getId())
         ]);
     }
 
@@ -94,11 +74,4 @@ class GetDeviceDataQuery extends AbstractDeviceQuery
         return $dataDTO;
     }
 
-    /**
-     * @return CloudDeviceID
-     */
-    public function getDeviceID(): CloudDeviceID
-    {
-        return new CloudDeviceID($this->cloudDevice->getId(), $this->cloudDevice->getDeviceType());
-    }
 }

@@ -47,7 +47,7 @@ class Cloud implements CloudInterface
     )
     {
         $this->account = $account;
-        $this->transport = $transport === null ? new Transport\HttpTransport() : $transport;
+        $this->transport = $transport === null ? new Transport\GuzzleHttpTransport() : $transport;
         $this->securityProvider = new SecurityProvider();
     }
 

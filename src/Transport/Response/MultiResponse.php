@@ -3,6 +3,8 @@
 
 namespace SkyCentrics\Cloud\Transport\Response;
 
+use SkyCentrics\Cloud\Transport\Request\RequestInterface;
+
 
 /**
  * Class MultiResponse
@@ -110,5 +112,13 @@ class MultiResponse implements MultiResponseInterface
     public function getData(): array
     {
         return $this->current() instanceof ResponseInterface ? $this->current()->getData() : [];
+    }
+
+    /**
+     * @return RequestInterface|null
+     */
+    public function getRequest()
+    {
+        current($this->responses)->getRequest();
     }
 }

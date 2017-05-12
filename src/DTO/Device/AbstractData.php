@@ -51,6 +51,22 @@ abstract class AbstractData
     }
 
     /**
+     * @param int $deviceId
+     */
+    public function setDeviceId(int $deviceId)
+    {
+        $this->deviceId = $deviceId;
+    }
+
+    /**
+     * @param \DateTime $time
+     */
+    public function setTime(\DateTime $time)
+    {
+        $this->time = $time;
+    }
+
+    /**
      * @param int $type
      * @return bool
      */

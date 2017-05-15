@@ -18,9 +18,9 @@ use SkyCentrics\Cloud\Transport\TransportInterface;
 interface CloudInterface
 {
     /**
-     * @param QueryInterface $query
+     * @param QueryInterface|array $query
      * @param AccountInterface|null $account
      * @return mixed
      */
-    public function apply(QueryInterface $query, AccountInterface $account = null);
+    public function apply($query, AccountInterface $account = null);
 }

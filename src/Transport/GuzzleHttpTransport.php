@@ -66,35 +66,38 @@ class GuzzleHttpTransport implements TransportInterface
     public function sendMulti(MultiRequestInterface $multiRequest): MultiResponseInterface
     {
         $guzzleRequests = [];
-        $response = new MultiResponse([]);
+        $responses = [];
 
         foreach ($multiRequest as $request){
             $guzzleRequests[] = $this->createRequest($request);
         }
 
         $pool = new Pool($this->client, $guzzleRequests, [
-            'concurrency' => 10,
+            'concurrency' => 100,
             'fulfilled' =>
-                function($guzzleResponse, $index) use ($response, $multiRequest){
+                function($guzzleResponse, $index) use (&$responses, $multiRequest){
 
-                $response->addResponse(new Response(
+                $responses[$index] = new Response(
                     $guzzleResponse->getStatusCode(),
                     json_decode($guzzleResponse->getBody(), true),
-                    $multiRequest
-                    ));
+                    $multiRequest->getRequests()[$index]
+                    );
             }
         ]);
 
         $promise = $pool->promise();
         $promise->wait();
 
-        return $response;
+        return new MultiResponse($responses);
     }
 
+    /**
+     * @param RequestInterface $request
+     * @return Request
+     */
     protected function createRequest(RequestInterface $request)
     {
-        $uri = new Uri($request->getUri() . ltrim($request->getPath(), '/'));
-        $uri->withQuery(http_build_query($request->getQuery()));
+        $uri = (new Uri($request->getUri() . ltrim($request->getPath(), '/')))->withQuery(http_build_query($request->getQuery()));
         $guzzleRequest = new Request(
             $request->getMethod(),
             $uri,

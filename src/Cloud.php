@@ -6,6 +6,7 @@ namespace SkyCentrics\Cloud;
 
 use SkyCentrics\Cloud\Exception\CloudException;
 use SkyCentrics\Cloud\Exception\CloudResponseException;
+use SkyCentrics\Cloud\Query\MultiQuery;
 use SkyCentrics\Cloud\Query\QueryInterface;
 use SkyCentrics\Cloud\Security\AccountInterface;
 use SkyCentrics\Cloud\Security\SecurityProvider;
@@ -52,19 +53,18 @@ class Cloud implements CloudInterface
     }
 
     /**
-     * @param QueryInterface $query
+     * @param QueryInterface|array $query
      * @param AccountInterface|null $account
      * @return mixed
      * @throws CloudException
      */
-    public function apply(QueryInterface $query, AccountInterface $account = null)
+    public function apply($query, AccountInterface $account = null)
     {
-        $request = $query->createRequest();
-
-        if(!$request instanceof RequestInterface){
-            throw new CloudException(sprintf("Request must be instanced of %s!", RequestInterface::class));
+        if(is_array($query)){
+            $query = new MultiQuery($query);
         }
 
+        $request = $query->createRequest();
 
         if($request instanceof MultiRequestInterface) {
             foreach ($request as $requestItem){
@@ -81,5 +81,31 @@ class Cloud implements CloudInterface
         $queryResult = $query->mapResponse($response);
 
         return $queryResult;
+    }
+
+    /**
+     * @param QueryInterface $query
+     * @return RequestInterface
+     * @throws CloudException
+     */
+    protected function createRequest(QueryInterface $query) : RequestInterface
+    {
+        $request = $query->createRequest();
+
+        if(!$request instanceof RequestInterface){
+            throw new CloudException(sprintf("Request must be instanced of %s!", RequestInterface::class));
+        }
+
+        return $request;
+    }
+
+    protected function send(RequestInterface $request)
+    {
+        return $response;
+    }
+
+    protected function sendMulti()
+    {
+        return $response;
     }
 }

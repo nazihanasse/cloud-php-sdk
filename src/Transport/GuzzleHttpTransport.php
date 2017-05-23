@@ -16,13 +16,21 @@ use SkyCentrics\Cloud\Transport\Response\MultiResponse;
 use SkyCentrics\Cloud\Transport\Response\MultiResponseInterface;
 use SkyCentrics\Cloud\Transport\Response\Response;
 
+/**
+ * Class GuzzleHttpTransport
+ * @package SkyCentrics\Cloud\Transport
+ */
 class GuzzleHttpTransport implements TransportInterface
 {
+    /**
+     * @var Client
+     */
     protected $client;
 
-    public function __construct(
-
-    )
+    /**
+     * GuzzleHttpTransport constructor.
+     */
+    public function __construct()
     {
         $this->client = new Client();
     }
@@ -43,7 +51,8 @@ class GuzzleHttpTransport implements TransportInterface
 
             $response = new Response(
                 $guzzleResponse->getStatusCode(),
-                (array)json_decode($guzzleResponse->getBody(), true),
+                $guzzleResponse->getHeaders(),
+                $guzzleResponse->getBody(),
                 $request
             );
 
@@ -54,7 +63,8 @@ class GuzzleHttpTransport implements TransportInterface
 
         return new Response(
             $response->getStatusCode(),
-            json_decode($response->getBody(), true),
+            $response->getHeaders(),
+            $response->getBody(),
             $request
         );
     }
@@ -79,7 +89,8 @@ class GuzzleHttpTransport implements TransportInterface
 
                 $responses[$index] = new Response(
                     $guzzleResponse->getStatusCode(),
-                    json_decode($guzzleResponse->getBody(), true),
+                    $guzzleResponse->getHeaders(),
+                    $guzzleResponse->getBody(),
                     $multiRequest->getRequests()[$index]
                     );
             }

@@ -55,23 +55,19 @@ class HttpTransport implements TransportInterface
         $transportResponse = $client->send($transportRequest);
 
         if(!$transportResponse->isSuccess()){
-            $response = new Response($transportResponse->getStatusCode(), [], $request);
+            $response = new Response(
+                $transportResponse->getStatusCode(),
+                (array)$transportResponse->getHeaders(),
+                $transportResponse->getContent(),
+                $request);
+
             throw new CloudResponseException($response);
-        }
-
-        $data = $transportResponse->getContent() ?? [];
-
-        if($transportResponse->getStatusCode() === 201){
-            preg_match_all("/([\d]+)/", $transportResponse->getHeaders()->get('Location'), $matches);
-
-            if(!empty($matches[0][0])){
-                $data['id'] = (int)$matches[0][0];
-            }
         }
 
         return new Response(
             $transportResponse->getStatusCode(),
-            json_decode($data, true),
+            (array)$transportResponse->getHeaders(),
+            $transportResponse->getContent(),
             $request
         );
     }

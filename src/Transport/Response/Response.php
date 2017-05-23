@@ -19,6 +19,16 @@ class Response implements ResponseInterface
     /**
      * @var array
      */
+    protected $headers;
+
+    /**
+     * @var mixed
+     */
+    protected $body;
+
+    /**
+     * @var array
+     */
     protected $data;
 
     /**
@@ -29,17 +39,20 @@ class Response implements ResponseInterface
     /**
      * Response constructor.
      * @param int $statusCode
-     * @param array $data
+     * @param array $headers
+     * @param string $body
      * @param RequestInterface $request
      */
     public function __construct(
         int $statusCode,
-        array $data,
+        array $headers,
+        string $body,
         RequestInterface $request
     )
     {
         $this->statusCode = $statusCode;
-        $this->data = $data;
+        $this->headers = $headers;
+        $this->body = $body;
         $this->request = $request;
     }
 
@@ -54,9 +67,25 @@ class Response implements ResponseInterface
     /**
      * @return array
      */
+    public function getHeaders() : array
+    {
+        return $this->headers;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBody()
+    {
+        return $this->body;
+    }
+
+    /**
+     * @return array
+     */
     public function getData(): array
     {
-        return $this->data;
+        return (array)json_decode($this->body, true);
     }
 
     /**

@@ -121,4 +121,20 @@ class MultiResponse implements MultiResponseInterface
     {
         current($this->responses)->getRequest();
     }
+
+    /**
+     * @return array
+     */
+    public function getHeaders(): array
+    {
+        return $this->current() instanceof ResponseInterface ? $this->current()->getHeaders() : [];
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBody()
+    {
+        return $this->current() instanceof ResponseInterface ? $this->current()->getBody() : null;
+    }
 }

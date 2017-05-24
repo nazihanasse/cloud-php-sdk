@@ -65,7 +65,7 @@ class Cloud implements CloudInterface
 
         $request = $query->createRequest();
 
-        $response = $this->transport->send($this->securityProvider->provide($request));
+        $response = $this->transport->send($request);
 
         if(!$query instanceof MultiQuery && $response instanceof MultiResponseInterface){
             $queryResult = [];

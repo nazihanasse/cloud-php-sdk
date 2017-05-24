@@ -4,6 +4,7 @@
 namespace SkyCentrics\Cloud\DTO\Device;
 use SkyCentrics\Cloud\DTO\Device\Data\ChargerData;
 use SkyCentrics\Cloud\DTO\Device\Data\CTThermostatData;
+use SkyCentrics\Cloud\DTO\Device\Data\DeprecatedThermostatData;
 use SkyCentrics\Cloud\DTO\Device\Data\PlugData;
 use SkyCentrics\Cloud\DTO\Device\Data\PoolPumpData;
 use SkyCentrics\Cloud\DTO\Device\Data\SkySnapData;
@@ -25,13 +26,14 @@ class CloudDevice extends AbstractCloudDevice
     public static function getDeviceDataDTO($type)
     {
         foreach ([
-           ThermostatData::class,
-           SkySnapData::class,
-           PlugData::class,
-           PoolPumpData::class,
-           WaterHeaterData::class,
-           ChargerData::class,
-           CTThermostatData::class
+                    ThermostatData::class,
+                    SkySnapData::class,
+                    PlugData::class,
+                    PoolPumpData::class,
+                    WaterHeaterData::class,
+                    ChargerData::class,
+                    CTThermostatData::class,
+                    DeprecatedThermostatData::class
                 ] as $className){
            if(!class_exists($className)){
                throw new CloudQueryException();

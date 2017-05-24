@@ -192,7 +192,6 @@ class ThermostatData extends AbstractData
     public function supportType(int $type): bool
     {
         return in_array($type, [
-
             DeviceTypeInterface::TYPE_ISLAND_AIRE_PTAC,
             DeviceTypeInterface::TYPE_EMERSON,
             DeviceTypeInterface::TYPE_MITSUBISHI,

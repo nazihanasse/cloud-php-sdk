@@ -71,7 +71,7 @@ class Cloud implements CloudInterface
             $queryResult = [];
 
             foreach ($response as $responseItem){
-                $queryResult[] = $query->mapResponse($response);
+                $queryResult[] = $query->mapResponse($responseItem);
             }
         }else{
 

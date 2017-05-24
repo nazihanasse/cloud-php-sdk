@@ -7,6 +7,7 @@ namespace SkyCentrics\Cloud\Transport;
 use SkyCentrics\Cloud\Transport\Request\MultiRequestInterface;
 use SkyCentrics\Cloud\Transport\Request\RequestInterface;
 use SkyCentrics\Cloud\Transport\Response\MultiResponseInterface;
+use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
 
 /**
  * Interface TransportInterface
@@ -16,13 +17,7 @@ interface TransportInterface
 {
     /**
      * @param RequestInterface $request
-     * @return mixed
+     * @return ResponseInterface
      */
-    public function send(RequestInterface $request);
-
-    /**
-     * @param MultiRequestInterface $multiRequest
-     * @return MultiResponseInterface
-     */
-    public function sendMulti(MultiRequestInterface $multiRequest) : MultiResponseInterface;
+    public function send(RequestInterface $request) : ResponseInterface;
 }

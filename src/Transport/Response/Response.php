@@ -32,6 +32,11 @@ class Response implements ResponseInterface
     protected $data;
 
     /**
+     * @var bool
+     */
+    protected $isSuccess;
+
+    /**
      * @var RequestInterface
      */
     protected $request;
@@ -53,7 +58,10 @@ class Response implements ResponseInterface
         $this->statusCode = $statusCode;
         $this->headers = $headers;
         $this->body = $body;
+
         $this->request = $request;
+
+        $this->isSuccess = $statusCode < 400;
     }
 
     /**
@@ -94,5 +102,25 @@ class Response implements ResponseInterface
     public function getRequest()
     {
         return $this->request;
+    }
+
+    /**
+     * @param RequestInterface $request
+     */
+    public function setRequest(RequestInterface $request)
+    {
+        $this->request = $request;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSuccess(bool $isSuccess = null): bool
+    {
+        if($isSuccess === null){
+            return $this->isSuccess;
+        }
+
+        return $this->isSuccess = $isSuccess;
     }
 }

@@ -36,4 +36,14 @@ interface ResponseInterface
      * @return RequestInterface|null
      */
     public function getRequest();
+
+    /**
+     * @param RequestInterface $request
+     */
+    public function setRequest(RequestInterface $request);
+
+    /**
+     * @return bool
+     */
+    public function isSuccess(bool $isSuccess = null) : bool;
 }

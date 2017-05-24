@@ -2,6 +2,8 @@
 
 
 namespace SkyCentrics\Cloud\Transport\Request;
+use SkyCentrics\Cloud\Cloud;
+use SkyCentrics\Cloud\CloudInterface;
 
 /**
  * Class Request
@@ -54,6 +56,8 @@ class Request implements RequestInterface
      */
     public function __construct(string $path, array $data =[], array $query = [], string $method = self::METHOD_GET, array $headers = [])
     {
+        $this->uri = CloudInterface::SKYCENTRICS_API_URI;
+
         $this->path = $path;
         $this->method = $method;
         $this->data = $data;

@@ -66,13 +66,23 @@ class MultiQuery implements QueryInterface
 
         /** @var QueryInterface $query */
         foreach ($this->queries as $query){
-            $request = $query->createRequest();
-            $hash = spl_object_hash($request);
+            $queryRequest = $query->createRequest();
 
-            $this->queryMap[$hash] = $query;
-            $this->resultMap[$hash] = null;
+            if($queryRequest instanceof MultiRequestInterface){
+                $queryRequests = $queryRequest->getRequests();
+            }else{
+                $queryRequests = [$queryRequest];
+            }
 
-            $requests[] = $request;
+            foreach ($queryRequests as $request){
+
+                $hash = spl_object_hash($request);
+
+                $this->queryMap[$hash] = $query;
+                $this->resultMap[$hash] = null;
+
+                $requests[] = $request;
+            }
         }
 
         return new MultiRequest($requests);

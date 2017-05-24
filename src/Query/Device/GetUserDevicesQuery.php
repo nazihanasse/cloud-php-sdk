@@ -58,20 +58,12 @@ class GetUserDevicesQuery implements QueryInterface
      */
     public function mapResponse(ResponseInterface $response)
     {
-        if($response instanceof MultiResponseInterface){
-            $devices = [];
+        $devices = [];
 
-            /** @var ResponseInterface $responseItem */
-            foreach ($response as $responseItem){
-                foreach ($responseItem->getData() as $deviceData){
-                    $devices[] = DeviceMapper::fromResponse($deviceData);
-                }
-            }
-
-            return $devices;
-
-        }else{
-            return DeviceMapper::fromResponse($response->getData());
+        foreach ($response->getData() as $deviceData){
+            $devices[] = DeviceMapper::fromResponse($deviceData);
         }
+
+        return $devices;
     }
 }

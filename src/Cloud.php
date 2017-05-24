@@ -12,6 +12,7 @@ use SkyCentrics\Cloud\Security\AccountInterface;
 use SkyCentrics\Cloud\Security\SecurityProvider;
 use SkyCentrics\Cloud\Transport\Request\MultiRequestInterface;
 use SkyCentrics\Cloud\Transport\Request\RequestInterface;
+use SkyCentrics\Cloud\Transport\Response\MultiResponseInterface;
 use SkyCentrics\Cloud\Transport\TransportInterface;
 
 /**
@@ -20,8 +21,6 @@ use SkyCentrics\Cloud\Transport\TransportInterface;
  */
 class Cloud implements CloudInterface
 {
-    const SKYCENTRICS_API_URI = 'http://api.skycentrics.com/api/';
-
     /**
      * @var AccountInterface|null
      */
@@ -66,19 +65,18 @@ class Cloud implements CloudInterface
 
         $request = $query->createRequest();
 
-        if($request instanceof MultiRequestInterface) {
-            foreach ($request as $requestItem){
-                $requestItem->setUri(self::SKYCENTRICS_API_URI);
+        $response = $this->transport->send($this->securityProvider->provide($request));
+
+        if(!$query instanceof MultiQuery && $response instanceof MultiResponseInterface){
+            $queryResult = [];
+
+            foreach ($response as $responseItem){
+                $queryResult[] = $query->mapResponse($response);
             }
-
-            $response = $this->transport->sendMulti($request);
         }else{
-            $request->setUri(self::SKYCENTRICS_API_URI);
 
-            $response = $this->transport->send($this->securityProvider->provide($request));
+            $queryResult = $query->mapResponse($response);
         }
-
-        $queryResult = $query->mapResponse($response);
 
         return $queryResult;
     }
@@ -99,13 +97,4 @@ class Cloud implements CloudInterface
         return $request;
     }
 
-    protected function send(RequestInterface $request)
-    {
-        return $response;
-    }
-
-    protected function sendMulti()
-    {
-        return $response;
-    }
 }

@@ -79,17 +79,12 @@ class GetDevicesDataQuery extends AbstractDeviceQuery
      */
     public function mapResponse(ResponseInterface $response)
     {
-        $result = [];
+        $respData = $response->getData();
 
-        /** @var ResponseInterface $responseItem */
-        foreach ($response as $responseItem){
-            $respData = $responseItem->getData();
+        $deviceDataDTO = $this->mappers[$response->getRequest()->getPath()];
 
-            $deviceDataDTO = $this->mappers[$responseItem->getRequest()->getPath()];
+        AnnotationMapper::fromResponse($respData, $deviceDataDTO::fromResponse($respData));
 
-            AnnotationMapper::fromResponse($respData, $deviceDataDTO::fromResponse($respData));
-        }
-
-        return $result;
+        return $deviceDataDTO;
     }
 }

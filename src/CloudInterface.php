@@ -17,6 +17,8 @@ use SkyCentrics\Cloud\Transport\TransportInterface;
  */
 interface CloudInterface
 {
+    const SKYCENTRICS_API_URI = 'http://api.skycentrics.com/api/';
+
     /**
      * @param QueryInterface|array $query
      * @param AccountInterface|null $account

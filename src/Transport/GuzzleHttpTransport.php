@@ -4,8 +4,10 @@
 namespace SkyCentrics\Cloud\Transport;
 
 
+use function foo\func;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Pool;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Uri;
@@ -20,7 +22,7 @@ use SkyCentrics\Cloud\Transport\Response\Response;
  * Class GuzzleHttpTransport
  * @package SkyCentrics\Cloud\Transport
  */
-class GuzzleHttpTransport implements TransportInterface
+class GuzzleHttpTransport extends AbstractTransport
 {
     /**
      * @var Client
@@ -36,62 +38,39 @@ class GuzzleHttpTransport implements TransportInterface
     }
 
     /**
-     * @param RequestInterface $request
-     * @return Response
-     * @throws CloudResponseException
+     * @param array<RequestInterface> $requests
+     * @return array
      */
-    public function send(RequestInterface $request)
+    protected function sendRequests(array $requests) : array
     {
-        $guzzleRequest = $this->createRequest($request);
-
-        try{
-            $response = $this->client->send($guzzleRequest);
-        }catch (ClientException $exception){
-            $guzzleResponse = $exception->getResponse();
-
-            $response = new Response(
-                $guzzleResponse->getStatusCode(),
-                $guzzleResponse->getHeaders(),
-                $guzzleResponse->getBody(),
-                $request
-            );
-
-            throw new CloudResponseException(
-                $response
-            );
-        }
-
-        return new Response(
-            $response->getStatusCode(),
-            $response->getHeaders(),
-            $response->getBody(),
-            $request
-        );
-    }
-
-    /**
-     * @param MultiRequestInterface $multiRequest
-     * @return MultiResponseInterface
-     */
-    public function sendMulti(MultiRequestInterface $multiRequest): MultiResponseInterface
-    {
-        $guzzleRequests = [];
         $responses = [];
+        $guzzleRequests = [];
 
-        foreach ($multiRequest as $request){
+        foreach ($requests as $request){
             $guzzleRequests[] = $this->createRequest($request);
         }
 
         $pool = new Pool($this->client, $guzzleRequests, [
             'concurrency' => 100,
             'fulfilled' =>
-                function($guzzleResponse, $index) use (&$responses, $multiRequest){
+                function(\GuzzleHttp\Psr7\Response $guzzleResponse, $index) use (&$responses, $requests){
 
-                $responses[$index] = new Response(
-                    $guzzleResponse->getStatusCode(),
-                    $guzzleResponse->getHeaders(),
-                    $guzzleResponse->getBody(),
-                    $multiRequest->getRequests()[$index]
+                    $responses[$index] = new Response(
+                        $guzzleResponse->getStatusCode(),
+                        $guzzleResponse->getHeaders(),
+                        $guzzleResponse->getBody(),
+                        $requests[$index]
+                    );
+            },
+            'rejected' => function(RequestException $requestException, $index) use (&$responses, $requests){
+
+                    $guzzleResponse = $requestException->getResponse();
+
+                    $responses[$index] = new Response(
+                        $guzzleResponse->getStatusCode(),
+                        $guzzleResponse->getHeaders(),
+                        $guzzleResponse->getBody(),
+                        $requests[$index]
                     );
             }
         ]);
@@ -99,7 +78,7 @@ class GuzzleHttpTransport implements TransportInterface
         $promise = $pool->promise();
         $promise->wait();
 
-        return new MultiResponse($responses);
+        return $responses;
     }
 
     /**

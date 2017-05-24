@@ -137,4 +137,20 @@ class MultiResponse implements MultiResponseInterface
     {
         return $this->current() instanceof ResponseInterface ? $this->current()->getBody() : null;
     }
+
+    /**
+     * @param RequestInterface $request
+     */
+    public function setRequest(RequestInterface $request)
+    {
+        !$this->current() instanceof ResponseInterface ?: $this->current()->setRequest($request);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSuccess(bool $isSuccess = null): bool
+    {
+        return !$this->current() instanceof ResponseInterface ? false : $this->current()->isSuccess($isSuccess);
+    }
 }

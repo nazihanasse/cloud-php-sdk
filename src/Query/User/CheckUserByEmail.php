@@ -16,8 +16,6 @@ use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
  */
 class CheckUserByEmail implements QueryInterface
 {
-    use UserMapper;
-
     /**
      * @var string
      */

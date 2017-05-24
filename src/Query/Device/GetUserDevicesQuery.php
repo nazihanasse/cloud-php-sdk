@@ -8,6 +8,7 @@ use SkyCentrics\Cloud\Mapper\DeviceMapper;
 use SkyCentrics\Cloud\Query\QueryInterface;
 use SkyCentrics\Cloud\Security\AccountInterface;
 use SkyCentrics\Cloud\Transport\Request\MultiRequest;
+use SkyCentrics\Cloud\Transport\Request\Request;
 use SkyCentrics\Cloud\Transport\Request\RequestInterface;
 use SkyCentrics\Cloud\Transport\Response\MultiResponseInterface;
 use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
@@ -16,7 +17,7 @@ use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
  * Class GetUserDevices
  * @package SkyCentrics\Cloud\Query\Device
  */
-class GetUserDevicesQuery implements QueryInterface
+class GetUserDevicesQuery extends AbstractDeviceQuery
 {
     /**
      * @var AccountInterface
@@ -42,11 +43,11 @@ class GetUserDevicesQuery implements QueryInterface
         $requests = [];
 
         /** @var RequestInterface $request */
-        foreach (DeviceRequestFactory::createRequest() as $request){
-            $request->setQuery([
-                'auth' => $this->account->getAuth()
+        foreach ($this->getPaths() as $path){
+            $requests[] = Request::createFromParams([
+                'path' => sprintf("/%s/", $path),
+                'query' => ['auth' => $this->account->getAuth()]
             ]);
-            $requests[] = $request;
         }
 
         return new MultiRequest($requests);

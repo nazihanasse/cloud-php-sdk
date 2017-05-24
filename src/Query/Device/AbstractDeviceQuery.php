@@ -69,4 +69,12 @@ abstract class AbstractDeviceQuery implements QueryInterface
         throw new CloudQueryException(sprintf("Path for devices type %s doesn't exists !", $deviceType));
     }
 
+    /**
+     * @return array
+     */
+    public function getPaths() : array
+    {
+        return array_keys($this->paths);
+    }
+
 }

@@ -44,6 +44,7 @@ class GetDeviceQuery extends AbstractDeviceQuery
 
     /**
      * @param ResponseInterface $response
+     * @return \SkyCentrics\Cloud\DTO\CloudDTOInterface
      */
     public function mapResponse(ResponseInterface $response)
     {

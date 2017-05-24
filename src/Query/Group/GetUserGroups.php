@@ -15,10 +15,10 @@ use SkyCentrics\Cloud\Transport\Response\MultiResponseInterface;
 use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
 
 /**
- * Class GetUserGroupsQuery
+ * Class GetUserGroups
  * @package SkyCentrics\Cloud\Query\Group
  */
-class GetUserGroupsQuery implements QueryInterface
+class GetUserGroups implements QueryInterface
 {
     /**
      * @var AccountInterface
@@ -26,7 +26,7 @@ class GetUserGroupsQuery implements QueryInterface
     protected $account;
 
     /**
-     * GetUserGroupsQuery constructor.
+     * GetUserGroups constructor.
      * @param AccountInterface $account
      */
     public function __construct(

@@ -11,6 +11,7 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Pool;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Uri;
+use Psr\Http\Message\ResponseInterface;
 use SkyCentrics\Cloud\Exception\CloudResponseException;
 use SkyCentrics\Cloud\Transport\Request\MultiRequestInterface;
 use SkyCentrics\Cloud\Transport\Request\RequestInterface;
@@ -55,10 +56,16 @@ class GuzzleHttpTransport extends AbstractTransport
             'fulfilled' =>
                 function(\GuzzleHttp\Psr7\Response $guzzleResponse, $index) use (&$responses, $requests){
 
+                    if($guzzleResponse->getHeaderLine('Content-Type') === 'application/gzip'){
+                        $body = gzdecode($guzzleResponse->getBody());
+                    }else{
+                        $body = $guzzleResponse->getBody();
+                    }
+
                     $responses[$index] = new Response(
                         $guzzleResponse->getStatusCode(),
                         $guzzleResponse->getHeaders(),
-                        $guzzleResponse->getBody(),
+                        $body,
                         $requests[$index]
                     );
             },

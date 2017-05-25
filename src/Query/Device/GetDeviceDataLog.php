@@ -53,6 +53,13 @@ class GetDeviceDataLog extends GetDeviceDataQuery
             'g' => 1
         ]);
 
+        $headers = $request->getHeaders();
+
+        // @TODO: Cloud API returns result from time to time for request with this header.
+        unset($headers['Accept']);
+
+        $request->setHeaders($headers);
+
         return $request;
     }
 

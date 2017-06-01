@@ -1,5 +1,6 @@
 {
   "name": "skycentrics/cloud",
+  "license": "MIT",
   "version": "0.0.1",
   "authors": [
     {
@@ -10,6 +11,8 @@
   "require": {
     "php" : ">=7",
     "zendframework/zend-http": "2.6.*",
+    "guzzlehttp/psr7": "1.4.*",
+    "guzzlehttp/guzzle": "6.2.*",
     "doctrine/annotations": "1.4.*"
   },
   "require-dev": {

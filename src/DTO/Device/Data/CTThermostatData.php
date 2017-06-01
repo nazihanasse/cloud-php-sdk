@@ -38,7 +38,7 @@ class CTThermostatData extends AbstractData
     /**
      * @return array
      */
-    public function getTemperature(): ?array
+    public function getTemperature()
     {
         return $this->temperature;
     }
@@ -55,7 +55,7 @@ class CTThermostatData extends AbstractData
     /**
      * @return array
      */
-    public function getThermostat(): ?array
+    public function getThermostat()
     {
         return $this->thermostat;
     }
@@ -72,7 +72,7 @@ class CTThermostatData extends AbstractData
     /**
      * @return array
      */
-    public function getFan(): ?array
+    public function getFan()
     {
         return $this->fan;
     }
@@ -89,7 +89,7 @@ class CTThermostatData extends AbstractData
     /**
      * @return array
      */
-    public function getHumidity(): ?array
+    public function getHumidity()
     {
         return $this->humidity;
     }
@@ -106,7 +106,7 @@ class CTThermostatData extends AbstractData
     /**
      * @return array
      */
-    public function getSetpoint(): ?array
+    public function getSetpoint()
     {
         return $this->setpoint;
     }

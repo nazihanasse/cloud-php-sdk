@@ -57,7 +57,7 @@ class WaterHeaterData extends AbstractData
     /**
      * @return int
      */
-    public function getRelay(): ?int
+    public function getRelay()
     {
         return $this->relay;
     }
@@ -74,7 +74,7 @@ class WaterHeaterData extends AbstractData
     /**
      * @return int
      */
-    public function getOverride(): ?int
+    public function getOverride()
     {
         return $this->override;
     }
@@ -108,7 +108,7 @@ class WaterHeaterData extends AbstractData
     /**
      * @return int
      */
-    public function getState(): ?int
+    public function getState()
     {
         return $this->state;
     }
@@ -125,7 +125,7 @@ class WaterHeaterData extends AbstractData
     /**
      * @return array
      */
-    public function getCommodity(): ?array
+    public function getCommodity()
     {
         return $this->commodity;
     }
@@ -142,7 +142,7 @@ class WaterHeaterData extends AbstractData
     /**
      * @return array
      */
-    public function getCommodities(): ?array
+    public function getCommodities()
     {
         return $this->commodities;
     }
@@ -159,7 +159,7 @@ class WaterHeaterData extends AbstractData
     /**
      * @return array
      */
-    public function getOffset(): ?array
+    public function getOffset()
     {
         return $this->offset;
     }
@@ -176,7 +176,7 @@ class WaterHeaterData extends AbstractData
     /**
      * @return array
      */
-    public function getSetpoint(): ?array
+    public function getSetpoint()
     {
         return $this->setpoint;
     }

@@ -22,7 +22,7 @@ class SkySnapData extends AbstractData
     /**
      * @return array
      */
-    public function getCurrentTransformers(): ?array
+    public function getCurrentTransformers()
     {
         return $this->currentTransformers;
     }
@@ -39,7 +39,7 @@ class SkySnapData extends AbstractData
     /**
      * @return array
      */
-    public function getSensors(): ?array
+    public function getSensors()
     {
         return $this->sensors;
     }

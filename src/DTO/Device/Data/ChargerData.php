@@ -42,7 +42,7 @@ class ChargerData extends AbstractData
     /**
      * @return int
      */
-    public function getRelay(): ?int
+    public function getRelay()
     {
         return $this->relay;
     }
@@ -59,7 +59,7 @@ class ChargerData extends AbstractData
     /**
      * @return int
      */
-    public function getOverride(): ?int
+    public function getOverride()
     {
         return $this->override;
     }
@@ -76,7 +76,7 @@ class ChargerData extends AbstractData
     /**
      * @return int
      */
-    public function getState(): ?int
+    public function getState()
     {
         return $this->state;
     }
@@ -93,7 +93,7 @@ class ChargerData extends AbstractData
     /**
      * @return array
      */
-    public function getCommodity(): ?array
+    public function getCommodity()
     {
         return $this->commodity;
     }
@@ -110,7 +110,7 @@ class ChargerData extends AbstractData
     /**
      * @return array
      */
-    public function getCommodities(): ?array
+    public function getCommodities()
     {
         return $this->commodities;
     }

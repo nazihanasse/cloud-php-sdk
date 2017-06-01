@@ -77,7 +77,7 @@ class PlugData extends AbstractData
     /**
      * @return float
      */
-    public function getVoltage(): ?float
+    public function getVoltage()
     {
         return $this->voltage;
     }
@@ -94,7 +94,7 @@ class PlugData extends AbstractData
     /**
      * @return float
      */
-    public function getPower(): ?float
+    public function getPower()
     {
         return $this->power;
     }
@@ -111,7 +111,7 @@ class PlugData extends AbstractData
     /**
      * @return float
      */
-    public function getPowerFactor(): ?float
+    public function getPowerFactor()
     {
         return $this->powerFactor;
     }
@@ -128,7 +128,7 @@ class PlugData extends AbstractData
     /**
      * @return float
      */
-    public function getCurrent(): ?float
+    public function getCurrent()
     {
         return $this->current;
     }
@@ -145,7 +145,7 @@ class PlugData extends AbstractData
     /**
      * @return float
      */
-    public function getFrequency(): ?float
+    public function getFrequency()
     {
         return $this->frequency;
     }
@@ -162,7 +162,7 @@ class PlugData extends AbstractData
     /**
      * @return int
      */
-    public function getRelay(): ?int
+    public function getRelay()
     {
         return $this->relay;
     }
@@ -179,7 +179,7 @@ class PlugData extends AbstractData
     /**
      * @return float
      */
-    public function getTotalPower(): ?float
+    public function getTotalPower()
     {
         return $this->totalPower;
     }
@@ -196,7 +196,7 @@ class PlugData extends AbstractData
     /**
      * @return int
      */
-    public function getDimmer(): ?int
+    public function getDimmer()
     {
         return $this->dimmer;
     }
@@ -213,7 +213,7 @@ class PlugData extends AbstractData
     /**
      * @return int
      */
-    public function getRssi(): ?int
+    public function getRssi()
     {
         return $this->rssi;
     }
@@ -230,7 +230,7 @@ class PlugData extends AbstractData
     /**
      * @return array
      */
-    public function getSensors(): ?array
+    public function getSensors()
     {
         return $this->sensors;
     }
@@ -247,7 +247,7 @@ class PlugData extends AbstractData
     /**
      * @return int
      */
-    public function getOccupancy(): ?int
+    public function getOccupancy()
     {
         return $this->occupancy;
     }
@@ -264,7 +264,7 @@ class PlugData extends AbstractData
     /**
      * @return int
      */
-    public function getScheduler(): ?int
+    public function getScheduler()
     {
         return $this->scheduler;
     }
@@ -281,7 +281,7 @@ class PlugData extends AbstractData
     /**
      * @return int
      */
-    public function getOverrided(): ?int
+    public function getOverrided()
     {
         return $this->overrided;
     }

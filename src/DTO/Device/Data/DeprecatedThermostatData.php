@@ -118,7 +118,7 @@ class DeprecatedThermostatData extends AbstractData
     /**
      * @return int
      */
-    public function getCurrentMode(): ?int
+    public function getCurrentMode()
     {
         return $this->currentMode;
     }
@@ -135,7 +135,7 @@ class DeprecatedThermostatData extends AbstractData
     /**
      * @return int
      */
-    public function getTargetMode(): ?int
+    public function getTargetMode()
     {
         return $this->targetMode;
     }
@@ -152,7 +152,7 @@ class DeprecatedThermostatData extends AbstractData
     /**
      * @return int
      */
-    public function getFanMode(): ?int
+    public function getFanMode()
     {
         return $this->fanMode;
     }
@@ -169,7 +169,7 @@ class DeprecatedThermostatData extends AbstractData
     /**
      * @return int
      */
-    public function getLedStatus(): ?int
+    public function getLedStatus()
     {
         return $this->ledStatus;
     }
@@ -203,7 +203,7 @@ class DeprecatedThermostatData extends AbstractData
     /**
      * @return int
      */
-    public function getAbsoluteCool(): ?int
+    public function getAbsoluteCool()
     {
         return $this->absoluteCool;
     }
@@ -220,7 +220,7 @@ class DeprecatedThermostatData extends AbstractData
     /**
      * @return int
      */
-    public function getAbsoluteHeat(): ?int
+    public function getAbsoluteHeat()
     {
         return $this->absoluteHeat;
     }
@@ -237,7 +237,7 @@ class DeprecatedThermostatData extends AbstractData
     /**
      * @return int
      */
-    public function getTargetCool(): ?int
+    public function getTargetCool()
     {
         return $this->targetCool;
     }
@@ -254,7 +254,7 @@ class DeprecatedThermostatData extends AbstractData
     /**
      * @return int
      */
-    public function getTargetHeat(): ?int
+    public function getTargetHeat()
     {
         return $this->targetHeat;
     }
@@ -271,7 +271,7 @@ class DeprecatedThermostatData extends AbstractData
     /**
      * @return int
      */
-    public function getTargetSetback(): ?int
+    public function getTargetSetback()
     {
         return $this->targetSetback;
     }
@@ -288,7 +288,7 @@ class DeprecatedThermostatData extends AbstractData
     /**
      * @return int
      */
-    public function getHumidity(): ?int
+    public function getHumidity()
     {
         return $this->humidity;
     }
@@ -305,7 +305,7 @@ class DeprecatedThermostatData extends AbstractData
     /**
      * @return int
      */
-    public function getHumiditySetpoint(): ?int
+    public function getHumiditySetpoint()
     {
         return $this->humiditySetpoint;
     }
@@ -322,7 +322,7 @@ class DeprecatedThermostatData extends AbstractData
     /**
      * @return int
      */
-    public function getDate(): ?int
+    public function getDate()
     {
         return $this->date;
     }
@@ -339,7 +339,7 @@ class DeprecatedThermostatData extends AbstractData
     /**
      * @return int
      */
-    public function getOverride(): ?int
+    public function getOverride()
     {
         return $this->override;
     }
@@ -356,7 +356,7 @@ class DeprecatedThermostatData extends AbstractData
     /**
      * @return int
      */
-    public function getHold(): ?int
+    public function getHold()
     {
         return $this->hold;
     }
@@ -373,7 +373,7 @@ class DeprecatedThermostatData extends AbstractData
     /**
      * @return int
      */
-    public function getSaveEnergy(): ?int
+    public function getSaveEnergy()
     {
         return $this->saveEnergy;
     }
@@ -390,7 +390,7 @@ class DeprecatedThermostatData extends AbstractData
     /**
      * @return int
      */
-    public function getEnergyEmergency(): ?int
+    public function getEnergyEmergency()
     {
         return $this->energyEmergency;
     }
@@ -407,7 +407,7 @@ class DeprecatedThermostatData extends AbstractData
     /**
      * @return int
      */
-    public function getSetpointEnable(): ?int
+    public function getSetpointEnable()
     {
         return $this->setpointEnable;
     }
@@ -424,7 +424,7 @@ class DeprecatedThermostatData extends AbstractData
     /**
      * @return int
      */
-    public function getUnits(): ?int
+    public function getUnits()
     {
         return $this->units;
     }
@@ -441,7 +441,7 @@ class DeprecatedThermostatData extends AbstractData
     /**
      * @return int
      */
-    public function getRssi(): ?int
+    public function getRssi()
     {
         return $this->rssi;
     }
@@ -458,7 +458,7 @@ class DeprecatedThermostatData extends AbstractData
     /**
      * @return int
      */
-    public function getBatteryLevel(): ?int
+    public function getBatteryLevel()
     {
         return $this->batteryLevel;
     }

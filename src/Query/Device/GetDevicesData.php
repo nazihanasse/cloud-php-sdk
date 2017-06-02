@@ -20,7 +20,7 @@ use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
  * Class GetDevicesDataQuery
  * @package SkyCentrics\Cloud\Query\Device
  */
-class GetDevicesDataQuery extends AbstractDeviceQuery
+class GetDevicesData extends AbstractDeviceQuery
 {
     /**
      * @var array<AbstractCloudDevice>

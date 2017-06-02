@@ -17,7 +17,7 @@ use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
  * Class CreateUserQuery
  * @package SkyCentrics\Cloud\Query\User
  */
-class CreateUserQuery implements QueryInterface
+class CreateUser implements QueryInterface
 {
     /**
      * @var CloudUser

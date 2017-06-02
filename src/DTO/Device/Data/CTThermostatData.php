@@ -4,7 +4,7 @@
 namespace SkyCentrics\Cloud\DTO\Device\Data;
 
 
-use SkyCentrics\Cloud\Annotation\Property;
+use SkyCentrics\Cloud\Annotation\Method;
 use SkyCentrics\Cloud\DTO\Device\AbstractData;
 use SkyCentrics\Cloud\DTO\Device\DeviceTypeInterface;
 
@@ -45,7 +45,7 @@ class CTThermostatData extends AbstractData
 
     /**
      * @param array $temperature
-     * @Property(property="temperature", type="array")
+     * @Method(property="temperature", type="array")
      */
     public function setTemperature(array $temperature)
     {
@@ -62,7 +62,7 @@ class CTThermostatData extends AbstractData
 
     /**
      * @param array $thermostat
-     * @Property(property="thermostat", type="array")
+     * @Method(property="thermostat", type="array")
      */
     public function setThermostat(array $thermostat)
     {
@@ -79,7 +79,7 @@ class CTThermostatData extends AbstractData
 
     /**
      * @param array $fan
-     * @Property(property="fan", type="array")
+     * @Method(property="fan", type="array")
      */
     public function setFan(array $fan)
     {
@@ -96,7 +96,7 @@ class CTThermostatData extends AbstractData
 
     /**
      * @param array $humidity
-     * @Property(property="humidity", type="array")
+     * @Method(property="humidity", type="array")
      */
     public function setHumidity(array $humidity)
     {
@@ -113,7 +113,7 @@ class CTThermostatData extends AbstractData
 
     /**
      * @param array $setpoint
-     * @Property(property="setpoint", type="array")
+     * @Method(property="setpoint", type="array")
      */
     public function setSetpoint(array $setpoint)
     {

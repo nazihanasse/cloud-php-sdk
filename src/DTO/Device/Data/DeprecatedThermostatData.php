@@ -4,7 +4,7 @@
 namespace SkyCentrics\Cloud\DTO\Device\Data;
 
 
-use SkyCentrics\Cloud\Annotation\Property;
+use SkyCentrics\Cloud\Annotation\Method;
 use SkyCentrics\Cloud\DTO\Device\AbstractData;
 use SkyCentrics\Cloud\DTO\Device\DeviceTypeInterface;
 
@@ -125,7 +125,7 @@ class DeprecatedThermostatData extends AbstractData
 
     /**
      * @param int $currentMode
-     * @Property(property="cm", type="int")
+     * @Method(property="cm", type="int")
      */
     public function setCurrentMode(int $currentMode)
     {
@@ -142,7 +142,7 @@ class DeprecatedThermostatData extends AbstractData
 
     /**
      * @param int $targetMode
-     * @Property(property="tm", type="int")
+     * @Method(property="tm", type="int")
      */
     public function setTargetMode(int $targetMode)
     {
@@ -159,7 +159,7 @@ class DeprecatedThermostatData extends AbstractData
 
     /**
      * @param int $fanMode
-     * @Property(property="f", type="int")
+     * @Method(property="f", type="int")
      */
     public function setFanMode(int $fanMode)
     {
@@ -176,7 +176,7 @@ class DeprecatedThermostatData extends AbstractData
 
     /**
      * @param int $ledStatus
-     * @Property(property="l", type="int")
+     * @Method(property="l", type="int")
      */
     public function setLedStatus(int $ledStatus)
     {
@@ -193,7 +193,7 @@ class DeprecatedThermostatData extends AbstractData
 
     /**
      * @param float $temperature
-     * @Property(property="t", type="float")
+     * @Method(property="t", type="float")
      */
     public function setTemperature(float $temperature)
     {
@@ -210,7 +210,7 @@ class DeprecatedThermostatData extends AbstractData
 
     /**
      * @param int $absoluteCool
-     * @Property(property="tsc", type="int")
+     * @Method(property="tsc", type="int")
      */
     public function setAbsoluteCool(int $absoluteCool)
     {
@@ -227,7 +227,7 @@ class DeprecatedThermostatData extends AbstractData
 
     /**
      * @param int $absoluteHeat
-     * @Property(property="tsh", type="int")
+     * @Method(property="tsh", type="int")
      */
     public function setAbsoluteHeat(int $absoluteHeat)
     {
@@ -244,7 +244,7 @@ class DeprecatedThermostatData extends AbstractData
 
     /**
      * @param int $targetCool
-     * @Property(property="tc", type="int")
+     * @Method(property="tc", type="int")
      */
     public function setTargetCool(int $targetCool)
     {
@@ -261,7 +261,7 @@ class DeprecatedThermostatData extends AbstractData
 
     /**
      * @param int $targetHeat
-     * @Property(property="th", type="int")
+     * @Method(property="th", type="int")
      */
     public function setTargetHeat(int $targetHeat)
     {
@@ -278,7 +278,7 @@ class DeprecatedThermostatData extends AbstractData
 
     /**
      * @param int $targetSetback
-     * @Property(property="ts", type="int")
+     * @Method(property="ts", type="int")
      */
     public function setTargetSetback(int $targetSetback)
     {
@@ -295,7 +295,7 @@ class DeprecatedThermostatData extends AbstractData
 
     /**
      * @param int $humidity
-     * @Property(property="h", type="int")
+     * @Method(property="h", type="int")
      */
     public function setHumidity(int $humidity)
     {
@@ -312,7 +312,7 @@ class DeprecatedThermostatData extends AbstractData
 
     /**
      * @param int $humiditySetpoint
-     * @Property(property="hs", type="int")
+     * @Method(property="hs", type="int")
      */
     public function setHumiditySetpoint(int $humiditySetpoint)
     {
@@ -329,7 +329,7 @@ class DeprecatedThermostatData extends AbstractData
 
     /**
      * @param int $date
-     * @Property(property="dd", type="int")
+     * @Method(property="dd", type="int")
      */
     public function setDate(int $date)
     {
@@ -346,7 +346,7 @@ class DeprecatedThermostatData extends AbstractData
 
     /**
      * @param int $override
-     * @Property(property="fo", type="int")
+     * @Method(property="fo", type="int")
      */
     public function setOverride(int $override)
     {
@@ -363,7 +363,7 @@ class DeprecatedThermostatData extends AbstractData
 
     /**
      * @param int $hold
-     * @Property(property="fh", type="int")
+     * @Method(property="fh", type="int")
      */
     public function setHold(int $hold)
     {
@@ -380,7 +380,7 @@ class DeprecatedThermostatData extends AbstractData
 
     /**
      * @param int $saveEnergy
-     * @Property(property="fs", type="int")
+     * @Method(property="fs", type="int")
      */
     public function setSaveEnergy(int $saveEnergy)
     {
@@ -397,7 +397,7 @@ class DeprecatedThermostatData extends AbstractData
 
     /**
      * @param int $energyEmergency
-     * @Property(property="fe", type="int")
+     * @Method(property="fe", type="int")
      */
     public function setEnergyEmergency(int $energyEmergency)
     {
@@ -414,7 +414,7 @@ class DeprecatedThermostatData extends AbstractData
 
     /**
      * @param int $setpointEnable
-     * @Property(property="fa", type="int")
+     * @Method(property="fa", type="int")
      */
     public function setSetpointEnable(int $setpointEnable)
     {
@@ -431,7 +431,7 @@ class DeprecatedThermostatData extends AbstractData
 
     /**
      * @param int $units
-     * @Property(property="fu", type="int")
+     * @Method(property="fu", type="int")
      */
     public function setUnits(int $units)
     {
@@ -448,7 +448,7 @@ class DeprecatedThermostatData extends AbstractData
 
     /**
      * @param int $rssi
-     * @Property(property="rssi", type="int")
+     * @Method(property="rssi", type="int")
      */
     public function setRssi(int $rssi)
     {
@@ -465,7 +465,7 @@ class DeprecatedThermostatData extends AbstractData
 
     /**
      * @param int $batteryLevel
-     * @Property(property="", type="int")
+     * @Method(property="", type="int")
      */
     public function setBatteryLevel(int $batteryLevel)
     {

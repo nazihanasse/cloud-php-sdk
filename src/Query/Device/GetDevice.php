@@ -14,7 +14,7 @@ use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
  * Class GetDeviceQuery
  * @package SkyCentrics\Cloud\Query\Device
  */
-class GetDeviceQuery extends AbstractDeviceQuery
+class GetDevice extends AbstractDeviceQuery
 {
     /**
      * @var CloudDeviceID

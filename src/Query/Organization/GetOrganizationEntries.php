@@ -17,7 +17,7 @@ use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
  * Class GetOrganizationEntriesQuery
  * @package SkyCentrics\Cloud\Query\Organization
  */
-class GetOrganizationEntriesQuery implements QueryInterface
+class GetOrganizationEntries implements QueryInterface
 {
     /**
      * @var int

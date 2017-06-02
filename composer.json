@@ -20,7 +20,7 @@
   "autoload": {
     "psr-4": {
       "SkyCentrics\\Cloud\\" : "src/",
-      "SkyCentrics\\Tests\\" : "tests/"
+      "SkyCentrics\\Cloud\\Tests\\" : "tests/"
     }
   }
 }

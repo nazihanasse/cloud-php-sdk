@@ -3,7 +3,7 @@
 
 namespace SkyCentrics\Cloud\DTO\Device\Data;
 
-use SkyCentrics\Cloud\Annotation\Property;
+use SkyCentrics\Cloud\Annotation\Method;
 use SkyCentrics\Cloud\DTO\Device\AbstractData;
 use SkyCentrics\Cloud\DTO\Device\DeviceTypeInterface;
 
@@ -84,7 +84,7 @@ class PlugData extends AbstractData
 
     /**
      * @param float $voltage
-     * @Property(property="v", type="float")
+     * @Method(property="v", type="float")
      */
     public function setVoltage(float $voltage)
     {
@@ -101,7 +101,7 @@ class PlugData extends AbstractData
 
     /**
      * @param float $power
-     * @Property(property="p", type="float")
+     * @Method(property="p", type="float")
      */
     public function setPower(float $power)
     {
@@ -118,7 +118,7 @@ class PlugData extends AbstractData
 
     /**
      * @param float $powerFactor
-     * @Property(property="pf", type="float")
+     * @Method(property="pf", type="float")
      */
     public function setPowerFactor(float $powerFactor)
     {
@@ -135,7 +135,7 @@ class PlugData extends AbstractData
 
     /**
      * @param float $current
-     * @Property(property="c", type="float")
+     * @Method(property="c", type="float")
      */
     public function setCurrent(float $current)
     {
@@ -152,7 +152,7 @@ class PlugData extends AbstractData
 
     /**
      * @param float $frequency
-     * @Property(property="f", type="float")
+     * @Method(property="f", type="float")
      */
     public function setFrequency(float $frequency)
     {
@@ -169,7 +169,7 @@ class PlugData extends AbstractData
 
     /**
      * @param int $relay
-     * @Property(property="r", type="int")
+     * @Method(property="r", type="int")
      */
     public function setRelay(int $relay)
     {
@@ -186,7 +186,7 @@ class PlugData extends AbstractData
 
     /**
      * @param float $totalPower
-     * @Property(property="t", type="float")
+     * @Method(property="t", type="float")
      */
     public function setTotalPower(float $totalPower)
     {
@@ -203,7 +203,7 @@ class PlugData extends AbstractData
 
     /**
      * @param int $dimmer
-     * @Property(property="d", type="int")
+     * @Method(property="d", type="int")
      */
     public function setDimmer(int $dimmer)
     {
@@ -220,7 +220,7 @@ class PlugData extends AbstractData
 
     /**
      * @param int $rssi
-     * @Property(property="rssi", type="int")
+     * @Method(property="rssi", type="int")
      */
     public function setRssi(int $rssi)
     {
@@ -237,7 +237,7 @@ class PlugData extends AbstractData
 
     /**
      * @param array $sensors
-     * @Property(property="w", type="array")
+     * @Method(property="w", type="array")
      */
     public function setSensors(array $sensors)
     {
@@ -254,7 +254,7 @@ class PlugData extends AbstractData
 
     /**
      * @param int $occupancy
-     * @Property(property="ocp", type="int")
+     * @Method(property="ocp", type="int")
      */
     public function setOccupancy(int $occupancy)
     {
@@ -271,7 +271,7 @@ class PlugData extends AbstractData
 
     /**
      * @param int $scheduler
-     * @Property(property="se", type="int")
+     * @Method(property="se", type="int")
      */
     public function setScheduler(int $scheduler)
     {
@@ -288,7 +288,7 @@ class PlugData extends AbstractData
 
     /**
      * @param int $overrided
-     * @Property(property="uo", type="int")
+     * @Method(property="uo", type="int")
      */
     public function setOverrided(int $overrided)
     {

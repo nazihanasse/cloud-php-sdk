@@ -3,7 +3,7 @@
 
 namespace SkyCentrics\Cloud\DTO\Device\Data;
 
-use SkyCentrics\Cloud\Annotation\Property;
+use SkyCentrics\Cloud\Annotation\Method;
 use SkyCentrics\Cloud\DTO\Device\AbstractData;
 use SkyCentrics\Cloud\DTO\Device\DeviceTypeInterface;
 
@@ -63,7 +63,7 @@ class ThermostatData extends AbstractData
 
     /**
      * @param array $temperature
-     * @Property(property="temperature", type="array")
+     * @Method(property="temperature", type="array")
      */
     public function setTemperature(array $temperature)
     {
@@ -80,7 +80,7 @@ class ThermostatData extends AbstractData
 
     /**
      * @param array $setpoint
-     * @Property(property="setpoint", type="array")
+     * @Method(property="setpoint", type="array")
      */
     public function setSetpoint(array $setpoint)
     {
@@ -97,7 +97,7 @@ class ThermostatData extends AbstractData
 
     /**
      * @param array $offset
-     * @Property(property="offset", type="array")
+     * @Method(property="offset", type="array")
      */
     public function setOffset(array $offset)
     {
@@ -114,7 +114,7 @@ class ThermostatData extends AbstractData
 
     /**
      * @param int $state
-     * @Property(property="state", type="int")
+     * @Method(property="state", type="int")
      */
     public function setState(int $state)
     {
@@ -131,7 +131,7 @@ class ThermostatData extends AbstractData
 
     /**
      * @param int $override
-     * @Property(property="override", type="int")
+     * @Method(property="override", type="int")
      */
     public function setOverride(int $override)
     {
@@ -148,7 +148,7 @@ class ThermostatData extends AbstractData
 
     /**
      * @param int $relay
-     * @Property(property="relay", type="int")
+     * @Method(property="relay", type="int")
      */
     public function setRelay(int $relay)
     {
@@ -165,7 +165,7 @@ class ThermostatData extends AbstractData
 
     /**
      * @param array $commodity
-     * @Property(property="commodity", type="array")
+     * @Method(property="commodity", type="array")
      */
     public function setCommodity(array $commodity)
     {
@@ -182,7 +182,7 @@ class ThermostatData extends AbstractData
 
     /**
      * @param array $commodities
-     * @Property(property="commodities", type="array")
+     * @Method(property="commodities", type="array")
      */
     public function setCommodities(array $commodities)
     {

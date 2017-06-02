@@ -4,6 +4,7 @@
 namespace SkyCentrics\Cloud\Query\User;
 
 
+use SkyCentrics\Cloud\DTO\CloudUser;
 use SkyCentrics\Cloud\Mapper\UserMapper;
 use SkyCentrics\Cloud\Query\QueryInterface;
 use SkyCentrics\Cloud\Transport\Request\Request;
@@ -11,25 +12,25 @@ use SkyCentrics\Cloud\Transport\Request\RequestInterface;
 use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
 
 /**
- * Class GetUserQuery
+ * Class UpdateUserQuery
  * @package SkyCentrics\Cloud\Query\User
  */
-class GetUserQuery implements QueryInterface
+class UpdateUser implements QueryInterface
 {
     /**
-     * @var
+     * @var CloudUser
      */
-    protected $id;
+    protected $cloudUser;
 
     /**
-     * GetUserQuery constructor.
-     * @param int $id
+     * UpdateUserQuery constructor.
+     * @param CloudUser $cloudUser
      */
     public function __construct(
-        int $id
+        CloudUser $cloudUser
     )
     {
-        $this->id = $id;
+        $this->cloudUser = $cloudUser;
     }
 
     /**
@@ -38,11 +39,9 @@ class GetUserQuery implements QueryInterface
     public function createRequest(): RequestInterface
     {
         return Request::createFromParams([
-            'path' => '/users/' . $this->id . '/',
-            'headers' => [
-                'Content-Type' => 'application/vnd.cloudbeam-v2+json',
-                'Accept' => 'application/vnd.cloudbeam-v2+json'
-            ]
+            'path' => "/users/{$this->cloudUser->getId()}/",
+            'method' => 'PUT',
+            'data' => UserMapper::toRequest($this->cloudUser)
         ]);
     }
 
@@ -51,6 +50,6 @@ class GetUserQuery implements QueryInterface
      */
     public function mapResponse(ResponseInterface $response)
     {
-        return UserMapper::fromResponse($response->getData());
+        return $this->cloudUser;
     }
 }

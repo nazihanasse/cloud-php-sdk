@@ -4,33 +4,31 @@
 namespace SkyCentrics\Cloud\Query\User;
 
 
-use SkyCentrics\Cloud\DTO\CloudUser;
-use SkyCentrics\Cloud\Mapper\UserMapper;
 use SkyCentrics\Cloud\Query\QueryInterface;
 use SkyCentrics\Cloud\Transport\Request\Request;
 use SkyCentrics\Cloud\Transport\Request\RequestInterface;
 use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
 
 /**
- * Class UpdateUserQuery
+ * Class RemoveUserQuery
  * @package SkyCentrics\Cloud\Query\User
  */
-class UpdateUserQuery implements QueryInterface
+class RemoveUser implements QueryInterface
 {
     /**
-     * @var CloudUser
+     * @var int
      */
-    protected $cloudUser;
+    protected $id;
 
     /**
-     * UpdateUserQuery constructor.
-     * @param CloudUser $cloudUser
+     * RemoveUserQuery constructor.
+     * @param int $id
      */
     public function __construct(
-        CloudUser $cloudUser
+        int $id
     )
     {
-        $this->cloudUser = $cloudUser;
+        $this->id = $id;
     }
 
     /**
@@ -39,9 +37,7 @@ class UpdateUserQuery implements QueryInterface
     public function createRequest(): RequestInterface
     {
         return Request::createFromParams([
-            'path' => "/users/{$this->cloudUser->getId()}/",
-            'method' => 'PUT',
-            'data' => UserMapper::toRequest($this->cloudUser)
+            'path' => "/users/{$this->id}/"
         ]);
     }
 
@@ -50,6 +46,6 @@ class UpdateUserQuery implements QueryInterface
      */
     public function mapResponse(ResponseInterface $response)
     {
-        return $this->cloudUser;
+        return;
     }
 }

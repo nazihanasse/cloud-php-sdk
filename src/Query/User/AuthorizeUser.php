@@ -15,7 +15,7 @@ use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
  * Class AuthorizeUserQuery
  * @package SkyCentrics\Cloud\Query\User
  */
-class AuthorizeUserQuery implements QueryInterface
+class AuthorizeUser implements QueryInterface
 {
     /**
      * @var AccountInterface

@@ -39,13 +39,23 @@ class AnnotationReader implements AnnotationReaderInterface
 
         $refClass = new \ReflectionClass($className);
 
-        foreach ($refClass->getMethods() as $method){
-            $annotation = $this->doctrineReader->getMethodAnnotations($method);
+        $classAnnotation = $this->doctrineReader->getClassAnnotations($refClass);
+
+        if($classAnnotation){
+            $classAnnotation->setContext($refClass);
+            $annotations[] = $classAnnotation;
+        }
+
+        $refItems = array_merge($refClass->getMethods(), $refClass->getProperties());
+
+        foreach ($refItems as $refItem){
+
+            $annotation = $refClass instanceof \ReflectionMethod ? $this->doctrineReader->getMethodAnnotations($refItem) : $this->doctrineReader->getPropertyAnnotations($refItem);
 
             if($annotation){
                 /** @var AnnotationInterface $annotationItem */
                 foreach ($annotation as $annotationItem){
-                    $annotationItem->setContext($method);
+                    $annotationItem->setContext($refItem);
                     $annotations[] = $annotationItem;
                 }
             }

@@ -3,7 +3,7 @@
 
 namespace SkyCentrics\Cloud\DTO\Device\Data;
 
-use SkyCentrics\Cloud\Annotation\Property;
+use SkyCentrics\Cloud\Annotation\Method;
 use SkyCentrics\Cloud\DTO\Device\AbstractData;
 use SkyCentrics\Cloud\DTO\Device\DeviceTypeInterface;
 
@@ -49,7 +49,7 @@ class PoolPumpData extends AbstractData
 
     /**
      * @param int $relay
-     * @Property(property="relay", type="int")
+     * @Method(property="relay", type="int")
      */
     public function setRelay(int $relay)
     {
@@ -66,7 +66,7 @@ class PoolPumpData extends AbstractData
 
     /**
      * @param int $override
-     * @Property(property="override", type="int")
+     * @Method(property="override", type="int")
      */
     public function setOverride(int $override)
     {
@@ -83,7 +83,7 @@ class PoolPumpData extends AbstractData
 
     /**
      * @param int $state
-     * @Property(property="state", type="int")
+     * @Method(property="state", type="int")
      */
     public function setState(int $state)
     {
@@ -100,7 +100,7 @@ class PoolPumpData extends AbstractData
 
     /**
      * @param array $commodity
-     * @Property(property="commodity", type="array")
+     * @Method(property="commodity", type="array")
      */
     public function setCommodity(array $commodity)
     {
@@ -117,7 +117,7 @@ class PoolPumpData extends AbstractData
 
     /**
      * @param array $commodities
-     * @Property(property="commodities", type="array")
+     * @Method(property="commodities", type="array")
      */
     public function setCommodities(array $commodities)
     {
@@ -134,7 +134,7 @@ class PoolPumpData extends AbstractData
 
     /**
      * @param int $power
-     * @Property(property="power", type="int")
+     * @Method(property="power", type="int")
      */
     public function setPower(int $power)
     {

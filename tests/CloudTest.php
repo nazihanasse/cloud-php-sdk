@@ -1,7 +1,7 @@
 <?php
 
 
-namespace SkyCentrics\Cloud\tests;
+namespace SkyCentrics\Cloud\Test;
 
 use SkyCentrics\Cloud\Cloud;
 

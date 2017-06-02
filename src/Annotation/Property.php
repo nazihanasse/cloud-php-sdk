@@ -4,75 +4,60 @@
 namespace SkyCentrics\Cloud\Annotation;
 
 /**
- * @Annotation
- *
  * Class Property
- * @package SkyCentrics\Cloud\Mapper
+ * @package SkyCentrics\Cloud\Annotation
  */
 class Property extends AbstractAnnotation
 {
     /**
-     * @var string
+     * @var mixed
+     */
+    protected $key;
+
+    /**
+     * @var mixed
      */
     protected $property;
 
     /**
-     * @var string
+     * @var mixed
      */
-    protected $type;
+    protected $method;
 
     /**
      * Property constructor.
-     * @param $values
+     * @param array $values
      */
     public function __construct(
-        $values
+        array $values
     )
     {
+        $this->key = $values['key'];
         $this->property = $values['property'];
-        $this->type = $values['type'];
+        $this->method = $values['method'];
     }
 
     /**
      * @return string
      */
-    public function getPropertyName()
+    public function getKey()
+    {
+        return $this->key;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProperty()
     {
         return $this->property;
     }
 
     /**
-     * @return string|null
+     * @return string
      */
     public function getMethod()
     {
-        return $this->context instanceof \ReflectionMethod ? $this->context->getName() : null;
+        return $this->method;
     }
-
-    /**
-     * @param $value
-     * @return mixed
-     */
-    public function toType($value)
-    {
-        return self::getTypeHandler($this->type)($value);
-    }
-
-    /**
-     * @return array
-     */
-    public static function getTypeHandler(string $type)
-    {
-        $handlers = [
-            'int' => function($value){return (int)$value;},
-            'string' => function($value){return (string)$value;},
-            'float' => function($value){return (float)$value;},
-            'array' => function($value){return (array)$value;},
-            'datetime' => function($value){return new \DateTime($value);},
-            'default' => function($value){return $value;}
-        ];
-
-        return $handlers[$type] ?? $handlers['default'];
-    }
-
 }

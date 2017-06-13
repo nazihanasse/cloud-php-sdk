@@ -4,7 +4,6 @@
 namespace SkyCentrics\Cloud\DTO\Device\Data;
 
 
-use SkyCentrics\Cloud\Annotation\Method;
 use SkyCentrics\Cloud\DTO\Device\AbstractData;
 use SkyCentrics\Cloud\DTO\Device\DeviceTypeInterface;
 

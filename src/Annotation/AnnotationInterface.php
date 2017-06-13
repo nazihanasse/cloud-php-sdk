@@ -16,4 +16,9 @@ interface AnnotationInterface
      * @param \Reflector $reflection
      */
     public function setContext(\Reflector $reflection);
+
+    /**
+     * @return \Reflection
+     */
+    public function getContext();
 }

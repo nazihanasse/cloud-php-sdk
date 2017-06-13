@@ -4,6 +4,7 @@
 namespace SkyCentrics\Cloud\Query\User;
 
 
+use SkyCentrics\Cloud\Query\AbstractQuery;
 use SkyCentrics\Cloud\Query\QueryInterface;
 use SkyCentrics\Cloud\Security\Account;
 use SkyCentrics\Cloud\Transport\Request\Request;
@@ -14,7 +15,7 @@ use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
  * Class CheckUserByEmail
  * @package SkyCentrics\Cloud\Query\User
  */
-class CheckUserByEmail implements QueryInterface
+class CheckUserByEmail extends AbstractQuery
 {
     /**
      * @var string

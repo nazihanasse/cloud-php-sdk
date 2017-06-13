@@ -7,6 +7,7 @@ namespace SkyCentrics\Cloud\Query\Organization;
 use SkyCentrics\Cloud\Mapper\DeviceMapper;
 use SkyCentrics\Cloud\Mapper\GroupMapper;
 use SkyCentrics\Cloud\Mapper\UserMapper;
+use SkyCentrics\Cloud\Query\AbstractQuery;
 use SkyCentrics\Cloud\Query\QueryInterface;
 use SkyCentrics\Cloud\Transport\Request\MultiRequestInterface;
 use SkyCentrics\Cloud\Transport\Request\Request;
@@ -17,7 +18,7 @@ use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
  * Class GetOrganizationEntriesQuery
  * @package SkyCentrics\Cloud\Query\Organization
  */
-class GetOrganizationEntries implements QueryInterface
+class GetOrganizationEntries extends AbstractQuery
 {
     /**
      * @var int

@@ -3,13 +3,27 @@
 
 namespace SkyCentrics\Cloud\Security;
 
-
+/**
+ * Class Account
+ * @package SkyCentrics\Cloud\Security
+ */
 class Account implements AccountInterface
 {
+    /**
+     * @var string
+     */
     protected $email;
 
+    /**
+     * @var string
+     */
     protected $password;
 
+    /**
+     * Account constructor.
+     * @param string $email
+     * @param string $password Md5 hashed string !
+     */
     public function __construct(
         string $email = '',
         string $password = ''

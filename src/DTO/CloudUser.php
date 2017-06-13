@@ -3,6 +3,8 @@
 
 namespace SkyCentrics\Cloud\DTO;
 
+use SkyCentrics\Cloud\Annotation\Property;
+
 /**
  * Class CloudUser
  * @package SkyCentrics\Cloud\DTO
@@ -11,71 +13,85 @@ class CloudUser implements CloudDTOInterface
 {
     /**
      * @var int
+     * @Property(key="id")
      */
     protected $id;
 
     /**
      * @var string
+     * @Property(key="email")
      */
     protected $email;
 
     /**
      * @var string
+     * @Property(key="auth")
      */
     protected $password;
 
     /**
      * @var string
+     * @Property(key="name.first")
      */
     protected $firstName;
 
     /**
      * @var string
+     * @Property(key="name.last")
      */
     protected $lastName;
 
     /**
      * @var string
+     * @Property(key="address.street")
      */
     protected $street;
 
     /**
      * @var string
+     * @Property(key="address.city")
      */
     protected $city;
 
     /**
      * @var string
+     * @Property(key="address.state")
      */
     protected $state;
 
     /**
      * @var int
+     * @Property(key="address.zip")
      */
     protected $zip;
 
     /**
      * @var string
+     * @Property(key="address.country")
      */
     protected $country;
 
     /**
      * @var \DateTimeZone
+     * @Property(key="timezone")
      */
     protected $timeZone;
 
     /**
      * @var int
+     * @Property(key="sync")
      */
     protected $sync;
 
     /**
      * @var int
+     * @Property(key="organization")
      */
     protected $organization;
 
     /**
      * @var int
+     * @Property(key="control")
      */
     protected $control;
 

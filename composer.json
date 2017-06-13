@@ -18,8 +18,18 @@
     "phpunit/phpunit": "6.1.*"
   },
   "autoload": {
+    "classmap": [
+      "src/"
+    ],
     "psr-4": {
-      "SkyCentrics\\Cloud\\" : "src/",
+      "SkyCentrics\\Cloud\\" : "src/"
+    }
+  },
+  "autoload-dev": {
+    "classmap": [
+      "tests/"
+    ],
+    "psr-4": {
       "SkyCentrics\\Cloud\\Tests\\" : "tests/"
     }
   }

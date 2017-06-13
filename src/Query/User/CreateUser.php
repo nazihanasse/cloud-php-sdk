@@ -7,6 +7,7 @@ namespace SkyCentrics\Cloud\Query\User;
 use SkyCentrics\Cloud\DTO\CloudUser;
 use SkyCentrics\Cloud\Exception\CloudQueryException;
 use SkyCentrics\Cloud\Mapper\UserMapper;
+use SkyCentrics\Cloud\Query\AbstractQuery;
 use SkyCentrics\Cloud\Query\QueryInterface;
 use SkyCentrics\Cloud\src\Exception\QueryException;
 use SkyCentrics\Cloud\Transport\Request\Request;
@@ -17,7 +18,7 @@ use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
  * Class CreateUserQuery
  * @package SkyCentrics\Cloud\Query\User
  */
-class CreateUser implements QueryInterface
+class CreateUser extends AbstractQuery
 {
     /**
      * @var CloudUser

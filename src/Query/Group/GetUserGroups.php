@@ -6,6 +6,7 @@ namespace SkyCentrics\Cloud\Query\Group;
 
 use SkyCentrics\Cloud\DTO\CloudGroup;
 use SkyCentrics\Cloud\Mapper\GroupMapper;
+use SkyCentrics\Cloud\Query\AbstractQuery;
 use SkyCentrics\Cloud\Query\QueryInterface;
 use SkyCentrics\Cloud\Security\AccountInterface;
 use SkyCentrics\Cloud\Transport\Request\MultiRequestInterface;
@@ -18,7 +19,7 @@ use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
  * Class GetUserGroups
  * @package SkyCentrics\Cloud\Query\Group
  */
-class GetUserGroups implements QueryInterface
+class GetUserGroups extends AbstractQuery
 {
     /**
      * @var AccountInterface

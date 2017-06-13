@@ -4,8 +4,15 @@
 namespace SkyCentrics\Cloud;
 
 
+use SkyCentrics\Cloud\Annotation\AnnotationHandler;
+use SkyCentrics\Cloud\Annotation\AnnotationMapper;
+use SkyCentrics\Cloud\Annotation\AnnotationMapperInterface;
+use SkyCentrics\Cloud\Annotation\AnnotationReader;
+use SkyCentrics\Cloud\Annotation\Property;
+use SkyCentrics\Cloud\Annotation\PropertyHandler;
 use SkyCentrics\Cloud\Exception\CloudException;
 use SkyCentrics\Cloud\Exception\CloudResponseException;
+use SkyCentrics\Cloud\Query\AbstractQuery;
 use SkyCentrics\Cloud\Query\MultiQuery;
 use SkyCentrics\Cloud\Query\QueryInterface;
 use SkyCentrics\Cloud\Security\AccountInterface;
@@ -37,6 +44,11 @@ class Cloud implements CloudInterface
     protected $securityProvider;
 
     /**
+     * @var AnnotationMapperInterface
+     */
+    protected $annotationMapper;
+
+    /**
      * Cloud constructor.
      * @param TransportInterface $transport
      * @param AccountInterface $account
@@ -49,10 +61,17 @@ class Cloud implements CloudInterface
         $this->account = $account;
         $this->transport = $transport === null ? new Transport\GuzzleHttpTransport() : $transport;
         $this->securityProvider = new SecurityProvider();
+
+        $this->annotationMapper = new AnnotationMapper(
+            new AnnotationReader(),
+            new AnnotationHandler([
+                Property::class => new PropertyHandler()
+            ])
+        );
     }
 
     /**
-     * @param QueryInterface|array $query
+     * @param QueryInterface|AbstractQuery|array $query
      * @param AccountInterface|null $account
      * @return mixed
      * @throws CloudException
@@ -60,7 +79,7 @@ class Cloud implements CloudInterface
     public function apply($query, AccountInterface $account = null)
     {
         if(is_array($query)){
-            $query = new MultiQuery($query);
+            $query = new MultiQuery($query, $this->annotationMapper);
         }
 
         $request = $query->createRequest();
@@ -74,7 +93,9 @@ class Cloud implements CloudInterface
                 $queryResult[] = $query->mapResponse($responseItem);
             }
         }else{
-
+            if($query instanceof AbstractQuery){
+                $query->setAnnotationMapper($this->annotationMapper);
+            }
             $queryResult = $query->mapResponse($response);
         }
 

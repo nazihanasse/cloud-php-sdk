@@ -44,7 +44,7 @@ abstract class AbstractTransport implements TransportInterface
         foreach ($responses as $key => $response){
 
             if(!$response instanceof ResponseInterface){
-                throw new CloudTransportException(sprintf("Response must be instance of %s , but %s is given.", ResponseInterface::class, get_class($response)));
+                throw new CloudTransportException(sprintf("Response must be instance of %s, but %s is given.", ResponseInterface::class, get_class($response)));
             }
 
             //@TODO: need to resolve what will we do with response exceptions in multi-requests.

@@ -14,7 +14,7 @@ use SkyCentrics\Cloud\Query\QueryInterface;
  * Class AbstractDeviceQuery
  * @package SkyCentrics\Cloud\Query\Device
  */
-abstract class AbstractDeviceQuery implements QueryInterface
+abstract class AbstractDeviceQuery extends AbstractQuery
 {
     private $paths = [
         'devices' => [

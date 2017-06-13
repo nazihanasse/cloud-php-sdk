@@ -2,8 +2,11 @@
 
 
 namespace SkyCentrics\Cloud\Annotation;
+use Doctrine\Common\Annotations\AnnotationException;
 
 /**
+ * @Annotation
+ *
  * Class Property
  * @package SkyCentrics\Cloud\Annotation
  */
@@ -17,12 +20,12 @@ class Property extends AbstractAnnotation
     /**
      * @var mixed
      */
-    protected $property;
+    protected $getter;
 
     /**
      * @var mixed
      */
-    protected $method;
+    protected $setter;
 
     /**
      * Property constructor.
@@ -32,9 +35,21 @@ class Property extends AbstractAnnotation
         array $values
     )
     {
+        if(empty($values['key'])){
+            /** @var \ReflectionProperty $context */
+            $context = $this->getContext();
+            throw new AnnotationException(sprintf("Property 'key' is required in the class property %s.", $context->getName()));
+        }
+
+        $values = array_merge([
+            'key' => null,
+            'getter' => null,
+            'setter' => null
+        ], $values);
+
         $this->key = $values['key'];
-        $this->property = $values['property'];
-        $this->method = $values['method'];
+        $this->getter = $values['getter'];
+        $this->setter = $values['setter'];
     }
 
     /**
@@ -46,18 +61,19 @@ class Property extends AbstractAnnotation
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getProperty()
+    public function getGetter()
     {
-        return $this->property;
+        return $this->getter;
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getMethod()
+    public function getSetter()
     {
-        return $this->method;
+        return $this->setter;
     }
+
 }

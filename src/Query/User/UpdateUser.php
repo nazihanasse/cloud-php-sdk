@@ -6,6 +6,7 @@ namespace SkyCentrics\Cloud\Query\User;
 
 use SkyCentrics\Cloud\DTO\CloudUser;
 use SkyCentrics\Cloud\Mapper\UserMapper;
+use SkyCentrics\Cloud\Query\AbstractQuery;
 use SkyCentrics\Cloud\Query\QueryInterface;
 use SkyCentrics\Cloud\Transport\Request\Request;
 use SkyCentrics\Cloud\Transport\Request\RequestInterface;
@@ -15,7 +16,7 @@ use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
  * Class UpdateUserQuery
  * @package SkyCentrics\Cloud\Query\User
  */
-class UpdateUser implements QueryInterface
+class UpdateUser extends AbstractQuery
 {
     /**
      * @var CloudUser

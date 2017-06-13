@@ -22,4 +22,12 @@ abstract class AbstractAnnotation implements AnnotationInterface
     {
         $this->context = $reflection;
     }
+
+    /**
+     * @return \Reflection
+     */
+    public function getContext()
+    {
+        return $this->context;
+    }
 }

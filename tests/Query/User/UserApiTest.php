@@ -4,57 +4,27 @@
 namespace SkyCentrics\Tests\Query\User;
 
 
-use PHPUnit\Framework\TestCase;
-use SkyCentrics\Cloud\Cloud;
-use SkyCentrics\Cloud\CloudInterface;
 use SkyCentrics\Cloud\DTO\CloudUser;
-use SkyCentrics\Cloud\Query\User\AuthorizeUserQuery;
+use SkyCentrics\Cloud\Query\User\AuthorizeUser;
 use SkyCentrics\Cloud\Query\User\CheckUserByEmail;
-use SkyCentrics\Cloud\Query\User\CreateUserQuery;
-use SkyCentrics\Cloud\Query\User\GetUserQuery;
+use SkyCentrics\Cloud\Query\User\GetUser;
 use SkyCentrics\Cloud\Security\Account;
+use SkyCentrics\Cloud\Test\CloudTest;
 
 /**
  * Class UserApiTest
  * @package SkyCentrics\Tests\Query\User
  */
-class UserApiTest extends TestCase
+class UserApiTest extends CloudTest
 {
     /**
-     * @var CloudInterface
-     */
-    protected static $cloud;
-
-    public function setUp()
-    {
-        if(empty(self::$cloud)){
-            self::$cloud = new Cloud();
-        }
-    }
-
-    public function testCreateUser()
-    {
-        $cloud = self::$cloud;
-
-        $cloudUser = new CloudUser(
-            'test_account@test.com',
-            'scn54321'
-        );
-
-        $userId = $cloud->apply(new CreateUserQuery($cloudUser));
-
-        $this->assertInternalType('int', $userId);
-
-        return $userId;
-    }
-
-    /**
      * @param CloudUser $cloudUser
-     * @depends testCreateUser
      */
-    public function testGetUser(int $userId)
+    public function testGetUser()
     {
-        $cloudUser = self::$cloud->apply(new GetUserQuery($userId));
+        $userId = self::getUser()->getId();
+
+        $cloudUser = self::$cloud->apply(new GetUser($userId));
 
         $this->assertInstanceOf(CloudUser::class, $cloudUser);
         $this->assertEquals($userId, $cloudUser->getId());
@@ -68,19 +38,20 @@ class UserApiTest extends TestCase
      */
     public function testGetUserByEmail(CloudUser $cloudUser)
     {
+        /** @var Account $cloudUserByEmail */
         $cloudUserByEmail = self::$cloud->apply(new CheckUserByEmail($cloudUser->getEmail()));
 
-        $this->assertInstanceOf(CloudUser::class, $cloudUserByEmail);
-        $this->assertEquals($cloudUserByEmail->getId(), $cloudUser->getId());
+        $this->assertInstanceOf(Account::class, $cloudUserByEmail);
+        $this->assertEquals($cloudUserByEmail->getEmail(), $cloudUser->getEmail());
     }
 
     /**
      * @param CloudUser $cloudUser
-     * @depends testCreateUser
+     * @depends testGetUser
      */
     public function testAuthorizeUser(CloudUser $cloudUser)
     {
-        $cloudAthorizedUser = self::$cloud->apply(new AuthorizeUserQuery(new Account($cloudUser->getEmail(), $cloudUser->getPassword())));
+        $cloudAthorizedUser = self::$cloud->apply(new AuthorizeUser(new Account($cloudUser->getEmail(), $cloudUser->getPassword())));
 
         $this->assertInstanceOf(CloudUser::class, $cloudAthorizedUser);
         $this->assertEquals($cloudAthorizedUser->getId(), $cloudUser->getId());
@@ -92,14 +63,17 @@ class UserApiTest extends TestCase
      */
     public function testUpdateUser(CloudUser $cloudUser)
     {
-        
+        $this->markTestIncomplete();
     }
 
     /**
      * @param CloudUser $cloudUser
      * @depends testGetUser
      */
-    public function testDeleteUser(CloudUser $cloudUser){}
+    public function testDeleteUser(CloudUser $cloudUser)
+    {
+        $this->markTestIncomplete();
+    }
 
 
 }

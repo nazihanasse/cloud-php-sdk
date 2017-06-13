@@ -4,7 +4,9 @@
 namespace SkyCentrics\Cloud\Query\User;
 
 
+use SkyCentrics\Cloud\DTO\CloudUser;
 use SkyCentrics\Cloud\Mapper\UserMapper;
+use SkyCentrics\Cloud\Query\AbstractQuery;
 use SkyCentrics\Cloud\Query\QueryInterface;
 use SkyCentrics\Cloud\Transport\Request\Request;
 use SkyCentrics\Cloud\Transport\Request\RequestInterface;
@@ -14,7 +16,7 @@ use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
  * Class GetUserQuery
  * @package SkyCentrics\Cloud\Query\User
  */
-class GetUser implements QueryInterface
+class GetUser extends AbstractQuery
 {
     /**
      * @var
@@ -51,6 +53,6 @@ class GetUser implements QueryInterface
      */
     public function mapResponse(ResponseInterface $response)
     {
-        return UserMapper::fromResponse($response->getData());
+        return $this->map(CloudUser::class, $response);
     }
 }

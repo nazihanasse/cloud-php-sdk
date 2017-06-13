@@ -35,10 +35,9 @@ class AnnotationReader implements AnnotationReaderInterface
      */
     public function read($className, array $annotations = [])
     {
-        $annotations = [];
-
         $refClass = new \ReflectionClass($className);
 
+        /** @var AnnotationInterface $classAnnotation */
         $classAnnotation = $this->doctrineReader->getClassAnnotations($refClass);
 
         if($classAnnotation){
@@ -50,7 +49,7 @@ class AnnotationReader implements AnnotationReaderInterface
 
         foreach ($refItems as $refItem){
 
-            $annotation = $refClass instanceof \ReflectionMethod ? $this->doctrineReader->getMethodAnnotations($refItem) : $this->doctrineReader->getPropertyAnnotations($refItem);
+            $annotation = $refItem instanceof \ReflectionMethod ? $this->doctrineReader->getMethodAnnotations($refItem) : $this->doctrineReader->getPropertyAnnotations($refItem);
 
             if($annotation){
                 /** @var AnnotationInterface $annotationItem */

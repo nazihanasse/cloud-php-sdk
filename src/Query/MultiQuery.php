@@ -7,6 +7,7 @@ namespace SkyCentrics\Cloud\Query;
 use SkyCentrics\Cloud\Annotation\AnnotationMapper;
 use SkyCentrics\Cloud\Annotation\AnnotationMapperInterface;
 use SkyCentrics\Cloud\Exception\CloudQueryException;
+use SkyCentrics\Cloud\Security\AbstractSecurityProvider;
 use SkyCentrics\Cloud\Transport\Request\MultiRequest;
 use SkyCentrics\Cloud\Transport\Request\MultiRequestInterface;
 use SkyCentrics\Cloud\Transport\Request\RequestInterface;
@@ -38,10 +39,12 @@ class MultiQuery implements QueryInterface
      * MultiQuery constructor.
      * @param array $queries
      * @param AnnotationMapperInterface $annotationMapper
+     * @param AbstractSecurityProvider $securityProvider
      */
     public function __construct(
         array $queries,
-        AnnotationMapperInterface $annotationMapper
+        AnnotationMapperInterface $annotationMapper,
+        AbstractSecurityProvider $securityProvider
     )
     {
         $this->queries = [];
@@ -52,6 +55,7 @@ class MultiQuery implements QueryInterface
         foreach ($queries as $query){
             if($query instanceof AbstractQuery){
                 $query->setAnnotationMapper($annotationMapper);
+                $query->setSecurityProvider($securityProvider);
             }
             $this->addQuery($query);
         }

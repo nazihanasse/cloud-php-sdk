@@ -48,7 +48,7 @@ class CreateUser extends AbstractQuery
     {
         return Request::createFromParams([
             'path' => '/users/',
-            'body' => UserMapper::toRequest($this->cloudUser)
+            'data' => UserMapper::toRequest($this->cloudUser)
         ]);
     }
 
@@ -59,15 +59,7 @@ class CreateUser extends AbstractQuery
      */
     public function mapResponse(ResponseInterface $response)
     {
-        $headers = $response->getHeaders();
-
-        if(!isset($headers['Location'])){
-            throw new CloudQueryException('Location header is missing !');
-        }
-
-        preg_match_all("/([\d]+)/", $headers['Location'], $matches);
-
-        $id = !empty($matches[0][0]) ? (int)$matches[0][0] : null;
+        $id = $response->getIdFromLocation();
 
         $this->cloudUser->setId($id);
 

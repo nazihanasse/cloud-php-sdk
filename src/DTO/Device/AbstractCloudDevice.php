@@ -3,6 +3,7 @@
 
 namespace SkyCentrics\Cloud\DTO\Device;
 
+use SkyCentrics\Cloud\Annotation\Property;
 use SkyCentrics\Cloud\DTO\CloudDTOInterface;
 
 /**
@@ -13,31 +14,43 @@ abstract class AbstractCloudDevice implements CloudDTOInterface
 {
     /**
      * @var int
+     *
+     * @Property(key="id")
      */
-    protected $id;
+    protected $id = 0;
 
     /**
      * @var int
+     *
+     * @Property(key="user")
      */
     protected $userId;
 
     /**
      * @var int
+     *
+     * @Property(key="group")
      */
     protected $groupId;
 
     /**
      * @var string
+     *
+     * @Property(key="name")
      */
     protected $name;
 
     /**
      * @var int
+     *
+     * @Property(key="type")
      */
     protected $type;
 
     /**
      * @var string
+     *
+     * @Property(key="mac")
      */
     protected $mac;
 
@@ -181,6 +194,14 @@ abstract class AbstractCloudDevice implements CloudDTOInterface
     public function getGroupId(): int
     {
         return $this->groupId;
+    }
+
+    /**
+     * @return CloudDeviceID
+     */
+    public function getDeviceId()
+    {
+        return new CloudDeviceID($this->getId(), $this->getDeviceType());
     }
 
 }

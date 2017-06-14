@@ -78,8 +78,15 @@ class Cloud implements CloudInterface
      */
     public function apply($query, AccountInterface $account = null)
     {
+        $securityProvider = $account === null ? $this->securityProvider : new SecurityProvider($account);
+
         if(is_array($query)){
-            $query = new MultiQuery($query, $this->annotationMapper);
+            $query = new MultiQuery($query, $this->annotationMapper, $securityProvider);
+        }
+
+        if($query instanceof AbstractQuery){
+            $query->setAnnotationMapper($this->annotationMapper);
+            $query->setSecurityProvider($securityProvider);
         }
 
         $request = $query->createRequest();
@@ -93,9 +100,6 @@ class Cloud implements CloudInterface
                 $queryResult[] = $query->mapResponse($responseItem);
             }
         }else{
-            if($query instanceof AbstractQuery){
-                $query->setAnnotationMapper($this->annotationMapper);
-            }
             $queryResult = $query->mapResponse($response);
         }
 

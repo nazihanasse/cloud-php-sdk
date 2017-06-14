@@ -6,6 +6,9 @@ namespace SkyCentrics\Cloud\Query;
 
 use SkyCentrics\Cloud\Annotation\AnnotationMapperInterface;
 use SkyCentrics\Cloud\DTO\CloudDTOInterface;
+use SkyCentrics\Cloud\Security\AbstractSecurityProvider;
+use SkyCentrics\Cloud\Security\AccountInterface;
+use SkyCentrics\Cloud\Transport\Request\RequestInterface;
 use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
 
 /**
@@ -20,6 +23,11 @@ abstract class AbstractQuery implements QueryInterface
     private $annotationMapper;
 
     /**
+     * @var AbstractSecurityProvider
+     */
+    private $securityProvider;
+
+    /**
      * @param AnnotationMapperInterface $annotationMapper
      */
     final public function setAnnotationMapper(AnnotationMapperInterface $annotationMapper)
@@ -28,18 +36,30 @@ abstract class AbstractQuery implements QueryInterface
     }
 
     /**
-     * @param $cloudDTO
-     * @param ResponseInterface|null $response
-     * @return mixed
+     * @param AbstractSecurityProvider $securityProvider
      */
-    final public function map($cloudDTO, ResponseInterface $response = null)
+    final public function setSecurityProvider(AbstractSecurityProvider $securityProvider)
     {
-        $data = null;
+        $this->securityProvider = $securityProvider;
+    }
 
-        if($response){
-            $data = $response->getData() ?? [];
-        }
+    /**
+     * @param RequestInterface $request
+     * @return RequestInterface
+     */
+    final public function addSecurityHeaders(RequestInterface $request)
+    {
+        return $this->securityProvider->provide($request);
+    }
 
+    /**
+     * @param $cloudDTO
+     * @param array|null $data
+     * @return mixed
+     * @internal param null|ResponseInterface $response
+     */
+    final public function map($cloudDTO, array $data = null)
+    {
         return $this->annotationMapper->map($cloudDTO, $data);
     }
 }

@@ -153,4 +153,12 @@ class MultiResponse implements MultiResponseInterface
     {
         return !$this->current() instanceof ResponseInterface ? false : $this->current()->isSuccess($isSuccess);
     }
+
+    /**
+     * @return int|null
+     */
+    public function getIdFromLocation()
+    {
+        // TODO: Implement getIdFromLocation() method.
+    }
 }

@@ -27,24 +27,34 @@ class PropertyHandler implements AnnotationHandlerInterface
         $key = $annotation->getKey();
 
         $value = null;
+        $valueFounded = false;
 
         foreach ((explode('.', $key)) as $level => $keyName){
 
             if($level === 0){
                 if($source[$keyName]){
                     $value = $source[$keyName];
+                    $valueFounded = true;
                 }else{
+                    $valueFounded = false;
                     break;
                 }
             }else{
                 if(isset($value[$keyName])){
                     $value = $value[$keyName];
+                    $valueFounded = true;
+                }else{
+                    $valueFounded = false;
                 }
             }
         }
 
         /** @var \ReflectionProperty  $property */
         $property = $annotation->getContext();
+
+        if(!$valueFounded){
+            return null;
+        }
 
         if($annotation->getSetter()){
             $setterName = $annotation->getGetter();
@@ -75,8 +85,9 @@ class PropertyHandler implements AnnotationHandlerInterface
         $key = $annotation->getKey();
 
         $value = [];
+        $keys = explode('.', $key);
 
-        foreach (explode('.', $key) as $level => $keyName){
+        foreach ($keys as $level => $keyName){
             if($level === 0){
                 if(!isset($source[$keyName])){
                     $source[$keyName] = [];
@@ -85,21 +96,22 @@ class PropertyHandler implements AnnotationHandlerInterface
                 $value = &$source[$keyName];
 
             }else{
-
-                $currValue = &$value[$prevName];
-
+                $currValue = &$value;
                 $this->build($currValue, $keyName);
+                $value = &$currValue[$keyName];
             }
 
-            $prevName = $keyName;
         }
 
         /** @var \ReflectionProperty $property */
         $property = $annotation->getContext();
 
+        $property->setAccessible(true);
         $value = $property->getValue($target);
 
-        return $value;
+        unset($keys, $value, $currValue);
+
+        return $source;
     }
 
     /**
@@ -111,5 +123,7 @@ class PropertyHandler implements AnnotationHandlerInterface
         if(!isset($value[$keyName])){
             $value[$keyName] = [];
         };
+
+        return $value;
     }
 }

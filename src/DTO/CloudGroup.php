@@ -3,6 +3,8 @@
 
 namespace SkyCentrics\Cloud\DTO;
 
+use SkyCentrics\Cloud\Annotation\Property;
+
 
 /**
  * Class CloudGroup
@@ -12,23 +14,39 @@ class CloudGroup implements CloudDTOInterface
 {
     /**
      * @var int
+     *
+     * @Property(key="i")
      */
     protected $id;
 
     /**
      * @var string
+     *
+     * @Property(key="n")
      */
     protected $name;
 
     /**
      * @var int
+     *
+     * @Property(key="u")
      */
     protected $userId;
 
     /**
      * @var int
+     *
+     * @Property(key="p")
      */
     protected $parent;
+
+    /**
+     * @var int
+     *
+     * @Property(key="t")
+     * @TODO: it is a temp name property is neede for mapping
+     */
+    protected $target = 0;
 
     /**
      * CloudGroup constructor.

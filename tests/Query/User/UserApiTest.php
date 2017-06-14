@@ -18,7 +18,7 @@ use SkyCentrics\Cloud\Test\CloudTest;
 class UserApiTest extends CloudTest
 {
     /**
-     * @param CloudUser $cloudUser
+     * @return mixed
      */
     public function testGetUser()
     {
@@ -74,6 +74,4 @@ class UserApiTest extends CloudTest
     {
         $this->markTestIncomplete();
     }
-
-
 }

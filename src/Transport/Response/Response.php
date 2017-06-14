@@ -3,6 +3,7 @@
 
 namespace SkyCentrics\Cloud\Transport\Response;
 
+use SkyCentrics\Cloud\Exception\CloudQueryException;
 use SkyCentrics\Cloud\Transport\Request\RequestInterface;
 
 /**
@@ -122,5 +123,22 @@ class Response implements ResponseInterface
         }
 
         return $this->isSuccess = $isSuccess;
+    }
+
+    /**
+     * @return int|null
+     * @throws CloudQueryException
+     */
+    public function getIdFromLocation()
+    {
+        $headers = $this->getHeaders();
+
+        if(!isset($headers['Location'])){
+            throw new CloudQueryException('Location header is missing !');
+        }
+
+        preg_match_all("/([\d]+)/", current($headers['Location']), $matches);
+
+        return !empty($matches[0][0]) ? (int)$matches[0][0] : null;
     }
 }

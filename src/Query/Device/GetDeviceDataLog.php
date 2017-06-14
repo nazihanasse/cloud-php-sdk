@@ -14,7 +14,7 @@ use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
  * Class GetDeviceDataLog
  * @package SkyCentrics\Cloud\Query\Device
  */
-class GetDeviceDataLog extends GetDeviceDataQuery
+class GetDeviceDataLog extends GetDeviceData
 {
     /**
      * @var \DateTime

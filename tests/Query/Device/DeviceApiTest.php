@@ -4,13 +4,112 @@
 namespace SkyCentrics\Tests\Query\Device;
 
 
-class DeviceApiTest
+use SkyCentrics\Cloud\DTO\Device\AbstractCloudDevice;
+use SkyCentrics\Cloud\DTO\Device\CloudDevice;
+use SkyCentrics\Cloud\DTO\Device\DeviceTypeInterface;
+use SkyCentrics\Cloud\Query\Device\CreateDevice;
+use SkyCentrics\Cloud\Query\Device\DeleteDevice;
+use SkyCentrics\Cloud\Query\Device\GetDevice;
+use SkyCentrics\Cloud\Query\Device\UpdateDevice;
+use SkyCentrics\Cloud\Test\CloudTest;
+
+/**
+ * Class DeviceApiTest
+ * @package SkyCentrics\Tests\Query\Device
+ *
+ * @coversDefaultClass \Skycentrics\Cloud\Query\Device
+ */
+class DeviceApiTest extends CloudTest
 {
-    public function testCreate(){}
+    /**
+     * @param string $name
+     * @param int $type
+     * @param string $mac
+     * @return CloudDevice
+     *
+     * @covers CreateDevice
+     */
+    public function testCreate()
+    {
+        list($name, $type, $mac) = $this->deviceDataProvider();
 
-    public function testGet(){}
+        $user = self::getUser();
 
-    public function testUpdate(){}
+        $cloudDevice = new CloudDevice(
+            $user->getId(),
+            $name,
+            $type,
+            $mac
+        );
 
-    public function testDelete(){}
+        $this->assertEquals(self::getUser()->getId(), $cloudDevice->getUserId());
+
+        $cloud = self::getCloud();
+
+        $deviceId = $cloud->apply(new CreateDevice($cloudDevice), $user->getAccount());
+
+        $this->assertInternalType('integer', $deviceId);
+        $this->assertNotEmpty($cloudDevice->getId());
+
+        return $cloudDevice;
+    }
+
+    /**
+     * @param AbstractCloudDevice $cloudDevice
+     *
+     * @return AbstractCloudDevice
+     *
+     * @depends testCreate
+     * @covers GetDevice
+     */
+    public function testGet($cloudDevice)
+    {
+        /** @var CloudDevice $device */
+        $device = self::getCloud()->apply(new GetDevice($cloudDevice->getDeviceId()));
+
+        $this->assertInstanceOf(AbstractCloudDevice::class, $device);
+        $this->assertEquals(self::getUser()->getId(), $device->getUserId());
+
+        return $device;
+    }
+
+    /**
+     * @depends testGet
+     * @covers UpdateDevice
+     */
+    public function testUpdate(AbstractCloudDevice $cloudDevice)
+    {
+        $this->assertEquals(self::getUser()->getId(), $cloudDevice->getUserId());
+
+        $cloudDevice->setDeviceName('New Test DeviceName');
+
+        $this->assertEmpty(self::getCloud()->apply(new UpdateDevice($cloudDevice)));
+    }
+
+    /**
+     * @depends testGet
+     * @covers DeleteDevice
+     */
+    public function testDelete(CloudDevice $cloudDevice)
+    {
+        $this->assertEquals(self::getUser()->getId(), $cloudDevice->getUserId());
+        $this->assertEmpty(self::getCloud()->apply(new DeleteDevice($cloudDevice)));
+    }
+
+    /**
+     * @return array
+     */
+    public function deviceDataProvider()
+    {
+
+        $generateMac = function(){
+            return substr(md5(time()), 0, 12);
+        };
+
+        return [
+            'Test device CT-80',
+            DeviceTypeInterface::TYPE_RADIO_THERMOSTAT_CT_80,
+            $generateMac()
+        ];
+    }
 }

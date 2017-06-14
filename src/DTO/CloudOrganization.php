@@ -3,6 +3,8 @@
 
 namespace SkyCentrics\Cloud\DTO;
 
+use SkyCentrics\Cloud\Annotation\Property;
+
 
 /**
  * Class CloudOrganization
@@ -12,16 +14,22 @@ class CloudOrganization implements CloudDTOInterface
 {
     /**
      * @var int
+     *
+     * @Property(key="id")
      */
     protected $id;
 
     /**
      * @var string
+     *
+     * @Property(key="name")
      */
     protected $name;
 
     /**
      * @var int
+     *
+     * @Property(key="user")
      */
     protected $user;
 

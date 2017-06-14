@@ -4,8 +4,8 @@
 namespace SkyCentrics\Cloud\Query\Device;
 
 
+use SkyCentrics\Cloud\DTO\Device\CloudDevice;
 use SkyCentrics\Cloud\DTO\Device\CloudDeviceID;
-use SkyCentrics\Cloud\Mapper\DeviceMapper;
 use SkyCentrics\Cloud\Transport\Request\Request;
 use SkyCentrics\Cloud\Transport\Request\RequestInterface;
 use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
@@ -38,7 +38,7 @@ class GetDevice extends AbstractDeviceQuery
     public function createRequest(): RequestInterface
     {
         return Request::createFromParams([
-            'path' => sprintf("/%s/%s/", $this->getPath($this->cloudDeviceID), $this->cloudDeviceID->getId())
+            'path' => sprintf("/%s/%s/", $this->getPath($this->cloudDeviceID->getType()), $this->cloudDeviceID->getId())
         ]);
     }
 
@@ -48,6 +48,6 @@ class GetDevice extends AbstractDeviceQuery
      */
     public function mapResponse(ResponseInterface $response)
     {
-        return DeviceMapper::fromResponse($response->getData());
+        return $this->map(CloudDevice::class, $this->sanitizeDeviceInfo($response->getData()));
     }
 }

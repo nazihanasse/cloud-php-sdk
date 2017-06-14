@@ -61,7 +61,7 @@ class GetDevicesData extends AbstractDeviceQuery
 
             $this->currentDevice = $device;
 
-            $path = sprintf("/%s/%s/data", $this->getPath(new CloudDeviceID($device->getId(), $device->getDeviceType())), $device->getId());
+            $path = sprintf("/%s/%s/data", $this->getPath($device->getDeviceType()), $device->getId());
 
             $requests[] = Request::createFromParams([
                 'path' => $path

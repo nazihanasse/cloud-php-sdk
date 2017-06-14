@@ -85,9 +85,7 @@ class MultiRequest implements MultiRequestInterface
      */
     public static function createFromParams(array $params): RequestInterface
     {
-        $request = Request::createFromParams($params);
-
-        return $request;
+        return Request::createFromParams($params);
     }
 
     /**

@@ -4,6 +4,8 @@
 namespace SkyCentrics\Cloud\DTO;
 
 use SkyCentrics\Cloud\Annotation\Property;
+use SkyCentrics\Cloud\Security\Account;
+use SkyCentrics\Cloud\Security\AccountInterface;
 
 /**
  * Class CloudUser
@@ -334,6 +336,14 @@ class CloudUser implements CloudDTOInterface
     public function setControl(int $control)
     {
         $this->control = $control;
+    }
+
+    /**
+     * @return AccountInterface
+     */
+    public function getAccount() : AccountInterface
+    {
+        return new Account($this->getEmail(), $this->getPassword());
     }
 
 }

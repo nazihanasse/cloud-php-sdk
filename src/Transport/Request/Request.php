@@ -83,7 +83,7 @@ class Request implements RequestInterface
             'query' => [],
             'method' => self::METHOD_GET,
             'headers' => []
-        ], $params);
+        ], array_filter($params));
 
         return new self(
             $params['path'],

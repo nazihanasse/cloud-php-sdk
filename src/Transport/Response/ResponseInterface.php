@@ -46,4 +46,9 @@ interface ResponseInterface
      * @return bool
      */
     public function isSuccess(bool $isSuccess = null) : bool;
+
+    /**
+     * @return int|null
+     */
+    public function getIdFromLocation();
 }

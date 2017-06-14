@@ -4,6 +4,7 @@
 namespace SkyCentrics\Cloud\Annotation;
 
 
+use phpDocumentor\Reflection\DocBlock\Tags\Return_;
 use SkyCentrics\Cloud\Annotation\AnnotationReader;
 use SkyCentrics\Cloud\Annotation\AnnotationReaderInterface;
 use SkyCentrics\Cloud\Annotation\Method;
@@ -61,6 +62,7 @@ class AnnotationMapper implements AnnotationMapperInterface
         }
 
         $annotations = $this->annotationReader->read($class);
+        $result = null;
 
         if($data !== null) {
             /** @var AnnotationInterface $annotation */
@@ -68,16 +70,23 @@ class AnnotationMapper implements AnnotationMapperInterface
                 $this->handler->fromSource($annotation, $class, $data);
             }
 
-            return $class;
-        }
+            $result = $class;
+        }else{
 
-        /** @var AnnotationInterface $annotation */
-        foreach ($annotations as $annotation){
             $data = [];
-            $this->handler->fromTarget($annotation, $class, $data);
+
+            /** @var AnnotationInterface $annotation */
+            foreach ($annotations as $annotation){
+                $this->handler->fromTarget($annotation, $class, $data);
+            }
+
+            $result = $data;
+
         }
 
-        return $data;
+        unset($annotations);
+
+        return $result;
 
     }
 

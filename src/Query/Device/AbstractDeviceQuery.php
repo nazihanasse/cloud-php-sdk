@@ -7,6 +7,7 @@ namespace SkyCentrics\Cloud\Query\Device;
 use SkyCentrics\Cloud\DTO\Device\CloudDeviceID;
 use SkyCentrics\Cloud\DTO\Device\DeviceTypeInterface;
 use SkyCentrics\Cloud\Exception\CloudQueryException;
+use SkyCentrics\Cloud\Query\AbstractQuery;
 use SkyCentrics\Cloud\Query\QueryInterface;
 
 
@@ -51,14 +52,12 @@ abstract class AbstractDeviceQuery extends AbstractQuery
     ];
 
     /**
-     * @param CloudDeviceID $cloudDeviceID
+     * @param int $deviceType
      * @return string
      * @throws CloudQueryException
      */
-    public function getPath(CloudDeviceID $cloudDeviceID) : string
+    public function getPath(int $deviceType) : string
     {
-        $deviceType = $cloudDeviceID->getType();
-
         foreach ($this->paths as $path => $types){
             if(in_array($deviceType, $types, true)){
                 return $path;
@@ -77,4 +76,37 @@ abstract class AbstractDeviceQuery extends AbstractQuery
         return array_keys($this->paths);
     }
 
+    /**
+     * @param array $deviceInfo
+     * @return array
+     */
+    public function sanitizeDeviceInfo(array $deviceInfo, int $deviceType = null)
+    {
+        $path = 'devices';
+
+        if($deviceType){
+            $path = $this->getPath($deviceType);
+        }
+
+        $result = [
+            'id' => 'i',
+            'user' => 'u',
+            'name' => 'n',
+            'type' => 't',
+            'mac' => 'm',
+            'group' => 'g'
+        ];
+
+        if($path === 'devices'){
+            foreach ($result as $deviceKey => $smartplugKey){
+                $result[$deviceKey] = array_key_exists($deviceKey, $deviceInfo) ? $deviceInfo[$deviceKey] : $deviceInfo[$smartplugKey];
+            }
+        }else{
+            foreach ($result as $deviceKey => $smartplugKey){
+                $result[$smartplugKey] = array_key_exists($deviceKey, $deviceInfo) ? $deviceInfo[$deviceKey] : $deviceInfo[$smartplugKey];
+            }
+        }
+
+        return $result;
+    }
 }

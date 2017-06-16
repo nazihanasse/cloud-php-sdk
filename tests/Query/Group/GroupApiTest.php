@@ -4,7 +4,9 @@
 namespace SkyCentrics\Tests\Query\Group;
 
 
-class GroupApiTest
+use SkyCentrics\Cloud\Test\CloudTest;
+
+class GroupApiTest extends CloudTest
 {
     public function testCreate(){}
 

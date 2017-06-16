@@ -3,6 +3,11 @@
 
 namespace SkyCentrics\Cloud\Test;
 
+use SkyCentrics\Cloud\Annotation\AnnotationHandler;
+use SkyCentrics\Cloud\Annotation\AnnotationMapper;
+use SkyCentrics\Cloud\Annotation\AnnotationReader;
+use SkyCentrics\Cloud\Annotation\Property;
+use SkyCentrics\Cloud\Annotation\PropertyHandler;
 use SkyCentrics\Cloud\Cloud;
 
 use PHPUnit\Framework\TestCase;
@@ -36,6 +41,11 @@ class CloudTest extends TestCase
      * @var CloudUser
      */
     protected static $testUser;
+
+    /**
+     * @var AnnotationMapper
+     */
+    protected $annotationMapper;
 
     /**
      * Initial
@@ -90,6 +100,23 @@ class CloudTest extends TestCase
     protected function getUser() : CloudUser
     {
         return self::$testUser;
+    }
+
+    /**
+     * @return AnnotationMapper
+     */
+    protected function getAnnotationMapper()
+    {
+        if(!$this->annotationMapper){
+            $this->annotationMapper = new AnnotationMapper(
+                new AnnotationReader(),
+                new AnnotationHandler([
+                    Property::class => new PropertyHandler()
+                ])
+            );
+        }
+
+        return $this->annotationMapper;
     }
 
     /**

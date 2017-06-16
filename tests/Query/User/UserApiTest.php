@@ -14,11 +14,14 @@ use SkyCentrics\Cloud\Test\CloudTest;
 /**
  * Class UserApiTest
  * @package SkyCentrics\Tests\Query\User
+ *
+ * @coversDefaultClass SkyCentrics\Cloud\Query\User
  */
 class UserApiTest extends CloudTest
 {
     /**
      * @return mixed
+     * @covers GetUser
      */
     public function testGetUser()
     {
@@ -35,6 +38,7 @@ class UserApiTest extends CloudTest
     /**
      * @param CloudUser $cloudUser
      * @depends  testGetUser
+     * @covers CheckUserByEmail
      */
     public function testGetUserByEmail(CloudUser $cloudUser)
     {
@@ -48,6 +52,7 @@ class UserApiTest extends CloudTest
     /**
      * @param CloudUser $cloudUser
      * @depends testGetUser
+     * @covers AuthorizeUser
      */
     public function testAuthorizeUser(CloudUser $cloudUser)
     {

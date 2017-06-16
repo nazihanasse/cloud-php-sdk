@@ -4,9 +4,14 @@
 namespace SkyCentrics\Tests\Query\Organization;
 
 
-class OrganizationApiTest
+use SkyCentrics\Cloud\Test\CloudTest;
+
+class OrganizationApiTest extends CloudTest
 {
-    public function testCreate(){}
+    public function testCreate()
+    {
+        $this->markTestIncomplete();
+    }
 
     public function testGet(){}
 
@@ -14,5 +19,8 @@ class OrganizationApiTest
 
     public function testUpdate(){}
 
-    public function testDelete(){}
+    public function testDelete()
+    {
+        $this->markTestIncomplete();
+    }
 }

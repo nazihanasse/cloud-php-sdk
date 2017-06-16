@@ -65,13 +65,7 @@ class GetDeviceData extends AbstractDeviceQuery
      */
     public function mapResponse(ResponseInterface $response)
     {
-        $responseData = $response->getData();
-
-        $dataDTO = $this->cloudDataClass::fromResponse($responseData);
-
-        AnnotationMapper::fromResponse($responseData, $dataDTO);
-
-        return $dataDTO;
+        return $this->map($this->cloudDataClass, $response->getData());
     }
 
 }

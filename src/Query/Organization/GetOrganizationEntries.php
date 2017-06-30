@@ -4,6 +4,9 @@
 namespace SkyCentrics\Cloud\Query\Organization;
 
 
+use SkyCentrics\Cloud\DTO\CloudGroup;
+use SkyCentrics\Cloud\DTO\CloudUser;
+use SkyCentrics\Cloud\DTO\Device\CloudDevice;
 use SkyCentrics\Cloud\Mapper\DeviceMapper;
 use SkyCentrics\Cloud\Mapper\GroupMapper;
 use SkyCentrics\Cloud\Mapper\UserMapper;
@@ -64,23 +67,23 @@ class GetOrganizationEntries extends AbstractQuery
         ];
 
         foreach ($requestData as $userData) {
-            $cloudUser = UserMapper::fromResponse($userData);
+            $cloudUser = $this->map(CloudUser::class, $userData);
             $result['users'][] = $cloudUser;
 
             foreach ($userData['groups'] as $group){
-                $group = GroupMapper::fromResponse($group);
+                $group = $this->map(CloudGroup::class, $group);
 
                 $result['groups'][] = $group;
             }
 
             foreach ($userData['devices'] as $typeChar => $devices){
                 foreach ($devices as $deviceData){
-                    // @TODO: neede cameras support
+                    // @TODO: needed the cameras support
                     if(!isset($deviceData['t']) && !isset($deviceData['type'])){
                         continue;
                     }
 
-                    $device = DeviceMapper::fromResponse($deviceData);
+                    $device = $this->map(CloudDevice::class, $deviceData);
 
                     $result['devices'][] = $device;
                 }

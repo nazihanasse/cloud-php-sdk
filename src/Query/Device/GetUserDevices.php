@@ -4,6 +4,7 @@
 namespace SkyCentrics\Cloud\Query\Device;
 
 
+use SkyCentrics\Cloud\DTO\Device\CloudDevice;
 use SkyCentrics\Cloud\Mapper\DeviceMapper;
 use SkyCentrics\Cloud\Query\QueryInterface;
 use SkyCentrics\Cloud\Security\AccountInterface;
@@ -62,7 +63,7 @@ class GetUserDevices extends AbstractDeviceQuery
         $devices = [];
 
         foreach ($response->getData() as $deviceData){
-            $devices[] = DeviceMapper::fromResponse($deviceData);
+            $devices[] = $this->map(CloudDevice::class, $deviceData);
         }
 
         return $devices;

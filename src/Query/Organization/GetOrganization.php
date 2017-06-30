@@ -4,13 +4,11 @@
 namespace SkyCentrics\Cloud\Query\Organization;
 
 
-use SkyCentrics\Cloud\Mapper\OrganizationMapper;
+use SkyCentrics\Cloud\DTO\CloudOrganization;
 use SkyCentrics\Cloud\Query\AbstractQuery;
-use SkyCentrics\Cloud\Query\QueryInterface;
 use SkyCentrics\Cloud\Transport\Request\MultiRequestInterface;
 use SkyCentrics\Cloud\Transport\Request\Request;
 use SkyCentrics\Cloud\Transport\Request\RequestInterface;
-use SkyCentrics\Cloud\Transport\Response\MultiResponseInterface;
 use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
 
 /**
@@ -51,6 +49,6 @@ class GetOrganization extends AbstractQuery
      */
     public function mapResponse(ResponseInterface $response)
     {
-        return OrganizationMapper::fromResponse($response->getData());
+        return $this->map(CloudOrganization::class, $response->getData());
     }
 }

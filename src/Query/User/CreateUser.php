@@ -48,7 +48,7 @@ class CreateUser extends AbstractQuery
     {
         return Request::createFromParams([
             'path' => '/users/',
-            'data' => UserMapper::toRequest($this->cloudUser)
+            'data' => $this->map($this->cloudUser)
         ]);
     }
 

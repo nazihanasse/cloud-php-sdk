@@ -44,7 +44,7 @@ class CloudGroup implements CloudDTOInterface
      * @var int
      *
      * @Property(key="t")
-     * @TODO: it is a temp name property is neede for mapping
+     * @TODO: it is a temp property's name is needed for mapping
      */
     protected $target = 0;
 

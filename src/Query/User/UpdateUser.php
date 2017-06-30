@@ -42,7 +42,7 @@ class UpdateUser extends AbstractQuery
         return Request::createFromParams([
             'path' => "/users/{$this->cloudUser->getId()}/",
             'method' => 'PUT',
-            'data' => UserMapper::toRequest($this->cloudUser)
+            'data' => $this->map($this->cloudUser)
         ]);
     }
 

@@ -32,7 +32,7 @@ class PropertyHandler implements AnnotationHandlerInterface
         foreach ((explode('.', $key)) as $level => $keyName){
 
             if($level === 0){
-                if($source[$keyName]){
+                if(isset($source[$keyName])){
                     $value = $source[$keyName];
                     $valueFounded = true;
                 }else{

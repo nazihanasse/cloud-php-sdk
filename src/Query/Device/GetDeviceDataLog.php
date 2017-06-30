@@ -5,6 +5,7 @@ namespace SkyCentrics\Cloud\Query\Device;
 
 
 use SkyCentrics\Cloud\DTO\Device\AbstractCloudDevice;
+use SkyCentrics\Cloud\DTO\Device\CloudDeviceID;
 use SkyCentrics\Cloud\Transport\Request\MultiRequestInterface;
 use SkyCentrics\Cloud\Transport\Request\RequestInterface;
 use SkyCentrics\Cloud\Transport\Response\MultiResponseInterface;
@@ -27,17 +28,29 @@ class GetDeviceDataLog extends GetDeviceData
     protected $end;
 
     /**
+     * @var bool
+     */
+    protected $asArray;
+
+    /**
      * GetDeviceDataLog constructor.
-     * @param AbstractCloudDevice $cloudDevice
+     * @param CloudDeviceID $cloudDeviceID
      * @param \DateTime $begin
      * @param \DateTime $end
+     * @param bool $asArray
      */
-    public function __construct(AbstractCloudDevice $cloudDevice, \DateTime $begin, \DateTime $end)
+    public function __construct(
+        CloudDeviceID $cloudDeviceID,
+        \DateTime $begin,
+        \DateTime $end,
+        $asArray = false)
     {
-        parent::__construct($cloudDevice);
+        parent::__construct($cloudDeviceID);
 
         $this->begin = $begin;
         $this->end = $end;
+
+        $this->asArray = $asArray;
     }
 
     /**
@@ -69,6 +82,37 @@ class GetDeviceDataLog extends GetDeviceData
      */
     public function mapResponse(ResponseInterface $response)
     {
-        return $response->getData();
+        $responseData = $response->getData();
+
+        $mappingClass = $this->mappingClass;
+
+        if(!$this->asArray){
+
+            $annotationMapper = $this->getAnnotationMapper();
+
+            return function() use ($mappingClass, $responseData, $annotationMapper) {
+                foreach ($responseData as $time => $data){
+                    if(!isset($data['time'])){
+                        $data['time'] = $time;
+                    }
+                    $result = $annotationMapper->map($mappingClass, $data);
+                    yield $result;
+                    unset($result);
+                }
+            };
+
+        }else{
+
+            $result = [];
+
+            foreach ($responseData as $time => $data){
+                if(!isset($data['time'])){
+                    $data['time'] = $time;
+                }
+                $result[] = $this->map($mappingClass, $data);
+            }
+
+            return $result;
+        }
     }
 }

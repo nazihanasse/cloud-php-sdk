@@ -4,12 +4,10 @@
 namespace SkyCentrics\Tests\Query\Device;
 
 
-use SkyCentrics\Cloud\Annotation\AnnotationHandler;
-use SkyCentrics\Cloud\Annotation\AnnotationMapper;
-use SkyCentrics\Cloud\Annotation\AnnotationReader;
 use SkyCentrics\Cloud\Cloud;
 use SkyCentrics\Cloud\DTO\Device\AbstractData;
 use SkyCentrics\Cloud\DTO\Device\CloudDevice;
+use SkyCentrics\Cloud\DTO\Device\CloudDeviceID;
 use SkyCentrics\Cloud\DTO\Device\DeviceTypeInterface;
 use SkyCentrics\Cloud\Query\Device\GetDeviceData;
 use SkyCentrics\Cloud\Test\CloudTest;
@@ -45,13 +43,13 @@ class GetDeviceDataTest extends CloudTest
         $respMock->method('getData')
                  ->willReturn($deviceData);
 
-        /** @var CloudDevice|\PHPUnit_Framework_MockObject_MockObject $deviceMoc */
-        $deviceMoc = $this->getMockBuilder(CloudDevice::class)
+        /** @var CloudDeviceID|\PHPUnit_Framework_MockObject_MockObject $deviceMoc */
+        $deviceMoc = $this->getMockBuilder(CloudDeviceID::class)
                     ->disableOriginalConstructor()
-                    ->setMethods(['getDeviceType'])
+                    ->setMethods(['getType'])
                     ->getMock();
 
-        $deviceMoc->method('getDeviceType')
+        $deviceMoc->method('getType')
                     ->willReturn($deviceType);
 
         /** @var GetDeviceData */

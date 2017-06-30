@@ -28,9 +28,9 @@ use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
 class GetDeviceData extends AbstractDeviceQuery
 {
     /**
-     * @var AbstractCloudDevice
+     * @var CloudDeviceID
      */
-    protected $cloudDevice;
+    protected $cloudDeviceId;
 
     /**
      * @var string
@@ -39,14 +39,13 @@ class GetDeviceData extends AbstractDeviceQuery
 
     /**
      * GetDeviceDataQuery constructor.
-     * @param AbstractCloudDevice $cloudDevice
-     * @throws CloudQueryException
+     * @param CloudDeviceID $cloudDeviceId
      */
-    public function __construct(AbstractCloudDevice $cloudDevice)
+    public function __construct(CloudDeviceID $cloudDeviceId)
     {
-       $this->cloudDevice = $cloudDevice;
+       $this->cloudDeviceId = $cloudDeviceId;
 
-       $this->cloudDataClass = CloudDevice::getDeviceDataDTO($cloudDevice->getDeviceType());
+       $this->cloudDataClass = CloudDevice::getDeviceDataDTO($cloudDeviceId->getType());
     }
 
     /**
@@ -55,7 +54,7 @@ class GetDeviceData extends AbstractDeviceQuery
     public function createRequest(): RequestInterface
     {
         return Request::createFromParams([
-            'path' => sprintf("/%s/%s/data", $this->getPath($this->cloudDevice->getDeviceType()), $this->cloudDevice->getId())
+            'path' => sprintf("/%s/%s/data", $this->getPath($this->cloudDeviceId->getType()), $this->cloudDeviceId->getId())
         ]);
     }
 

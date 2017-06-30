@@ -25,6 +25,12 @@ abstract class AbstractData
     protected $time;
 
     /**
+     * @var int|null
+     * @Property(key="override")
+     */
+    protected $override;
+
+    /**
      * AbstractData constructor.
      * @param $deviceId
      * @param $time
@@ -68,6 +74,22 @@ abstract class AbstractData
     public function setTime(\DateTime $time)
     {
         $this->time = $time;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getOverride()
+    {
+        return $this->override;
+    }
+
+    /**
+     * @param int $override
+     */
+    public function setOverride(int $override)
+    {
+        $this->override = $override;
     }
 
     /**

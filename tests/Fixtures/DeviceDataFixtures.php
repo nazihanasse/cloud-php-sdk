@@ -27,7 +27,7 @@ class DeviceDataFixtures
             'r' => random_int(0, 1),
             't' => Base::randomFloat(3, 0, 100),
             'd' => random_int(0, 100),
-            'rssi' => random_int(0,1),
+            'rssi' => random_int(0,300),
             'w' => (function(){
                 $sensors = [];
                 $limit = random_int(0, 4);

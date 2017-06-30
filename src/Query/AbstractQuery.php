@@ -36,6 +36,14 @@ abstract class AbstractQuery implements QueryInterface
     }
 
     /**
+     * @return AnnotationMapperInterface
+     */
+    final public function getAnnotationMapper()
+    {
+        return $this->annotationMapper;
+    }
+
+    /**
      * @param AbstractSecurityProvider $securityProvider
      */
     final public function setSecurityProvider(AbstractSecurityProvider $securityProvider)

@@ -301,6 +301,8 @@ class DeviceDataFixtures
                 return $transformers;
             })(),
             'sensors' => [],
+            'device' => random_int(300000,600000),
+            'time' => DateTime::dateTime('now')
         ];
     }
 }

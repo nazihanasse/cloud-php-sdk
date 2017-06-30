@@ -99,11 +99,15 @@ abstract class AbstractDeviceQuery extends AbstractQuery
 
         if($path === 'devices'){
             foreach ($result as $deviceKey => $smartplugKey){
-                $result[$deviceKey] = array_key_exists($deviceKey, $deviceInfo) ? $deviceInfo[$deviceKey] : $deviceInfo[$smartplugKey];
+                $result[$deviceKey] = array_key_exists($deviceKey, $deviceInfo)
+                    ? $deviceInfo[$deviceKey]
+                    : $deviceInfo[$smartplugKey];
             }
         }else{
             foreach ($result as $deviceKey => $smartplugKey){
-                $result[$smartplugKey] = array_key_exists($deviceKey, $deviceInfo) ? $deviceInfo[$deviceKey] : $deviceInfo[$smartplugKey];
+                $result[$smartplugKey] = array_key_exists($deviceKey, $deviceInfo)
+                    ? $deviceInfo[$deviceKey]
+                    : $deviceInfo[$smartplugKey];
             }
         }
 

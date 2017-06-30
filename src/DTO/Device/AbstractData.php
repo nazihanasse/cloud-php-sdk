@@ -3,6 +3,8 @@
 
 namespace SkyCentrics\Cloud\DTO\Device;
 
+use SkyCentrics\Cloud\Annotation\Property;
+
 
 /**
  * Class AbstractData
@@ -12,11 +14,13 @@ abstract class AbstractData
 {
     /**
      * @var int
+     * @Property(key="device")
      */
     protected $deviceId;
 
     /**
      * @var \DateTime
+     * @Property(key="time")
      */
     protected $time;
 
@@ -71,10 +75,4 @@ abstract class AbstractData
      * @return bool
      */
     abstract public function supportType(int $type) : bool;
-
-    /**
-     * @param array $response
-     * @return AbstractData
-     */
-    abstract public static function fromResponse(array $response) : AbstractData;
 }

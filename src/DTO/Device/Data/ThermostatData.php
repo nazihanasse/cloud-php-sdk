@@ -4,6 +4,7 @@
 namespace SkyCentrics\Cloud\DTO\Device\Data;
 
 use SkyCentrics\Cloud\Annotation\Method;
+use SkyCentrics\Cloud\Annotation\Property;
 use SkyCentrics\Cloud\DTO\Device\AbstractData;
 use SkyCentrics\Cloud\DTO\Device\DeviceTypeInterface;
 
@@ -15,41 +16,49 @@ class ThermostatData extends AbstractData
 {
     /**
      * @var array
+     * @Property(key="temperature")
      */
     protected $temperature;
 
     /**
      * @var array
+     * @Property(key="setpoint")
      */
     protected $setpoint;
 
     /**
      * @var array
+     * @Property(key="offset")
      */
     protected $offset;
 
     /**
      * @var int
+     * @Property(key="state")
      */
     protected $state;
 
     /**
      * @var int
+     * @Property(key="override")
      */
     protected $override;
 
     /**
      * @var int
+     * @Property(key="relay")
      */
     protected $relay;
 
     /**
      * @var array
+     * @Property(key="commodity")
      */
     protected $commodity;
 
     /**
      * @var array
+     * @Property(key="commodities")
      */
     protected $commodities;
 
@@ -63,7 +72,6 @@ class ThermostatData extends AbstractData
 
     /**
      * @param array $temperature
-     * @Method(property="temperature", type="array")
      */
     public function setTemperature(array $temperature)
     {
@@ -80,7 +88,6 @@ class ThermostatData extends AbstractData
 
     /**
      * @param array $setpoint
-     * @Method(property="setpoint", type="array")
      */
     public function setSetpoint(array $setpoint)
     {
@@ -97,7 +104,6 @@ class ThermostatData extends AbstractData
 
     /**
      * @param array $offset
-     * @Method(property="offset", type="array")
      */
     public function setOffset(array $offset)
     {
@@ -114,7 +120,6 @@ class ThermostatData extends AbstractData
 
     /**
      * @param int $state
-     * @Method(property="state", type="int")
      */
     public function setState(int $state)
     {
@@ -131,7 +136,6 @@ class ThermostatData extends AbstractData
 
     /**
      * @param int $override
-     * @Method(property="override", type="int")
      */
     public function setOverride(int $override)
     {
@@ -148,7 +152,6 @@ class ThermostatData extends AbstractData
 
     /**
      * @param int $relay
-     * @Method(property="relay", type="int")
      */
     public function setRelay(int $relay)
     {
@@ -165,7 +168,6 @@ class ThermostatData extends AbstractData
 
     /**
      * @param array $commodity
-     * @Method(property="commodity", type="array")
      */
     public function setCommodity(array $commodity)
     {
@@ -182,7 +184,6 @@ class ThermostatData extends AbstractData
 
     /**
      * @param array $commodities
-     * @Method(property="commodities", type="array")
      */
     public function setCommodities(array $commodities)
     {
@@ -197,10 +198,5 @@ class ThermostatData extends AbstractData
             DeviceTypeInterface::TYPE_MITSUBISHI,
             DeviceTypeInterface::TYPE_GENERIC_THERMOSTAT
         ],true);
-    }
-
-    public static function fromResponse(array $responseData): AbstractData
-    {
-        return new self($responseData['device'], new \DateTime($responseData['time']));
     }
 }

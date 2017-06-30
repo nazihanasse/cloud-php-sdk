@@ -4,18 +4,25 @@
 namespace SkyCentrics\Cloud\DTO\Device\Data;
 
 use SkyCentrics\Cloud\Annotation\Method;
+use SkyCentrics\Cloud\Annotation\Property;
 use SkyCentrics\Cloud\DTO\Device\AbstractData;
 use SkyCentrics\Cloud\DTO\Device\DeviceTypeInterface;
 
+/**
+ * Class SkySnapData
+ * @package SkyCentrics\Cloud\DTO\Device\Data
+ */
 class SkySnapData extends AbstractData
 {
     /**
      * @var array
+     * @Property(key="ct")
      */
     protected $currentTransformers = [];
 
     /**
      * @var array
+     * @Property(key="sensors")
      */
     protected $sensors = [];
 
@@ -46,7 +53,6 @@ class SkySnapData extends AbstractData
 
     /**
      * @param array $sensors
-     * @Method(property="sensors", type="array")
      */
     public function setSensors(array $sensors)
     {
@@ -58,13 +64,5 @@ class SkySnapData extends AbstractData
         return in_array($type, [
             DeviceTypeInterface::TYPE_PISNAP_3
         ], true);
-    }
-
-    public static function fromResponse(array $response): AbstractData
-    {
-        return new self(
-            $response['device'],
-            new \DateTime($response['time'])
-        );
     }
 }

@@ -3,9 +3,9 @@
 
 namespace SkyCentrics\Cloud\DTO\Device\Data;
 
+use SkyCentrics\Cloud\Annotation\Property;
 use SkyCentrics\Cloud\DTO\Device\AbstractData;
 use SkyCentrics\Cloud\DTO\Device\DeviceTypeInterface;
-use SkyCentrics\Cloud\Annotation\Method;
 
 /**
  * @Annotation
@@ -16,41 +16,49 @@ class WaterHeaterData extends AbstractData
 {
     /**
      * @var int
+     * @Property(key="relay")
      */
     protected $relay;
 
     /**
      * @var int
+     * @Property(key="override")
      */
     protected $override;
 
     /**
      * @var
+     * @Property(key="power")
      */
     protected $power;
 
     /**
      * @var int
+     * @Property(key="state")
      */
     protected $state;
 
     /**
      * @var array
+     * @Property(key="commodity")
      */
     protected $commodity;
 
     /**
      * @var array
+     * @Property(key="commodities")
      */
     protected $commodities;
 
     /**
      * @var array
+     * @Property(key="offset")
      */
     protected $offset;
 
     /**
      * @var array
+     * @Property(key="setpoint")
      */
     protected $setpoint;
 
@@ -64,7 +72,6 @@ class WaterHeaterData extends AbstractData
 
     /**
      * @param int $relay
-     * @Method(property="relay", type="int")
      */
     public function setRelay(int $relay)
     {
@@ -81,7 +88,6 @@ class WaterHeaterData extends AbstractData
 
     /**
      * @param int $override
-     * @Method(property="override", type="int")
      */
     public function setOverride(int $override)
     {
@@ -98,7 +104,6 @@ class WaterHeaterData extends AbstractData
 
     /**
      * @param mixed $power
-     * @Method(property="power", type="float")
      */
     public function setPower($power)
     {
@@ -115,7 +120,6 @@ class WaterHeaterData extends AbstractData
 
     /**
      * @param int $state
-     * @Method(property="state", type="int")
      */
     public function setState(int $state)
     {
@@ -132,7 +136,6 @@ class WaterHeaterData extends AbstractData
 
     /**
      * @param array $commodity
-     * @Method(property="commodity", type="array")
      */
     public function setCommodity(array $commodity)
     {
@@ -149,7 +152,6 @@ class WaterHeaterData extends AbstractData
 
     /**
      * @param array $commodities
-     * @Method(property="commodities", type="array")
      */
     public function setCommodities(array $commodities)
     {
@@ -166,7 +168,6 @@ class WaterHeaterData extends AbstractData
 
     /**
      * @param array $offset
-     * @Method(property="offset", type="array")
      */
     public function setOffset(array $offset)
     {
@@ -183,7 +184,6 @@ class WaterHeaterData extends AbstractData
 
     /**
      * @param array $setpoint
-     * @Method(property="setpoint", type="array")
      */
     public function setSetpoint(array $setpoint)
     {
@@ -200,17 +200,5 @@ class WaterHeaterData extends AbstractData
             DeviceTypeInterface::TYPE_EMERSON_SWITCH,
             DeviceTypeInterface::TYPE_GENERIC_WATER_HEATER
         ],true);
-    }
-
-    /**
-     * @param array $response
-     * @return AbstractData
-     */
-    public static function fromResponse(array $response): AbstractData
-    {
-        return new self(
-            $response['device'],
-            new \DateTime($response['time'])
-        );
     }
 }

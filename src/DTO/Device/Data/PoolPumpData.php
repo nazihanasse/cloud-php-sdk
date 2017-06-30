@@ -4,6 +4,7 @@
 namespace SkyCentrics\Cloud\DTO\Device\Data;
 
 use SkyCentrics\Cloud\Annotation\Method;
+use SkyCentrics\Cloud\Annotation\Property;
 use SkyCentrics\Cloud\DTO\Device\AbstractData;
 use SkyCentrics\Cloud\DTO\Device\DeviceTypeInterface;
 
@@ -11,31 +12,37 @@ class PoolPumpData extends AbstractData
 {
     /**
      * @var int
+     * @Property(key="relay")
      */
     protected $relay;
 
     /**
      * @var int
+     * @Property(key="override")
      */
     protected $override;
 
     /**
      * @var int
+     * @Property(key="state")
      */
     protected $state;
 
     /**
      * @var array
+     * @Property(key="commodity")
      */
     protected $commodity;
 
     /**
      * @var array
+     * @Property(key="commodities")
      */
     protected $commodities;
 
     /**
      * @var int
+     * @Property(key="power")
      */
     protected $power;
 
@@ -49,7 +56,6 @@ class PoolPumpData extends AbstractData
 
     /**
      * @param int $relay
-     * @Method(property="relay", type="int")
      */
     public function setRelay(int $relay)
     {
@@ -66,7 +72,6 @@ class PoolPumpData extends AbstractData
 
     /**
      * @param int $override
-     * @Method(property="override", type="int")
      */
     public function setOverride(int $override)
     {
@@ -83,7 +88,6 @@ class PoolPumpData extends AbstractData
 
     /**
      * @param int $state
-     * @Method(property="state", type="int")
      */
     public function setState(int $state)
     {
@@ -100,7 +104,6 @@ class PoolPumpData extends AbstractData
 
     /**
      * @param array $commodity
-     * @Method(property="commodity", type="array")
      */
     public function setCommodity(array $commodity)
     {
@@ -117,7 +120,6 @@ class PoolPumpData extends AbstractData
 
     /**
      * @param array $commodities
-     * @Method(property="commodities", type="array")
      */
     public function setCommodities(array $commodities)
     {
@@ -134,7 +136,6 @@ class PoolPumpData extends AbstractData
 
     /**
      * @param int $power
-     * @Method(property="power", type="int")
      */
     public function setPower(int $power)
     {
@@ -147,10 +148,5 @@ class PoolPumpData extends AbstractData
             DeviceTypeInterface::TYPE_PENTAIR,
             DeviceTypeInterface::TYPE_GENERIC_POOL_PUMP
         ], true);
-    }
-
-    public static function fromResponse(array $response): AbstractData
-    {
-        return new self($response['device'], new \DateTime($response['time']));
     }
 }

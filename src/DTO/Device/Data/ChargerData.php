@@ -5,6 +5,7 @@ namespace SkyCentrics\Cloud\DTO\Device\Data;
 
 
 use SkyCentrics\Cloud\Annotation\Method;
+use SkyCentrics\Cloud\Annotation\Property;
 use SkyCentrics\Cloud\DTO\Device\AbstractData;
 use SkyCentrics\Cloud\DTO\Device\DeviceTypeInterface;
 
@@ -16,26 +17,31 @@ class ChargerData extends AbstractData
 {
     /**
      * @var int
+     * @Property(key="relay")
      */
     protected $relay;
 
     /**
      * @var int
+     * @Property(key="override")
      */
     protected $override;
 
     /**
      * @var int
+     * @Property(key="state")
      */
     protected $state;
 
     /**
      * @var array
+     * @Property(key="commodity")
      */
     protected $commodity;
 
     /**
      * @var array
+     * @Property(key="commodities")
      */
     protected $commodities;
 
@@ -49,7 +55,6 @@ class ChargerData extends AbstractData
 
     /**
      * @param int $relay
-     * @Method(property="relay", type="int")
      */
     public function setRelay(int $relay)
     {
@@ -66,7 +71,6 @@ class ChargerData extends AbstractData
 
     /**
      * @param int $override
-     * @Method(property="override", type="int")
      */
     public function setOverride(int $override)
     {
@@ -83,7 +87,6 @@ class ChargerData extends AbstractData
 
     /**
      * @param int $state
-     * @Method(property="state", type="int")
      */
     public function setState(int $state)
     {
@@ -100,7 +103,6 @@ class ChargerData extends AbstractData
 
     /**
      * @param array $commodity
-     * @Method(property="commodity", type="array")
      */
     public function setCommodity(array $commodity)
     {
@@ -117,13 +119,16 @@ class ChargerData extends AbstractData
 
     /**
      * @param array $commodities
-     * @Method(property="commodities", type="array")
      */
     public function setCommodities(array $commodities)
     {
         $this->commodities = $commodities;
     }
 
+    /**
+     * @param int $type
+     * @return bool
+     */
     public function supportType(int $type): bool
     {
         return in_array($type, [
@@ -131,10 +136,5 @@ class ChargerData extends AbstractData
             DeviceTypeInterface::TYPE_GENERIC_EV_CHARGER,
             DeviceTypeInterface::TYPE_SIEMENS
         ], true);
-    }
-
-    public static function fromResponse(array $response): AbstractData
-    {
-        return new self($response['device'], new \DateTime($response['time']));
     }
 }

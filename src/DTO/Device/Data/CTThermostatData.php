@@ -3,34 +3,43 @@
 
 namespace SkyCentrics\Cloud\DTO\Device\Data;
 
-
+use SkyCentrics\Cloud\Annotation\Property;
 use SkyCentrics\Cloud\DTO\Device\AbstractData;
 use SkyCentrics\Cloud\DTO\Device\DeviceTypeInterface;
 
+/**
+ * Class CTThermostatData
+ * @package SkyCentrics\Cloud\DTO\Device\Data
+ */
 class CTThermostatData extends AbstractData
 {
     /**
      * @var array
+     * @Property(key="temperature")
      */
     protected $temperature;
 
     /**
      * @var array
+     * @Property(key="thermostat")
      */
     protected $thermostat;
 
     /**
      * @var array
+     * @Property(key="fan")
      */
     protected $fan;
 
     /**
      * @var array
+     * @Property(key="humidity")
      */
     protected $humidity;
 
     /**
      * @var array
+     * @Property(key="setpoint")
      */
     protected $setpoint;
 
@@ -44,7 +53,6 @@ class CTThermostatData extends AbstractData
 
     /**
      * @param array $temperature
-     * @Method(property="temperature", type="array")
      */
     public function setTemperature(array $temperature)
     {
@@ -61,7 +69,6 @@ class CTThermostatData extends AbstractData
 
     /**
      * @param array $thermostat
-     * @Method(property="thermostat", type="array")
      */
     public function setThermostat(array $thermostat)
     {
@@ -78,7 +85,6 @@ class CTThermostatData extends AbstractData
 
     /**
      * @param array $fan
-     * @Method(property="fan", type="array")
      */
     public function setFan(array $fan)
     {
@@ -95,7 +101,6 @@ class CTThermostatData extends AbstractData
 
     /**
      * @param array $humidity
-     * @Method(property="humidity", type="array")
      */
     public function setHumidity(array $humidity)
     {
@@ -112,13 +117,16 @@ class CTThermostatData extends AbstractData
 
     /**
      * @param array $setpoint
-     * @Method(property="setpoint", type="array")
      */
     public function setSetpoint(array $setpoint)
     {
         $this->setpoint = $setpoint;
     }
 
+    /**
+     * @param int $type
+     * @return bool
+     */
     public function supportType(int $type): bool
     {
         return in_array($type, [
@@ -129,11 +137,4 @@ class CTThermostatData extends AbstractData
         ],true);
     }
 
-    public static function fromResponse(array $response): AbstractData
-    {
-        return new self(
-            $response['device'],
-            new \DateTime($response['time'])
-        );
-    }
 }

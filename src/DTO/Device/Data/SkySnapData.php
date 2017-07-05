@@ -59,7 +59,7 @@ class SkySnapData extends AbstractData
         $this->sensors = $sensors;
     }
 
-    public function supportType(int $type): bool
+    public static function supportType(int $type): bool
     {
         return in_array($type, [
             DeviceTypeInterface::TYPE_PISNAP_3

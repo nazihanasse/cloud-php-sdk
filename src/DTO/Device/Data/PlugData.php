@@ -306,7 +306,7 @@ class PlugData extends AbstractData
         $this->overrided = $overrided;
     }
 
-    public function supportType(int $type): bool
+    public static function supportType(int $type): bool
     {
         return in_array($type, [
             DeviceTypeInterface::TYPE_PISNAP_3_DEPRECATED,

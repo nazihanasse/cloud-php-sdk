@@ -96,5 +96,5 @@ abstract class AbstractData
      * @param int $type
      * @return bool
      */
-    abstract public function supportType(int $type) : bool;
+    abstract public static function supportType(int $type) : bool;
 }

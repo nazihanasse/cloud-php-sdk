@@ -127,7 +127,7 @@ class CTThermostatData extends AbstractData
      * @param int $type
      * @return bool
      */
-    public function supportType(int $type): bool
+    public static function supportType(int $type): bool
     {
         return in_array($type, [
             DeviceTypeInterface::TYPE_RADIO_THERMOSTAT_CT_30,

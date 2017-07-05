@@ -190,7 +190,7 @@ class ThermostatData extends AbstractData
         $this->commodities = $commodities;
     }
 
-    public function supportType(int $type): bool
+    public static function supportType(int $type): bool
     {
         return in_array($type, [
             DeviceTypeInterface::TYPE_ISLAND_AIRE_PTAC,

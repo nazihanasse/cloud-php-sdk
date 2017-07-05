@@ -190,7 +190,7 @@ class WaterHeaterData extends AbstractData
         $this->setpoint = $setpoint;
     }
 
-    public function supportType(int $type): bool
+    public static function supportType(int $type): bool
     {
         return in_array($type, [
             DeviceTypeInterface::TYPE_AO_SMITH_ELECTRIC_RESISTANCE,

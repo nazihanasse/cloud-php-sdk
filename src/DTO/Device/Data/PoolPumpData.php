@@ -142,7 +142,7 @@ class PoolPumpData extends AbstractData
         $this->power = $power;
     }
 
-    public function supportType(int $type): bool
+    public static function supportType(int $type): bool
     {
         return in_array($type, [
             DeviceTypeInterface::TYPE_PENTAIR,

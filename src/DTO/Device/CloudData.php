@@ -4,7 +4,7 @@
 namespace SkyCentrics\Cloud\DTO\Device;
 
 
-class CloudData extends AbstractData
+class CloudData extends AbstractDeviceData
 {
     protected $comodities;
 
@@ -23,7 +23,7 @@ class CloudData extends AbstractData
         // TODO: Implement supportType() method.
     }
 
-    public static function fromResponse(array $response): AbstractData
+    public static function fromResponse(array $response): AbstractDeviceData
     {
         // TODO: Implement fromResponse() method.
     }

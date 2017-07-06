@@ -7,10 +7,10 @@ use SkyCentrics\Cloud\Annotation\Property;
 
 
 /**
- * Class AbstractData
+ * Class AbstractDeviceData
  * @package SkyCentrics\Cloud\DTO\Device
  */
-abstract class AbstractData
+abstract class AbstractDeviceData
 {
     /**
      * @var int
@@ -31,7 +31,7 @@ abstract class AbstractData
     protected $override;
 
     /**
-     * AbstractData constructor.
+     * AbstractDeviceData constructor.
      * @param $deviceId
      * @param $time
      */

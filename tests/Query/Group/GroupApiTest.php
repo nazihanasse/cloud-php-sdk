@@ -15,16 +15,16 @@ class GroupApiTest extends CloudTest
 
     public function testGet()
     {
-
+        $this->markTestIncomplete();
     }
 
     public function testUpdate()
     {
-
+        $this->markTestIncomplete();
     }
 
     public function testDelete()
     {
-
+        $this->markTestIncomplete();
     }
 }

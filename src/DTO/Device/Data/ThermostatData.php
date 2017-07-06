@@ -5,14 +5,14 @@ namespace SkyCentrics\Cloud\DTO\Device\Data;
 
 use SkyCentrics\Cloud\Annotation\Method;
 use SkyCentrics\Cloud\Annotation\Property;
-use SkyCentrics\Cloud\DTO\Device\AbstractData;
+use SkyCentrics\Cloud\DTO\Device\AbstractDeviceData;
 use SkyCentrics\Cloud\DTO\Device\DeviceTypeInterface;
 
 /**
  * Class ThermostatData
  * @package SkyCentrics\Cloud\DTO\Device\Data
  */
-class ThermostatData extends AbstractData
+class ThermostatData extends AbstractDeviceData
 {
     /**
      * @var array

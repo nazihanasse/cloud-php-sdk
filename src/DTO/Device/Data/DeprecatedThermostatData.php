@@ -6,10 +6,10 @@ namespace SkyCentrics\Cloud\DTO\Device\Data;
 
 use SkyCentrics\Cloud\Annotation\Method;
 use SkyCentrics\Cloud\Annotation\Property;
-use SkyCentrics\Cloud\DTO\Device\AbstractData;
+use SkyCentrics\Cloud\DTO\Device\AbstractDeviceData;
 use SkyCentrics\Cloud\DTO\Device\DeviceTypeInterface;
 
-class DeprecatedThermostatData extends AbstractData
+class DeprecatedThermostatData extends AbstractDeviceData
 {
     /**
      * @var int

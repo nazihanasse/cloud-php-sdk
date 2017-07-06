@@ -53,6 +53,6 @@ class GetUser extends AbstractQuery
      */
     public function mapResponse(ResponseInterface $response)
     {
-        return $this->map(CloudUser::class, $response);
+        return $this->map(CloudUser::class, $response->getData());
     }
 }

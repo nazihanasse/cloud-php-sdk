@@ -5,10 +5,10 @@ namespace SkyCentrics\Cloud\DTO\Device\Data;
 
 use SkyCentrics\Cloud\Annotation\Method;
 use SkyCentrics\Cloud\Annotation\Property;
-use SkyCentrics\Cloud\DTO\Device\AbstractData;
+use SkyCentrics\Cloud\DTO\Device\AbstractDeviceData;
 use SkyCentrics\Cloud\DTO\Device\DeviceTypeInterface;
 
-class PoolPumpData extends AbstractData
+class PoolPumpData extends AbstractDeviceData
 {
     /**
      * @var int

@@ -5,7 +5,7 @@ namespace SkyCentrics\Tests\Query\Device;
 
 
 use SkyCentrics\Cloud\Cloud;
-use SkyCentrics\Cloud\DTO\Device\AbstractData;
+use SkyCentrics\Cloud\DTO\Device\AbstractDeviceData;
 use SkyCentrics\Cloud\DTO\Device\CloudDevice;
 use SkyCentrics\Cloud\DTO\Device\CloudDeviceID;
 use SkyCentrics\Cloud\DTO\Device\DeviceTypeInterface;
@@ -33,8 +33,6 @@ class GetDeviceDataTest extends CloudTest
      */
     public function testMapResponse($deviceType, $deviceData)
     {
-        $cloud = new Cloud();
-
         /** @var Response|\PHPUnit_Framework_MockObject_MockObject $respMock */
         $respMock = $this->getMockBuilder(Response::class)
                     ->disableOriginalConstructor()
@@ -57,10 +55,10 @@ class GetDeviceDataTest extends CloudTest
 
         $getDeviceDataMock->setAnnotationMapper($this->getAnnotationMapper());
 
-        /** @var AbstractData $deviceDataDTO */
+        /** @var AbstractDeviceData $deviceDataDTO */
         $deviceDataDTO = $getDeviceDataMock->mapResponse($respMock);
 
-        $this->assertInstanceOf(AbstractData::class, $deviceDataDTO);
+        $this->assertInstanceOf(AbstractDeviceData::class, $deviceDataDTO);
         $this->assertNotEmpty($deviceDataDTO->getDeviceId());
         $this->assertNotEmpty($deviceDataDTO->getTime());
     }

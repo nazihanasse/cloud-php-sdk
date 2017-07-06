@@ -4,7 +4,7 @@
 namespace SkyCentrics\Cloud\DTO\Device\Data;
 
 use SkyCentrics\Cloud\Annotation\Property;
-use SkyCentrics\Cloud\DTO\Device\AbstractData;
+use SkyCentrics\Cloud\DTO\Device\AbstractDeviceData;
 use SkyCentrics\Cloud\DTO\Device\DeviceTypeInterface;
 
 /**
@@ -12,7 +12,7 @@ use SkyCentrics\Cloud\DTO\Device\DeviceTypeInterface;
  * Class WaterHeaterData
  * @package SkyCentrics\Cloud\DTO\Device\Data
  */
-class WaterHeaterData extends AbstractData
+class WaterHeaterData extends AbstractDeviceData
 {
     /**
      * @var int

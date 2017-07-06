@@ -6,14 +6,14 @@ namespace SkyCentrics\Cloud\DTO\Device\Data;
 
 use SkyCentrics\Cloud\Annotation\Method;
 use SkyCentrics\Cloud\Annotation\Property;
-use SkyCentrics\Cloud\DTO\Device\AbstractData;
+use SkyCentrics\Cloud\DTO\Device\AbstractDeviceData;
 use SkyCentrics\Cloud\DTO\Device\DeviceTypeInterface;
 
 /**
  * Class ChargerData
  * @package SkyCentrics\Cloud\DTO\Device\Data
  */
-class ChargerData extends AbstractData
+class ChargerData extends AbstractDeviceData
 {
     /**
      * @var int

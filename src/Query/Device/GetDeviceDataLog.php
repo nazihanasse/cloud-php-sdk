@@ -6,6 +6,7 @@ namespace SkyCentrics\Cloud\Query\Device;
 
 use SkyCentrics\Cloud\DTO\Device\AbstractCloudDevice;
 use SkyCentrics\Cloud\DTO\Device\CloudDeviceID;
+use SkyCentrics\Cloud\Parameters\ParameterBag;
 use SkyCentrics\Cloud\Transport\Request\MultiRequestInterface;
 use SkyCentrics\Cloud\Transport\Request\RequestInterface;
 use SkyCentrics\Cloud\Transport\Response\MultiResponseInterface;
@@ -84,35 +85,29 @@ class GetDeviceDataLog extends GetDeviceData
     {
         $responseData = $response->getData();
 
-        $mappingClass = $this->mappingClass;
+        if(!$this->asArray) {
 
-        if(!$this->asArray){
-
-            $annotationMapper = $this->getAnnotationMapper();
-
-            return function() use ($mappingClass, $responseData, $annotationMapper) {
-                foreach ($responseData as $time => $data){
-                    if(!isset($data['time'])){
+            return function () use ($responseData) {
+                foreach ($responseData as $time => $data) {
+                    if (!isset($data['time'])) {
                         $data['time'] = $time;
                     }
-                    $result = $annotationMapper->map($mappingClass, $data);
+                    $result = new ParameterBag($data);
                     yield $result;
                     unset($result);
                 }
             };
-
-        }else{
-
-            $result = [];
-
-            foreach ($responseData as $time => $data){
-                if(!isset($data['time'])){
-                    $data['time'] = $time;
-                }
-                $result[] = $this->map($mappingClass, $data);
-            }
-
-            return $result;
         }
+
+        $result = [];
+
+        foreach ($responseData as $time => $data){
+            if(!isset($data['time'])){
+                $data['time'] = $time;
+            }
+            $result[] = new ParameterBag($data);
+        }
+
+        return $result;
     }
 }

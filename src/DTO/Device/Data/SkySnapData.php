@@ -5,14 +5,14 @@ namespace SkyCentrics\Cloud\DTO\Device\Data;
 
 use SkyCentrics\Cloud\Annotation\Method;
 use SkyCentrics\Cloud\Annotation\Property;
-use SkyCentrics\Cloud\DTO\Device\AbstractData;
+use SkyCentrics\Cloud\DTO\Device\AbstractDeviceData;
 use SkyCentrics\Cloud\DTO\Device\DeviceTypeInterface;
 
 /**
  * Class SkySnapData
  * @package SkyCentrics\Cloud\DTO\Device\Data
  */
-class SkySnapData extends AbstractData
+class SkySnapData extends AbstractDeviceData
 {
     /**
      * @var array

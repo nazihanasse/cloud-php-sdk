@@ -56,6 +56,7 @@ class CloudGroup implements CloudDTOInterface
      */
     public function __construct(string $name, int $userId, int $parent = 0)
     {
+        $this->id = 0;
         $this->name = $name;
         $this->userId = $userId;
         $this->parent = $parent;

@@ -13,10 +13,10 @@ use SkyCentrics\Cloud\Transport\Response\MultiResponseInterface;
 use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
 
 /**
- * Class CreateGroup
+ * Class UpdateGroup
  * @package SkyCentrics\Cloud\Query\Group
  */
-class CreateGroup extends AbstractQuery
+class UpdateGroup extends AbstractQuery
 {
     /**
      * @var CloudGroup
@@ -24,7 +24,7 @@ class CreateGroup extends AbstractQuery
     protected $group;
 
     /**
-     * CreateGroup constructor.
+     * UpdateGroup constructor.
      * @param CloudGroup $group
      */
     public function __construct(CloudGroup $group)
@@ -38,22 +38,17 @@ class CreateGroup extends AbstractQuery
     public function createRequest(): RequestInterface
     {
         return Request::createFromParams([
-            'path' => '/groups/',
-            'method' => Request::METHOD_POST,
+            'path' => sprintf('/groups/%s/', $this->group->getId()),
+            'method' => Request::METHOD_PUT,
             'data' => $this->map($this->group)
         ]);
     }
 
     /**
-     * @param ResponseInterface $response
-     * @return int|null
+     * @param ResponseInterface|MultiResponseInterface $response
      */
     public function mapResponse(ResponseInterface $response)
     {
-        $id = $response->getIdFromLocation();
-
-        $this->group->setId($id);
-
-        return $id;
+        // TODO: Implement mapResponse() method.
     }
 }

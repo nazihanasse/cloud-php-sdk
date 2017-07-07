@@ -27,6 +27,8 @@ interface RequestInterface
 
     public function getData() : array;
 
+    public function setData(array $data);
+
     public function getQuery() : array;
 
     public function setQuery(array $query);

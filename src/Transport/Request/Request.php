@@ -114,6 +114,11 @@ class Request implements RequestInterface
         return $this->data;
     }
 
+    public function setData(array $data)
+    {
+        $this->data = $data;
+    }
+
     public function setHeaders(array $headers)
     {
         $this->headers = $headers;

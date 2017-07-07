@@ -20,6 +20,7 @@ use SkyCentrics\Tests\Exception\CloudTestingExcpetion;
 
 /**
  * Class CloudTest
+ * @TODO: make Trait
  * @package SkyCentrics\Cloud\Test
  */
 class CloudTest extends TestCase

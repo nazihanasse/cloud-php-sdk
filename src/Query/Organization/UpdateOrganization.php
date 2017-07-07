@@ -13,10 +13,10 @@ use SkyCentrics\Cloud\Transport\Response\MultiResponseInterface;
 use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
 
 /**
- * Class CreateOrganization
+ * Class UpdateOrganization
  * @package SkyCentrics\Cloud\Query\Organization
  */
-class CreateOrganization extends AbstractQuery
+class UpdateOrganization extends AbstractQuery
 {
     /**
      * @var CloudOrganization
@@ -24,10 +24,12 @@ class CreateOrganization extends AbstractQuery
     protected $organization;
 
     /**
-     * CreateOrganization constructor.
+     * UpdateOrganization constructor.
      * @param CloudOrganization $organization
      */
-    public function __construct(CloudOrganization $organization)
+    public function __construct(
+        CloudOrganization $organization
+    )
     {
         $this->organization = $organization;
     }
@@ -38,22 +40,17 @@ class CreateOrganization extends AbstractQuery
     public function createRequest(): RequestInterface
     {
         return Request::createFromParams([
-            'path' => '/organizations/',
-            'method' => Request::METHOD_POST,
-            'data' => $this->map($this->organization)
+            'path' => sprintf('/organizations/%s/', $this->organization->getId()),
+            'data' => $this->map($this->organization),
+            'method' => Request::METHOD_PUT
         ]);
     }
 
     /**
-     * @param ResponseInterface $response
-     * @return int|null
+     * @param ResponseInterface|MultiResponseInterface $response
      */
     public function mapResponse(ResponseInterface $response)
     {
-        $organizationId = $response->getIdFromLocation();
-
-        $this->organization->setId($organizationId);
-
-        return $organizationId;
+        // TODO: Implement mapResponse() method.
     }
 }

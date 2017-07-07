@@ -58,7 +58,7 @@ class GetUserGroups extends AbstractQuery
     {
         $groups = [];
         foreach ($response->getData() as $groupData){
-            $groups[] = GroupMapper::fromResponse($groupData);
+            $groups[] = $this->map(CloudGroup::class, $groupData);
         }
 
         return $groups;

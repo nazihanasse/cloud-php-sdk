@@ -11,6 +11,7 @@ use SkyCentrics\Cloud\Mapper\DeviceMapper;
 use SkyCentrics\Cloud\Mapper\GroupMapper;
 use SkyCentrics\Cloud\Mapper\UserMapper;
 use SkyCentrics\Cloud\Query\AbstractQuery;
+use SkyCentrics\Cloud\Query\Device\AbstractDeviceQuery;
 use SkyCentrics\Cloud\Query\QueryInterface;
 use SkyCentrics\Cloud\Transport\Request\MultiRequestInterface;
 use SkyCentrics\Cloud\Transport\Request\Request;
@@ -21,7 +22,7 @@ use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
  * Class GetOrganizationEntriesQuery
  * @package SkyCentrics\Cloud\Query\Organization
  */
-class GetOrganizationEntries extends AbstractQuery
+class GetOrganizationEntries extends AbstractDeviceQuery
 {
     /**
      * @var int
@@ -78,10 +79,13 @@ class GetOrganizationEntries extends AbstractQuery
 
             foreach ($userData['devices'] as $typeChar => $devices){
                 foreach ($devices as $deviceData){
+
                     // @TODO: needed the cameras support
                     if(!isset($deviceData['t']) && !isset($deviceData['type'])){
                         continue;
                     }
+
+                    $deviceData = $this->sanitizeDeviceInfo($deviceData, $deviceData['t'] ?? $deviceData['type']);
 
                     $device = $this->map(CloudDevice::class, $deviceData);
 

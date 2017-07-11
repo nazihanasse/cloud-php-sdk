@@ -1,68 +1,40 @@
 <?php
 
 
-namespace SkyCentrics\Tests\Query\Device;
+namespace SkyCentrics\Cloud\Test\DTO\Device\Data;
 
 
-use SkyCentrics\Cloud\Cloud;
 use SkyCentrics\Cloud\DTO\Device\AbstractDeviceData;
 use SkyCentrics\Cloud\DTO\Device\CloudDevice;
-use SkyCentrics\Cloud\DTO\Device\CloudDeviceID;
 use SkyCentrics\Cloud\DTO\Device\DeviceTypeInterface;
-use SkyCentrics\Cloud\Query\Device\GetDeviceData;
 use SkyCentrics\Cloud\Test\CloudTest;
 use SkyCentrics\Cloud\Test\Fixtures\DeviceDataFixtures;
-use SkyCentrics\Cloud\Transport\Response\Response;
 
-/**
- * Class GetDeviceDataTest
- * @package SkyCentrics\Tests\Query\Device
- *
- * @covers GetDeviceData
- */
-class GetDeviceDataTest extends CloudTest
+class DeviceDataTest extends CloudTest
 {
-
-    public function testCreateRequest()
-    {
-        $this->markTestIncomplete();
-    }
-
     /**
      * @dataProvider deviceDataProvider
      */
     public function testMapResponse($deviceType, $deviceData)
     {
-        /** @var Response|\PHPUnit_Framework_MockObject_MockObject $respMock */
-        $respMock = $this->getMockBuilder(Response::class)
-                    ->disableOriginalConstructor()
-                    ->getMock();
-
-        $respMock->method('getData')
-                 ->willReturn($deviceData);
-
-        /** @var CloudDeviceID|\PHPUnit_Framework_MockObject_MockObject $deviceMoc */
-        $deviceMoc = $this->getMockBuilder(CloudDeviceID::class)
-                    ->disableOriginalConstructor()
-                    ->setMethods(['getType'])
-                    ->getMock();
-
-        $deviceMoc->method('getType')
-                    ->willReturn($deviceType);
-
-        /** @var GetDeviceData */
-        $getDeviceDataMock = new GetDeviceData($deviceMoc);
-
-        $getDeviceDataMock->setAnnotationMapper($this->getAnnotationMapper());
+        $annotationMapper = $this->getCloud()->getAnnotationMapper();
 
         /** @var AbstractDeviceData $deviceDataDTO */
-        $deviceDataDTO = $getDeviceDataMock->mapResponse($respMock);
+        $deviceDataDTO = $annotationMapper->map(CloudDevice::getDeviceDataDTO($deviceType), $deviceData);
 
         $this->assertInstanceOf(\DateTime::class, $deviceDataDTO->getTime());
 
         $this->assertInstanceOf(AbstractDeviceData::class, $deviceDataDTO);
         $this->assertNotEmpty($deviceDataDTO->getDeviceId());
         $this->assertNotEmpty($deviceDataDTO->getTime());
+
+        $resultArray = $annotationMapper->map($deviceDataDTO);
+
+        foreach ($resultArray as $key => $value){
+            if(isset($deviceData[$key])){
+                $this->assertEquals($deviceData[$key], $value);
+            }
+        }
     }
 
     /**

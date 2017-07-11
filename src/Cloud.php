@@ -122,4 +122,12 @@ class Cloud implements CloudInterface
         return $request;
     }
 
+    /**
+     * @return AnnotationMapperInterface
+     */
+    public function getAnnotationMapper(): AnnotationMapperInterface
+    {
+        return $this->annotationMapper;
+    }
+
 }

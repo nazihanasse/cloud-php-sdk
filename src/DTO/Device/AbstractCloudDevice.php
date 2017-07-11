@@ -15,42 +15,42 @@ abstract class AbstractCloudDevice implements CloudDTOInterface
     /**
      * @var int
      *
-     * @Property(key="id")
+     * @Property(key="id", to_type="int")
      */
     protected $id = 0;
 
     /**
      * @var int
      *
-     * @Property(key="user")
+     * @Property(key="user", to_type="int")
      */
     protected $userId;
 
     /**
      * @var int
      *
-     * @Property(key="group")
+     * @Property(key="group", to_type="int")
      */
     protected $groupId;
 
     /**
      * @var string
      *
-     * @Property(key="name")
+     * @Property(key="name", to_type="string")
      */
     protected $name;
 
     /**
      * @var int
      *
-     * @Property(key="type")
+     * @Property(key="type", to_type="int")
      */
     protected $type;
 
     /**
      * @var string
      *
-     * @Property(key="mac")
+     * @Property(key="mac", to_type="string")
      */
     protected $mac;
 

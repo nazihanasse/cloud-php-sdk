@@ -7,6 +7,7 @@
 
 namespace SkyCentrics\Cloud;
 
+use SkyCentrics\Cloud\Annotation\AnnotationMapperInterface;
 use SkyCentrics\Cloud\Query\QueryInterface;
 use SkyCentrics\Cloud\Security\AccountInterface;
 use SkyCentrics\Cloud\Transport\TransportInterface;
@@ -25,4 +26,9 @@ interface CloudInterface
      * @return mixed
      */
     public function apply($query, AccountInterface $account = null);
+
+    /**
+     * @return AnnotationMapperInterface
+     */
+    public function getAnnotationMapper() : AnnotationMapperInterface;
 }

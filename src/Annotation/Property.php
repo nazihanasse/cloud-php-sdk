@@ -28,6 +28,16 @@ class Property extends AbstractAnnotation
     protected $setter;
 
     /**
+     * @var string
+     */
+    protected $to_type;
+
+    /**
+     * @var string
+     */
+    protected $from_type;
+
+    /**
      * Property constructor.
      * @param array $values
      */
@@ -44,12 +54,16 @@ class Property extends AbstractAnnotation
         $values = array_merge([
             'key' => null,
             'getter' => null,
-            'setter' => null
+            'setter' => null,
+            'to_type' => null,
+            'from_type' => null
         ], $values);
 
         $this->key = $values['key'];
         $this->getter = $values['getter'];
         $this->setter = $values['setter'];
+        $this->to_type = $values['to_type'];
+        $this->from_type = $values['from_type'];
     }
 
     /**
@@ -74,6 +88,22 @@ class Property extends AbstractAnnotation
     public function getSetter()
     {
         return $this->setter;
+    }
+
+    /**
+     * @return string
+     */
+    public function getToType()
+    {
+        return $this->to_type;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFromType()
+    {
+        return $this->from_type;
     }
 
 }

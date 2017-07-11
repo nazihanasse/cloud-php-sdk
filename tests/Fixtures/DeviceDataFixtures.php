@@ -40,7 +40,7 @@ class DeviceDataFixtures
             'se' => random_int(10000, 20000),
             'uo' => random_int(0,1),
             'i' => random_int(300000,600000),
-            'time' => DateTime::dateTime('now')
+            'time' => DateTime::dateTime('now')->format('Y-m-d H:i:s')
         ];
     }
 
@@ -96,7 +96,7 @@ class DeviceDataFixtures
                 return $commodities;
             })(),
             'device' => random_int(300000,600000),
-            'time' => DateTime::dateTime('now')
+            'time' => DateTime::dateTime('now')->format('Y-m-d H:i:s')
         ];
     }
 
@@ -131,7 +131,7 @@ class DeviceDataFixtures
                 'units' => 'F'
             ],
             'device' => random_int(300000,600000),
-            'time' => DateTime::dateTime('now')
+            'time' => DateTime::dateTime('now')->format('Y-m-d H:i:s')
         ];
     }
 
@@ -159,7 +159,7 @@ class DeviceDataFixtures
             'fu' => random_int(0, 1),
             'rssi' => random_int(0, 1),
             'i' => random_int(300000,600000),
-            'time' => DateTime::dateTime('now')
+            'time' => DateTime::dateTime('now')->format('Y-m-d H:i:s')
         ];
     }
 
@@ -205,7 +205,7 @@ class DeviceDataFixtures
                 'units' => 'F'
             ],
             'device' => random_int(300000,600000),
-            'time' => DateTime::dateTime('now')
+            'time' => DateTime::dateTime('now')->format('Y-m-d H:i:s')
         ];
     }
 
@@ -239,7 +239,7 @@ class DeviceDataFixtures
                 return $commodities;
             })(),
             'device' => random_int(300000,600000),
-            'time' => DateTime::dateTime('now')
+            'time' => DateTime::dateTime('now')->format('Y-m-d H:i:s')
         ];
     }
 
@@ -274,7 +274,7 @@ class DeviceDataFixtures
                 return $commodities;
             })(),
             'device' => random_int(300000,600000),
-            'time' => DateTime::dateTime('now')
+            'time' => DateTime::dateTime('now')->format('Y-m-d H:i:s')
         ];
     }
 
@@ -302,7 +302,7 @@ class DeviceDataFixtures
             })(),
             'sensors' => [],
             'device' => random_int(300000,600000),
-            'time' => DateTime::dateTime('now')
+            'time' => DateTime::dateTime('now')->format('Y-m-d H:i:s')
         ];
     }
 }

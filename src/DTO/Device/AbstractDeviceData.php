@@ -20,7 +20,7 @@ abstract class AbstractDeviceData
 
     /**
      * @var \DateTime
-     * @Property(key="time")
+     * @Property(key="time", to_type="\DateTime", getter="stringifyTime")
      */
     protected $time;
 
@@ -58,6 +58,14 @@ abstract class AbstractDeviceData
     public function getTime() : \DateTime
     {
         return $this->time;
+    }
+
+    /**
+     * @return string
+     */
+    public function stringifyTime()
+    {
+        return $this->time->format('Y-m-d H:i:s');
     }
 
     /**

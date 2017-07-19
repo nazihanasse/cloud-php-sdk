@@ -187,4 +187,13 @@ class MultiRequest implements MultiRequestInterface
     {
         return $this->requests;
     }
+
+    /**
+     * @param array $data
+     * @return mixed
+     */
+    public function setData(array $data)
+    {
+        return !$this->current() instanceof RequestInterface ?: $this->current()->setData($data);
+    }
 }

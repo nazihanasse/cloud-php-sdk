@@ -38,6 +38,16 @@ class Property extends AbstractAnnotation
     protected $from_type;
 
     /**
+     * @var string
+     */
+    protected $map;
+
+    /**
+     * @var string
+     */
+    protected $default;
+
+    /**
      * Property constructor.
      * @param array $values
      */
@@ -56,7 +66,9 @@ class Property extends AbstractAnnotation
             'getter' => null,
             'setter' => null,
             'to_type' => null,
-            'from_type' => null
+            'from_type' => null,
+            'map' => null,
+            'default' => null
         ], $values);
 
         $this->key = $values['key'];
@@ -64,6 +76,8 @@ class Property extends AbstractAnnotation
         $this->setter = $values['setter'];
         $this->to_type = $values['to_type'];
         $this->from_type = $values['from_type'];
+        $this->default = $values['default'];
+        $this->map = $values['map'];
     }
 
     /**
@@ -104,6 +118,22 @@ class Property extends AbstractAnnotation
     public function getFromType()
     {
         return $this->from_type;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getMap()
+    {
+        return $this->map;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDefault()
+    {
+        return $this->default;
     }
 
 }

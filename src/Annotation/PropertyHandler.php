@@ -12,6 +12,22 @@ use SkyCentrics\Cloud\Exception\CloudAnnotationException;
 class PropertyHandler implements AnnotationHandlerInterface
 {
     /**
+     * @var AnnotationMapperInterface
+     */
+    protected $annotationMapper;
+
+    /**
+     * PropertyHandler constructor.
+     * @param AnnotationMapperInterface $annotationMapper
+     */
+    public function __construct(
+        AnnotationMapperInterface $annotationMapper
+    )
+    {
+        $this->annotationMapper = $annotationMapper;
+    }
+
+    /**
      * @param AnnotationInterface $annotation
      * @param $target
      * @param array|null $source
@@ -56,7 +72,9 @@ class PropertyHandler implements AnnotationHandlerInterface
             return null;
         }
 
-        if($annotation->getToType()){
+        if($annotation->getMap()){
+            $value = $this->annotationMapper->map($annotation->getMap(), $value);
+        }elseif($annotation->getToType()){
             $type = $annotation->getToType();
 
             $value = $this->castType($type, $value);
@@ -130,7 +148,11 @@ class PropertyHandler implements AnnotationHandlerInterface
 
             $propertyValue = $target->{$getterName}();
 
-        }else{
+        }
+        elseif($annotation->getMap()){
+            $propertyValue = $this->annotationMapper->map($property->getValue($target));
+        }
+        else{
             $propertyValue = $property->getValue($target);
 
             if($annotation->getFromType()){

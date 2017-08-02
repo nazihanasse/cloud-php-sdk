@@ -75,7 +75,7 @@ class CloudUser implements CloudDTOInterface
 
     /**
      * @var \DateTimeZone
-     * @Property(key="timezone")
+     * @Property(key="timezone", to_type="\DateTimeZone", getter="getTimeZoneString")
      */
     protected $timeZone;
 
@@ -288,6 +288,14 @@ class CloudUser implements CloudDTOInterface
     public function setTimeZone(\DateTimeZone $timeZone)
     {
         $this->timeZone = $timeZone;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTimeZoneString() : string
+    {
+        return $this->timeZone->getName();
     }
 
     /**

@@ -5,6 +5,7 @@ namespace SkyCentrics\Cloud\Test;
 
 use SkyCentrics\Cloud\Annotation\AnnotationHandler;
 use SkyCentrics\Cloud\Annotation\AnnotationMapper;
+use SkyCentrics\Cloud\Annotation\AnnotationMapperInterface;
 use SkyCentrics\Cloud\Annotation\AnnotationReader;
 use SkyCentrics\Cloud\Annotation\Property;
 use SkyCentrics\Cloud\Annotation\PropertyHandler;
@@ -104,20 +105,11 @@ class CloudTest extends TestCase
     }
 
     /**
-     * @return AnnotationMapper
+     * @return AnnotationMapperInterface
      */
     protected function getAnnotationMapper()
     {
-        if(!$this->annotationMapper){
-            $this->annotationMapper = new AnnotationMapper(
-                new AnnotationReader(),
-                new AnnotationHandler([
-                    Property::class => new PropertyHandler()
-                ])
-            );
-        }
-
-        return $this->annotationMapper;
+        return $this->getCloud()->getAnnotationMapper();
     }
 
     /**

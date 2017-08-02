@@ -64,9 +64,7 @@ class Cloud implements CloudInterface
 
         $this->annotationMapper = new AnnotationMapper(
             new AnnotationReader(),
-            new AnnotationHandler([
-                Property::class => new PropertyHandler()
-            ])
+            new AnnotationHandler()
         );
     }
 

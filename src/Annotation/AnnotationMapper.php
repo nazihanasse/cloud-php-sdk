@@ -30,13 +30,15 @@ class AnnotationMapper implements AnnotationMapperInterface
     /**
      * AnnotationMapper constructor.
      * @param \SkyCentrics\Cloud\Annotation\AnnotationReaderInterface $annotationReader
-     * @param AnnotationHandlerInterface $annotationHandler
+     * @param AnnotationHandlerInterface|AnnotationHandler $annotationHandler
      */
     public function __construct(
         AnnotationReaderInterface $annotationReader,
         AnnotationHandlerInterface $annotationHandler
     )
     {
+        $annotationHandler->registerAnnotation(Property::class, new PropertyHandler($this));
+
         $this->annotationReader = $annotationReader;
         $this->handler = $annotationHandler;
     }

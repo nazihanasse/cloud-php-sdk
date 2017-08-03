@@ -103,7 +103,7 @@ abstract class AbstractCloudDevice implements CloudDTOInterface
     /**
      * @return int
      */
-    public function getUserId() : int
+    public function getUserId()
     {
         return $this->userId;
     }
@@ -119,7 +119,7 @@ abstract class AbstractCloudDevice implements CloudDTOInterface
     /**
      * @return string
      */
-    public function getDeviceName() : string
+    public function getDeviceName()
     {
         return$this->name;
     }
@@ -135,7 +135,7 @@ abstract class AbstractCloudDevice implements CloudDTOInterface
     /**
      * @return string
      */
-    public function getMac() : string
+    public function getMac()
     {
         return $this->mac;
     }
@@ -151,7 +151,7 @@ abstract class AbstractCloudDevice implements CloudDTOInterface
     /**
      * @return int
      */
-    public function getDeviceType() : int
+    public function getDeviceType()
     {
         return $this->type;
     }
@@ -167,7 +167,7 @@ abstract class AbstractCloudDevice implements CloudDTOInterface
     /**
      * @return int
      */
-    public function getDeviceModel() : int
+    public function getDeviceModel()
     {
         return $this->model;
     }
@@ -191,7 +191,7 @@ abstract class AbstractCloudDevice implements CloudDTOInterface
     /**
      * @return int
      */
-    public function getGroupId(): int
+    public function getGroupId()
     {
         return $this->groupId;
     }

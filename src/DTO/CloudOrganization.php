@@ -47,7 +47,7 @@ class CloudOrganization implements CloudDTOInterface
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -63,7 +63,7 @@ class CloudOrganization implements CloudDTOInterface
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName()
     {
         return $this->name;
     }
@@ -79,7 +79,7 @@ class CloudOrganization implements CloudDTOInterface
     /**
      * @return int
      */
-    public function getUser(): int
+    public function getUser()
     {
         return $this->user;
     }

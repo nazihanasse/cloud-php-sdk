@@ -19,12 +19,12 @@ class CloudDeviceID
         $this->type = $type;
     }
 
-    public function getId() : int
+    public function getId()
     {
         return $this->id;
     }
 
-    public function getType() : int
+    public function getType()
     {
         return $this->type;
     }

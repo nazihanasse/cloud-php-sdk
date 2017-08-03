@@ -160,7 +160,7 @@ class CloudUserContacts implements CloudDTOInterface
     /**
      * @return int
      */
-    public function getPersonalPushStatus(): int
+    public function getPersonalPushStatus()
     {
         return $this->personalPushStatus;
     }
@@ -176,7 +176,7 @@ class CloudUserContacts implements CloudDTOInterface
     /**
      * @return int
      */
-    public function getTechnicalPushStatus(): int
+    public function getTechnicalPushStatus()
     {
         return $this->technicalPushStatus;
     }

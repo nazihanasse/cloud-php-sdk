@@ -64,7 +64,7 @@ class CloudGroup implements CloudDTOInterface
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -80,7 +80,7 @@ class CloudGroup implements CloudDTOInterface
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName()
     {
         return $this->name;
     }
@@ -96,7 +96,7 @@ class CloudGroup implements CloudDTOInterface
     /**
      * @return int
      */
-    public function getUserId(): int
+    public function getUserId()
     {
         return $this->userId;
     }
@@ -112,7 +112,7 @@ class CloudGroup implements CloudDTOInterface
     /**
      * @return int
      */
-    public function getParent(): int
+    public function getParent()
     {
         return $this->parent;
     }

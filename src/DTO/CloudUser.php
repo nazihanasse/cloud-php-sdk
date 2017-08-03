@@ -132,7 +132,7 @@ class CloudUser implements CloudDTOInterface
     /**
      * @return string
      */
-    public function getEmail(): string
+    public function getEmail()
     {
         return $this->email;
     }
@@ -148,7 +148,7 @@ class CloudUser implements CloudDTOInterface
     /**
      * @return string
      */
-    public function getPassword(): string
+    public function getPassword()
     {
         return $this->password;
     }
@@ -165,7 +165,7 @@ class CloudUser implements CloudDTOInterface
     /**
      * @return string
      */
-    public function getFirstName(): string
+    public function getFirstName()
     {
         return $this->firstName;
     }
@@ -181,7 +181,7 @@ class CloudUser implements CloudDTOInterface
     /**
      * @return string
      */
-    public function getLastName(): string
+    public function getLastName()
     {
         return $this->lastName;
     }
@@ -197,7 +197,7 @@ class CloudUser implements CloudDTOInterface
     /**
      * @return string
      */
-    public function getStreet(): string
+    public function getStreet()
     {
         return $this->street;
     }
@@ -213,7 +213,7 @@ class CloudUser implements CloudDTOInterface
     /**
      * @return string
      */
-    public function getCity(): string
+    public function getCity()
     {
         return $this->city;
     }
@@ -229,7 +229,7 @@ class CloudUser implements CloudDTOInterface
     /**
      * @return string
      */
-    public function getState(): string
+    public function getState()
     {
         return $this->state;
     }
@@ -245,7 +245,7 @@ class CloudUser implements CloudDTOInterface
     /**
      * @return int
      */
-    public function getZip(): int
+    public function getZip()
     {
         return $this->zip;
     }
@@ -261,7 +261,7 @@ class CloudUser implements CloudDTOInterface
     /**
      * @return string
      */
-    public function getCountry(): string
+    public function getCountry()
     {
         return $this->country;
     }
@@ -293,7 +293,7 @@ class CloudUser implements CloudDTOInterface
     /**
      * @return string
      */
-    public function getTimeZoneString() : string
+    public function getTimeZoneString()
     {
         return $this->timeZone->getName();
     }
@@ -301,7 +301,7 @@ class CloudUser implements CloudDTOInterface
     /**
      * @return int
      */
-    public function getSync(): int
+    public function getSync()
     {
         return $this->sync;
     }
@@ -317,7 +317,7 @@ class CloudUser implements CloudDTOInterface
     /**
      * @return int
      */
-    public function getOrganization(): int
+    public function getOrganization()
     {
         return $this->organization;
     }
@@ -333,7 +333,7 @@ class CloudUser implements CloudDTOInterface
     /**
      * @return int
      */
-    public function getControl(): int
+    public function getControl()
     {
         return $this->control;
     }

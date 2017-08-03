@@ -47,7 +47,7 @@ abstract class AbstractDeviceData
     /**
      * @return int
      */
-    public function getDeviceId() : int
+    public function getDeviceId()
     {
         return $this->deviceId;
     }

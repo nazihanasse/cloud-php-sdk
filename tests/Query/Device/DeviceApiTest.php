@@ -6,10 +6,12 @@ namespace SkyCentrics\Tests\Query\Device;
 
 use SkyCentrics\Cloud\DTO\Device\AbstractCloudDevice;
 use SkyCentrics\Cloud\DTO\Device\CloudDevice;
+use SkyCentrics\Cloud\DTO\Device\CloudDeviceInfo;
 use SkyCentrics\Cloud\DTO\Device\DeviceTypeInterface;
 use SkyCentrics\Cloud\Query\Device\CreateDevice;
 use SkyCentrics\Cloud\Query\Device\DeleteDevice;
 use SkyCentrics\Cloud\Query\Device\GetDevice;
+use SkyCentrics\Cloud\Query\Device\GetDeviceInfo;
 use SkyCentrics\Cloud\Query\Device\UpdateDevice;
 use SkyCentrics\Cloud\Test\CloudTest;
 
@@ -27,7 +29,6 @@ class DeviceApiTest extends CloudTest
      * @param string $mac
      * @return CloudDevice
      *
-     * @covers CreateDevice
      */
     public function testCreate()
     {
@@ -60,7 +61,6 @@ class DeviceApiTest extends CloudTest
      * @return AbstractCloudDevice
      *
      * @depends testCreate
-     * @covers GetDevice
      */
     public function testGet($cloudDevice)
     {
@@ -74,8 +74,18 @@ class DeviceApiTest extends CloudTest
     }
 
     /**
+     * @param CloudDevice $cloudDevice
      * @depends testGet
-     * @covers UpdateDevice
+     */
+    public function testGetInfo(CloudDevice $cloudDevice)
+    {
+        $deviceInfo = $this->getCloud()->apply(new GetDeviceInfo($cloudDevice->getDeviceId()));
+
+        $this->assertInstanceOf(CloudDeviceInfo::class, $deviceInfo);
+    }
+
+    /**
+     * @depends testGet
      */
     public function testUpdate(AbstractCloudDevice $cloudDevice)
     {
@@ -88,7 +98,6 @@ class DeviceApiTest extends CloudTest
 
     /**
      * @depends testGet
-     * @covers DeleteDevice
      */
     public function testDelete(CloudDevice $cloudDevice)
     {

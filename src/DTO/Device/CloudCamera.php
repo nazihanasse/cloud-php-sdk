@@ -6,6 +6,8 @@ namespace SkyCentrics\Cloud\DTO\Device;
 
 use SkyCentrics\Cloud\Annotation\Property;
 use SkyCentrics\Cloud\DTO\CloudDTOInterface;
+use SkyCentrics\Cloud\Security\Account;
+use SkyCentrics\Cloud\Security\AccountInterface;
 
 /**
  * Class CloudCamera
@@ -116,5 +118,15 @@ class CloudCamera extends AbstractCloudDevice
     public function getUrl(): string
     {
         return $this->url;
+    }
+
+    /**
+     * @return AccountInterface
+     */
+    public function getAccount() : AccountInterface
+    {
+        $credentials = explode(':', base64_decode($this->auth));
+
+        return new Account($credentials[0] ?? '', $credentials[1] ?? '');
     }
 }

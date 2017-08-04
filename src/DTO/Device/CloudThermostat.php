@@ -58,10 +58,25 @@ class CloudThermostat extends AbstractCloudDevice
     protected $location;
 
     /**
+     * @var int
+     *
+     * @Property(key="b")
+     */
+    protected $backlight = 0;
+
+    /**
      * @return int
      */
     public function getLocation()
     {
         return $this->location;
+    }
+
+    /**
+     * @return int
+     */
+    public function getBacklight(): int
+    {
+        return $this->backlight;
     }
 }

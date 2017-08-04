@@ -75,7 +75,7 @@ class CloudThermostat extends AbstractCloudDevice
     /**
      * @return int
      */
-    public function getBacklight(): int
+    public function getBacklight()
     {
         return $this->backlight;
     }

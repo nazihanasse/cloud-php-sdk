@@ -91,7 +91,7 @@ class CloudCamera extends AbstractCloudDevice
     /**
      * @return int
      */
-    public function getLocation(): int
+    public function getLocation()
     {
         return $this->location;
     }
@@ -99,7 +99,7 @@ class CloudCamera extends AbstractCloudDevice
     /**
      * @return string
      */
-    public function getAuth(): string
+    public function getAuth()
     {
         return $this->auth;
     }
@@ -107,7 +107,7 @@ class CloudCamera extends AbstractCloudDevice
     /**
      * @return int
      */
-    public function getManufacturer(): int
+    public function getManufacturer()
     {
         return $this->manufacturer;
     }
@@ -115,7 +115,7 @@ class CloudCamera extends AbstractCloudDevice
     /**
      * @return string
      */
-    public function getUrl(): string
+    public function getUrl()
     {
         return $this->url;
     }

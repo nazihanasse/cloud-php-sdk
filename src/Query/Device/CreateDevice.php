@@ -40,7 +40,7 @@ class CreateDevice extends AbstractDeviceQuery
         return $this->addSecurityHeaders(Request::createFromParams([
                 'path' => sprintf('/%s/', $this->getPath($this->cloudDevice->getDeviceType())),
                 'method' => Request::METHOD_POST,
-                'data' => $this->sanitizeDeviceInfo($this->map($this->cloudDevice), $this->cloudDevice->getDeviceType())
+                'data' => $this->map($this->cloudDevice)
             ]));
     }
 

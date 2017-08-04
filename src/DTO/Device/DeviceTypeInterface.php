@@ -34,4 +34,6 @@ interface DeviceTypeInterface
     const TYPE_THERMOSTAT_DEPRECATED = 1;
     const TYPE_PISNAP_3_DEPRECATED = 4;
     const TYPE_SKYSNAP_10_DEPRECATED = 5;
+
+    const TYPE_CAMERAS = 0;
 }

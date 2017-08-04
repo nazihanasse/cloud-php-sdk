@@ -18,37 +18,5 @@ use SkyCentrics\Cloud\Exception\CloudQueryException;
  */
 class CloudDevice extends AbstractCloudDevice
 {
-    /**
-     * @param $type
-     * @return string
-     * @throws CloudQueryException
-     */
-    public static function getDeviceDataDTO($type)
-    {
-        foreach ([
-                    ThermostatData::class,
-                    SkySnapData::class,
-                    PlugData::class,
-                    PoolPumpData::class,
-                    WaterHeaterData::class,
-                    ChargerData::class,
-                    CTThermostatData::class,
-                    DeprecatedThermostatData::class
-                ] as $className){
-           if(!class_exists($className)){
-               throw new CloudQueryException();
-           }
 
-           if($className::supportType($type)){
-               $cloudDataClass = $className;
-               break;
-           }
-       }
-
-       if(empty($cloudDataClass)){
-           throw new CloudQueryException(sprintf("Missing data class for the type %s !", $type));
-       }
-
-       return $cloudDataClass;
-    }
 }

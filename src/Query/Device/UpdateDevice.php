@@ -41,7 +41,7 @@ class UpdateDevice extends AbstractDeviceQuery
         return $this->addSecurityHeaders(Request::createFromParams([
             'path' => sprintf('/%s/%s/', $this->getPath($this->cloudDevice->getDeviceType()), $this->cloudDevice->getId()),
             'method' => Request::METHOD_PUT,
-            'data' => $this->sanitizeDeviceInfo($this->map($this->cloudDevice), $this->cloudDevice->getDeviceType())
+            'data' => $this->map($this->cloudDevice)
         ]));
     }
 

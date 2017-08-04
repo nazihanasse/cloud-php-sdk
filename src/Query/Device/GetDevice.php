@@ -4,6 +4,7 @@
 namespace SkyCentrics\Cloud\Query\Device;
 
 
+use SkyCentrics\Cloud\DTO\Device\AbstractCloudDevice;
 use SkyCentrics\Cloud\DTO\Device\CloudDevice;
 use SkyCentrics\Cloud\DTO\Device\CloudDeviceID;
 use SkyCentrics\Cloud\Transport\Request\Request;
@@ -48,6 +49,9 @@ class GetDevice extends AbstractDeviceQuery
      */
     public function mapResponse(ResponseInterface $response)
     {
-        return $this->map(CloudDevice::class, $this->sanitizeDeviceInfo($response->getData()));
+        return $this->map(
+            AbstractCloudDevice::getDeviceClassFromType($this->cloudDeviceID->getType()),
+            $response->getData()
+        );
     }
 }

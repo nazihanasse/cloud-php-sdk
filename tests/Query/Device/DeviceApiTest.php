@@ -12,7 +12,10 @@ use SkyCentrics\Cloud\Query\Device\CreateDevice;
 use SkyCentrics\Cloud\Query\Device\DeleteDevice;
 use SkyCentrics\Cloud\Query\Device\GetDevice;
 use SkyCentrics\Cloud\Query\Device\GetDeviceInfo;
+use SkyCentrics\Cloud\Query\Device\GetUserDevices;
 use SkyCentrics\Cloud\Query\Device\UpdateDevice;
+use SkyCentrics\Cloud\Query\User\CheckUserByEmail;
+use SkyCentrics\Cloud\Security\AccountInterface;
 use SkyCentrics\Cloud\Test\CloudTest;
 
 /**
@@ -71,6 +74,23 @@ class DeviceApiTest extends CloudTest
         $this->assertEquals(self::getUser()->getId(), $device->getUserId());
 
         return $device;
+    }
+
+    /**
+     *
+     */
+    public function testGetDevices()
+    {
+        /** @var AccountInterface $account */
+        $account = $this->getAccount();
+
+        $result = $this->getCloud()->apply(new GetUserDevices($account));
+
+        foreach ($result as $cloudDevices){
+            foreach ($cloudDevices as $cloudDevice){
+                $this->assertInstanceOf(AbstractCloudDevice::class, $cloudDevice);
+            }
+        }
     }
 
     /**

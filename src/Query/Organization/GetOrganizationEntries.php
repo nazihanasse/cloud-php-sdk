@@ -6,7 +6,10 @@ namespace SkyCentrics\Cloud\Query\Organization;
 
 use SkyCentrics\Cloud\DTO\CloudGroup;
 use SkyCentrics\Cloud\DTO\CloudUser;
+use SkyCentrics\Cloud\DTO\Device\CloudCamera;
 use SkyCentrics\Cloud\DTO\Device\CloudDevice;
+use SkyCentrics\Cloud\DTO\Device\CloudSmartplug;
+use SkyCentrics\Cloud\DTO\Device\CloudThermostat;
 use SkyCentrics\Cloud\Mapper\DeviceMapper;
 use SkyCentrics\Cloud\Mapper\GroupMapper;
 use SkyCentrics\Cloud\Mapper\UserMapper;
@@ -79,14 +82,15 @@ class GetOrganizationEntries extends AbstractQuery
 
             foreach ($userData['devices'] as $typeChar => $devices){
                 foreach ($devices as $deviceData){
-                    // @TODO: needed the cameras support
-                    if(!isset($deviceData['t']) && !isset($deviceData['type'])){
-                        continue;
-                    }
 
-                    $deviceData = DeviceResponseSanitizer::sanitize($deviceData);
+                    $mapClass = [
+                        'd' => CloudDevice::class,
+                        's' => CloudSmartplug::class,
+                        't' => CloudThermostat::class,
+                        'c' => CloudCamera::class
+                    ][$typeChar];
 
-                    $device = $this->map(CloudDevice::class, $deviceData);
+                    $device = $this->map($mapClass, $deviceData);
 
                     $result['devices'][] = $device;
                 }

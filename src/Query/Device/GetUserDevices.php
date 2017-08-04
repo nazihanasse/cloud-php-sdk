@@ -4,8 +4,11 @@
 namespace SkyCentrics\Cloud\Query\Device;
 
 
+use SkyCentrics\Cloud\DTO\Device\AbstractCloudDevice;
+use SkyCentrics\Cloud\DTO\Device\CloudCamera;
 use SkyCentrics\Cloud\DTO\Device\CloudDevice;
-use SkyCentrics\Cloud\Mapper\DeviceMapper;
+use SkyCentrics\Cloud\DTO\Device\CloudSmartplug;
+use SkyCentrics\Cloud\DTO\Device\CloudThermostat;
 use SkyCentrics\Cloud\Query\QueryInterface;
 use SkyCentrics\Cloud\Security\AccountInterface;
 use SkyCentrics\Cloud\Transport\Request\MultiRequest;
@@ -62,8 +65,15 @@ class GetUserDevices extends AbstractDeviceQuery
     {
         $devices = [];
 
+        $mapClass = [
+            'devices' => CloudDevice::class,
+            'smartplugs' => CloudSmartplug::class,
+            'thermostats' => CloudThermostat::class,
+            'cameras' => CloudCamera::class
+        ][trim($response->getRequest()->getPath(), '/')];
+
         foreach ($response->getData() as $deviceData){
-            $devices[] = $this->map(CloudDevice::class, $deviceData);
+            $devices[] = $this->map($mapClass, $deviceData);
         }
 
         return $devices;

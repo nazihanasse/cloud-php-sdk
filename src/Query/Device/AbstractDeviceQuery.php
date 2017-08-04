@@ -48,6 +48,9 @@ abstract class AbstractDeviceQuery extends AbstractQuery
             DeviceTypeInterface::TYPE_PISNAP_3_DEPRECATED,
             DeviceTypeInterface::TYPE_GENERIC_METERING_PLUG,
             DeviceTypeInterface::TYPE_SKYPLUG_110
+        ],
+        'cameras' => [
+            0
         ]
     ];
 
@@ -74,43 +77,5 @@ abstract class AbstractDeviceQuery extends AbstractQuery
     public function getPaths() : array
     {
         return array_keys($this->paths);
-    }
-
-    /**
-     * @param array $deviceInfo
-     * @return array
-     */
-    public function sanitizeDeviceInfo(array $deviceInfo, int $deviceType = null)
-    {
-        $path = 'devices';
-
-        if($deviceType){
-            $path = $this->getPath($deviceType);
-        }
-
-        $result = [
-            'id' => 'i',
-            'user' => 'u',
-            'name' => 'n',
-            'type' => 't',
-            'mac' => 'm',
-            'group' => 'g'
-        ];
-
-        if($path === 'devices'){
-            foreach ($result as $deviceKey => $smartplugKey){
-                $result[$deviceKey] = array_key_exists($deviceKey, $deviceInfo)
-                    ? $deviceInfo[$deviceKey]
-                    : $deviceInfo[$smartplugKey];
-            }
-        }else{
-            foreach ($result as $deviceKey => $smartplugKey){
-                $result[$smartplugKey] = array_key_exists($deviceKey, $deviceInfo)
-                    ? $deviceInfo[$deviceKey]
-                    : $deviceInfo[$smartplugKey];
-            }
-        }
-
-        return $result;
     }
 }

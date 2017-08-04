@@ -17,6 +17,7 @@ use SkyCentrics\Cloud\DTO\CloudUser;
 use SkyCentrics\Cloud\Query\User\AuthorizeUser;
 use SkyCentrics\Cloud\Security\Account;
 use SkyCentrics\Cloud\Security\AccountInterface;
+use SkyCentrics\Cloud\Transport\Response\Response;
 use SkyCentrics\Tests\Exception\CloudTestingExcpetion;
 
 /**
@@ -110,6 +111,23 @@ class CloudTest extends TestCase
     protected function getAnnotationMapper()
     {
         return $this->getCloud()->getAnnotationMapper();
+    }
+
+    /**
+     * @param $data
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected function getResponseMock($data)
+    {
+        $respMock = $this->getMockBuilder(Response::class)
+            ->disableOriginalConstructor()
+            ->setMethods(['getData'])
+            ->getMock();
+
+        $respMock->method('getData')
+            ->willReturn($data);
+
+        return $respMock;
     }
 
     /**

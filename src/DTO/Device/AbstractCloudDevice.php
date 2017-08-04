@@ -5,6 +5,15 @@ namespace SkyCentrics\Cloud\DTO\Device;
 
 use SkyCentrics\Cloud\Annotation\Property;
 use SkyCentrics\Cloud\DTO\CloudDTOInterface;
+use SkyCentrics\Cloud\DTO\Device\Data\ChargerData;
+use SkyCentrics\Cloud\DTO\Device\Data\CTThermostatData;
+use SkyCentrics\Cloud\DTO\Device\Data\DeprecatedThermostatData;
+use SkyCentrics\Cloud\DTO\Device\Data\PlugData;
+use SkyCentrics\Cloud\DTO\Device\Data\PoolPumpData;
+use SkyCentrics\Cloud\DTO\Device\Data\SkySnapData;
+use SkyCentrics\Cloud\DTO\Device\Data\ThermostatData;
+use SkyCentrics\Cloud\DTO\Device\Data\WaterHeaterData;
+use SkyCentrics\Cloud\Exception\CloudQueryException;
 
 /**
  * Class AbstractCloudDevice
@@ -45,7 +54,7 @@ abstract class AbstractCloudDevice implements CloudDTOInterface
      *
      * @Property(key="type", to_type="int")
      */
-    protected $type;
+    protected $type = 0;
 
     /**
      * @var string
@@ -204,4 +213,56 @@ abstract class AbstractCloudDevice implements CloudDTOInterface
         return new CloudDeviceID($this->getId(), $this->getDeviceType());
     }
 
+        /**
+     * @param $type
+     * @return string
+     * @throws CloudQueryException
+     */
+    public static function getDeviceDataDTO($type)
+    {
+        foreach ([
+                    ThermostatData::class,
+                    SkySnapData::class,
+                    PlugData::class,
+                    PoolPumpData::class,
+                    WaterHeaterData::class,
+                    ChargerData::class,
+                    CTThermostatData::class,
+                    DeprecatedThermostatData::class
+                ] as $className){
+           if(!class_exists($className)){
+               throw new CloudQueryException();
+           }
+
+           if($className::supportType($type)){
+               $cloudDataClass = $className;
+               break;
+           }
+       }
+
+       if(empty($cloudDataClass)){
+           throw new CloudQueryException(sprintf("Missing data class for the type %s !", $type));
+       }
+
+       return $cloudDataClass;
+    }
+
+    /**
+     * @param int $deviceType
+     * @return string
+     */
+    public static function getDeviceClassFromType(int $deviceType)
+    {
+        switch ($deviceType){
+            case DeviceTypeInterface::TYPE_THERMOSTAT_DEPRECATED:
+                return CloudThermostat::class;
+            case DeviceTypeInterface::TYPE_GENERIC_METERING_PLUG:
+            case DeviceTypeInterface::TYPE_SKYPLUG_110:
+                return CloudSmartplug::class;
+            case DeviceTypeInterface::TYPE_CAMERAS:
+                return CloudCamera::class;
+            default :
+                return CloudDevice::class;
+        }
+    }
 }

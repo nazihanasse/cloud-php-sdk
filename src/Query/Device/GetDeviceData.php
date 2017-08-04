@@ -45,7 +45,7 @@ class GetDeviceData extends AbstractDeviceQuery
     {
        $this->cloudDeviceId = $cloudDeviceId;
 
-       $this->cloudDataClass = CloudDevice::getDeviceDataDTO($cloudDeviceId->getType());
+       $this->cloudDataClass = AbstractCloudDevice::getDeviceDataDTO($cloudDeviceId->getType());
     }
 
     /**

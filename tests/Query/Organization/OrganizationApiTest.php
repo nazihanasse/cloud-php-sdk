@@ -6,7 +6,7 @@ namespace SkyCentrics\Tests\Query\Organization;
 
 use SkyCentrics\Cloud\DTO\CloudGroup;
 use SkyCentrics\Cloud\DTO\CloudOrganization;
-use SkyCentrics\Cloud\DTO\CloudUser;
+use SkyCentrics\Cloud\DTO\User\CloudUser;
 use SkyCentrics\Cloud\DTO\Device\AbstractCloudDevice;
 use SkyCentrics\Cloud\Query\Organization\GetOrganization;
 use SkyCentrics\Cloud\Query\Organization\GetOrganizationEntries;

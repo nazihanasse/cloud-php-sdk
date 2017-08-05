@@ -1,7 +1,7 @@
 <?php
 
 
-namespace SkyCentrics\Cloud\DTO\Device;
+namespace SkyCentrics\Cloud\DTO\User;
 
 
 use SkyCentrics\Cloud\Annotation\Property;

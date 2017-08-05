@@ -13,7 +13,7 @@ use SkyCentrics\Cloud\Cloud;
 
 use PHPUnit\Framework\TestCase;
 use SkyCentrics\Cloud\CloudInterface;
-use SkyCentrics\Cloud\DTO\CloudUser;
+use SkyCentrics\Cloud\DTO\User\CloudUser;
 use SkyCentrics\Cloud\Query\User\AuthorizeUser;
 use SkyCentrics\Cloud\Security\Account;
 use SkyCentrics\Cloud\Security\AccountInterface;

@@ -4,7 +4,7 @@
 namespace SkyCentrics\Cloud\Query\User;
 
 
-use SkyCentrics\Cloud\DTO\CloudUser;
+use SkyCentrics\Cloud\DTO\User\CloudUser;
 use SkyCentrics\Cloud\Mapper\UserMapper;
 use SkyCentrics\Cloud\Query\AbstractQuery;
 use SkyCentrics\Cloud\Query\QueryInterface;

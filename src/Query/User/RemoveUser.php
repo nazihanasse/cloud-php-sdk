@@ -13,6 +13,8 @@ use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
 /**
  * Class RemoveUserQuery
  * @package SkyCentrics\Cloud\Query\User
+ *
+ * @TODO: realize the DELETE method
  */
 class RemoveUser extends AbstractQuery
 {

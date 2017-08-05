@@ -5,16 +5,12 @@ namespace SkyCentrics\Cloud\Query\Organization;
 
 
 use SkyCentrics\Cloud\DTO\CloudGroup;
-use SkyCentrics\Cloud\DTO\CloudUser;
+use SkyCentrics\Cloud\DTO\User\CloudUser;
 use SkyCentrics\Cloud\DTO\Device\CloudCamera;
 use SkyCentrics\Cloud\DTO\Device\CloudDevice;
 use SkyCentrics\Cloud\DTO\Device\CloudSmartplug;
 use SkyCentrics\Cloud\DTO\Device\CloudThermostat;
-use SkyCentrics\Cloud\Mapper\DeviceMapper;
-use SkyCentrics\Cloud\Mapper\GroupMapper;
-use SkyCentrics\Cloud\Mapper\UserMapper;
 use SkyCentrics\Cloud\Query\AbstractQuery;
-use SkyCentrics\Cloud\Query\Device\DeviceResponseSanitizer;
 use SkyCentrics\Cloud\Query\QueryInterface;
 use SkyCentrics\Cloud\Transport\Request\MultiRequestInterface;
 use SkyCentrics\Cloud\Transport\Request\Request;

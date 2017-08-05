@@ -4,7 +4,7 @@
 namespace SkyCentrics\Tests\Query\User;
 
 
-use SkyCentrics\Cloud\DTO\CloudUser;
+use SkyCentrics\Cloud\DTO\User\CloudUser;
 use SkyCentrics\Cloud\Query\User\GetUser;
 use SkyCentrics\Cloud\Test\CloudTest;
 use SkyCentrics\Cloud\Test\Fixtures\UserDataFixtures;

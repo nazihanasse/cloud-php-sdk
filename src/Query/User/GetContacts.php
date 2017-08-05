@@ -4,7 +4,7 @@
 namespace SkyCentrics\Cloud\Query\User;
 
 
-use SkyCentrics\Cloud\DTO\Device\CloudUserContacts;
+use SkyCentrics\Cloud\DTO\User\CloudUserContacts;
 use SkyCentrics\Cloud\Query\AbstractQuery;
 use SkyCentrics\Cloud\Transport\Request\MultiRequestInterface;
 use SkyCentrics\Cloud\Transport\Request\Request;
@@ -45,7 +45,8 @@ class GetContacts extends AbstractQuery
     }
 
     /**
-     * @param ResponseInterface|MultiResponseInterface $response
+     * @param ResponseInterface $response
+     * @return mixed
      */
     public function mapResponse(ResponseInterface $response)
     {

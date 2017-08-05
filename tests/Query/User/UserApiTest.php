@@ -4,11 +4,13 @@
 namespace SkyCentrics\Tests\Query\User;
 
 
-use SkyCentrics\Cloud\DTO\CloudUser;
-use SkyCentrics\Cloud\DTO\Device\CloudUserContacts;
+use SkyCentrics\Cloud\DTO\User\CloudUser;
+use SkyCentrics\Cloud\DTO\User\CloudUserContacts;
+use SkyCentrics\Cloud\DTO\User\CloudUserControl;
 use SkyCentrics\Cloud\Query\User\AuthorizeUser;
 use SkyCentrics\Cloud\Query\User\CheckUserByEmail;
 use SkyCentrics\Cloud\Query\User\GetContacts;
+use SkyCentrics\Cloud\Query\User\GetControl;
 use SkyCentrics\Cloud\Query\User\GetUser;
 use SkyCentrics\Cloud\Query\User\SetContacts;
 use SkyCentrics\Cloud\Security\Account;
@@ -90,6 +92,18 @@ class UserApiTest extends CloudTest
         $userContacts = self::$cloud->apply(new GetContacts($cloudUser->getId()));
 
         $this->assertContains($email, $userContacts->getPersonalEmails());
+    }
+
+    /**
+     * @param CloudUser $cloudUser
+     * @depends testGetUser
+     */
+    public function testGetControl(CloudUser $cloudUser)
+    {
+        /** @var CloudUserControl $userControl */
+        $userControl = $this->getCloud()->apply(new GetControl($cloudUser->getId()));
+
+        $this->assertInstanceOf(CloudUserControl::class, $userControl);
     }
 
     /**

@@ -1,9 +1,10 @@
 <?php
 
 
-namespace SkyCentrics\Cloud\DTO;
+namespace SkyCentrics\Cloud\DTO\User;
 
 use SkyCentrics\Cloud\Annotation\Property;
+use SkyCentrics\Cloud\DTO\CloudDTOInterface;
 use SkyCentrics\Cloud\Security\Account;
 use SkyCentrics\Cloud\Security\AccountInterface;
 

@@ -80,10 +80,10 @@ class GetOrganizationEntries extends AbstractQuery
                 foreach ($devices as $deviceData){
 
                     $mapClass = [
-                        'd' => CloudDevice::class,
-                        's' => CloudSmartplug::class,
+                        'c' => CloudDevice::class,
+                        'p' => CloudSmartplug::class,
                         't' => CloudThermostat::class,
-                        'c' => CloudCamera::class
+                        'cs' => CloudCamera::class
                     ][$typeChar];
 
                     $device = $this->map($mapClass, $deviceData);

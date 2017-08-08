@@ -35,7 +35,7 @@ class GuzzleHttpTransport extends AbstractTransport
      */
     public function __construct()
     {
-        $this->client = new Client();
+        $this->client = new Client(['timeout' => 1, 'allow_redirects' => false]);
     }
 
     /**

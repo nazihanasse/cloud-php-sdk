@@ -25,17 +25,27 @@ use SkyCentrics\Cloud\Transport\Response\Response;
  */
 class GuzzleHttpTransport extends AbstractTransport
 {
+    const POOL_CONCURRENCY = 3;
+
     /**
      * @var Client
      */
     protected $client;
 
     /**
-     * GuzzleHttpTransport constructor.
+     * @var int
      */
-    public function __construct()
+    protected $concurrency;
+
+    /**
+     * GuzzleHttpTransport constructor.
+     * @param array $options
+     * @param int $concurrency
+     */
+    public function __construct(array $options = [], int $concurrency = self::POOL_CONCURRENCY)
     {
-        $this->client = new Client(['timeout' => 1, 'allow_redirects' => false]);
+        $this->client = new Client($options);
+        $this->concurrency = $concurrency;
     }
 
     /**
@@ -52,7 +62,7 @@ class GuzzleHttpTransport extends AbstractTransport
         }
 
         $pool = new Pool($this->client, $guzzleRequests, [
-            'concurrency' => 100,
+            'concurrency' => $this->concurrency,
             'fulfilled' =>
                 function(\GuzzleHttp\Psr7\Response $guzzleResponse, $index) use (&$responses, $requests){
 
@@ -84,6 +94,10 @@ class GuzzleHttpTransport extends AbstractTransport
 
         $promise = $pool->promise();
         $promise->wait();
+
+        $promise->cancel();
+
+        unset($promise, $guzzleRequests);
 
         return $responses;
     }

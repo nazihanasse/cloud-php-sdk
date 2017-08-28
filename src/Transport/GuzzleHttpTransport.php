@@ -25,7 +25,7 @@ use SkyCentrics\Cloud\Transport\Response\Response;
  */
 class GuzzleHttpTransport extends AbstractTransport
 {
-    const POOL_CONCURRENCY = 3;
+    const POOL_CONCURRENCY = 10;
 
     /**
      * @var Client
@@ -113,7 +113,7 @@ class GuzzleHttpTransport extends AbstractTransport
             $request->getMethod(),
             $uri,
             $request->getHeaders(),
-            json_encode($request->getData())
+            !empty($request->getData()) ? json_encode($request->getData()) : null
             );
 
         return $guzzleRequest;

@@ -87,7 +87,7 @@ class GetDeviceDataLog extends GetDeviceData
 
         if(!$this->asArray) {
 
-            return function () use ($responseData) {
+            return (function () use ($responseData) {
                 foreach ($responseData as $time => $data) {
                     if (!isset($data['time'])) {
                         $data['time'] = $time;
@@ -96,7 +96,7 @@ class GetDeviceDataLog extends GetDeviceData
                     yield $result;
                     unset($result);
                 }
-            };
+            })();
         }
 
         $result = [];

@@ -47,13 +47,10 @@ class GetDeviceDataLogTest extends CloudTest
             new \DateTime()
         );
 
-        $result = $getDeviceLogQuery->mapResponse($respMock);
-
-        $this->assertNotEmpty($result);
-        $this->assertInstanceOf(\Closure::class, $result);
-
         /** @var \Generator $generator */
-        $generator = $result();
+        $generator = $getDeviceLogQuery->mapResponse($respMock);
+
+        $this->assertNotEmpty($generator);
 
         $this->assertInstanceOf(\Generator::class, $generator);
 

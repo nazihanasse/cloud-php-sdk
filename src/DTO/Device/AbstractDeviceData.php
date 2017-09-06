@@ -55,7 +55,7 @@ abstract class AbstractDeviceData
     /**
      * @return \DateTime
      */
-    public function getTime() : \DateTime
+    public function getTime()
     {
         return $this->time;
     }

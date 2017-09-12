@@ -29,6 +29,11 @@ class GetDeviceDataLog extends GetDeviceData
     protected $end;
 
     /**
+     * @var int
+     */
+    protected $gap;
+
+    /**
      * @var bool
      */
     protected $asArray;
@@ -38,18 +43,21 @@ class GetDeviceDataLog extends GetDeviceData
      * @param CloudDeviceID $cloudDeviceID
      * @param \DateTime $begin
      * @param \DateTime $end
+     * @param int
      * @param bool $asArray
      */
     public function __construct(
         CloudDeviceID $cloudDeviceID,
         \DateTime $begin,
         \DateTime $end,
+        int $gap,
         $asArray = false)
     {
         parent::__construct($cloudDeviceID);
 
         $this->begin = $begin;
         $this->end = $end;
+        $this->gap = $gap;
 
         $this->asArray = $asArray;
     }
@@ -64,7 +72,7 @@ class GetDeviceDataLog extends GetDeviceData
         $request->setQuery([
             'b' => $this->begin->format('Y-m-d') . 'T' . $this->begin->format('H:i:s'),
             'e' => $this->end->format('Y-m-d') . 'T' . $this->end->format('H:i:s'),
-            'g' => 1
+            'g' => $this->gap
         ]);
 
         $headers = $request->getHeaders();

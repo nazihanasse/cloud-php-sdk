@@ -44,7 +44,8 @@ class GetDeviceDataLogTest extends CloudTest
         $getDeviceLogQuery = new GetDeviceDataLog(
             new CloudDeviceID(random_int(1000000, 2000000), $deviceType),
             new \DateTime(),
-            new \DateTime()
+            new \DateTime(),
+            random_int(1, 10)
         );
 
         /** @var \Generator $generator */
@@ -62,6 +63,7 @@ class GetDeviceDataLogTest extends CloudTest
             new CloudDeviceID(random_int(1000000, 2000000), $deviceType),
             new \DateTime(),
             new \DateTime(),
+            random_int(1, 10),
             true
         );
 

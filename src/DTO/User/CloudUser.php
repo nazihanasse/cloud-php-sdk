@@ -63,7 +63,7 @@ class CloudUser implements CloudDTOInterface
     protected $state;
 
     /**
-     * @var int
+     * @var string
      * @Property(key="address.zip")
      */
     protected $zip;
@@ -244,7 +244,7 @@ class CloudUser implements CloudDTOInterface
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getZip()
     {
@@ -252,9 +252,9 @@ class CloudUser implements CloudDTOInterface
     }
 
     /**
-     * @param int $zip
+     * @param string $zip
      */
-    public function setZip(int $zip)
+    public function setZip(string $zip)
     {
         $this->zip = $zip;
     }

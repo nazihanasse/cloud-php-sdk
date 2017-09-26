@@ -20,14 +20,21 @@ class SetDimmer extends AbstractPropertyQuery
     protected $dimmer;
 
     /**
+     * @var int|null
+     */
+    protected $id;
+
+    /**
      * SetDimmer constructor.
      * @param CloudDeviceID $deviceId
      * @param int $dimmer
+     * @param int|null $id
      */
-    public function __construct(CloudDeviceID $deviceId, int $dimmer)
+    public function __construct(CloudDeviceID $deviceId, int $dimmer, int $id = null)
     {
         parent::__construct($deviceId);
         $this->dimmer = $dimmer;
+        $this->id = $id;
     }
 
     /**
@@ -35,8 +42,10 @@ class SetDimmer extends AbstractPropertyQuery
      */
     public function createRequest(): RequestInterface
     {
-        return $this->createPropertyRequest('dimmer', [
-                'd' => $this->dimmer
-            ]);
+        return $this->createPropertyRequest('dimmer',
+            is_int($this->id)
+            ? ['id' => $this->id, 'data' => $this->dimmer]
+            : ['d' => $this->dimmer]
+        );
     }
 }

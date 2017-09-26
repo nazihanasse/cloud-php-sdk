@@ -41,8 +41,12 @@ class UpdateUser extends AbstractQuery
     {
         return Request::createFromParams([
             'path' => "/users/{$this->cloudUser->getId()}/",
-            'method' => 'PUT',
-            'data' => $this->map($this->cloudUser)
+            'method' => Request::METHOD_PUT,
+            'data' => $this->map($this->cloudUser),
+            'headers' => [
+                'Content-Type' => 'application/vnd.cloudbeam-v2+json',
+                'Accept' => 'application/vnd.cloudbeam-v2+json'
+            ]
         ]);
     }
 

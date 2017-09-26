@@ -20,14 +20,21 @@ class SetRelay extends AbstractPropertyQuery
     protected $on;
 
     /**
+     * @var int|null
+     */
+    protected $id;
+
+    /**
      * SetRelay constructor.
      * @param CloudDeviceID $deviceId
      * @param bool $on
+     * @param int|null $id
      */
-    public function __construct(CloudDeviceID $deviceId, bool $on)
+    public function __construct(CloudDeviceID $deviceId, bool $on, int $id = null)
     {
         parent::__construct($deviceId);
         $this->on = $on;
+        $this->id = $id;
     }
 
     /**
@@ -35,9 +42,14 @@ class SetRelay extends AbstractPropertyQuery
      */
     public function createRequest(): RequestInterface
     {
-        return $this->createPropertyRequest('relay', [
-                    'd' => $this->on ? 1 : 0
-                ]);
+        $id = $this->id;
+        $relay = (int)$this->on;
+
+        return $this->createPropertyRequest('relay',
+            is_int($id)
+            ? ['id' => $id, 'data' => $relay]
+            : ['d' => $relay]
+        );
     }
 
 }

@@ -47,7 +47,11 @@ class CreateUser extends AbstractQuery
     public function createRequest(): RequestInterface
     {
         return Request::createFromParams([
+            'headers' => [
+                'Content-Type' => 'application/vnd.cloudbeam-v2+json',
+            ],
             'path' => '/users/',
+            'method' => Request::METHOD_POST,
             'data' => $this->map($this->cloudUser)
         ]);
     }

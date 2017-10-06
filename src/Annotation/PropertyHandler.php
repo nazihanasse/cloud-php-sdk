@@ -197,6 +197,13 @@ class PropertyHandler implements AnnotationHandlerInterface
                 $value = (object)$value; break;
             case 'array':
                 $value = (array)$value; break;
+            case '\DateTimeZone':
+                if(!empty($value)){
+                    $value = new $type($value);
+                }else{
+                    $value = null;
+                }
+                break;
             default:
                 if(class_exists($type)){
                     $value = new $type($value);

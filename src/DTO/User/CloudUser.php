@@ -278,7 +278,7 @@ class CloudUser implements CloudDTOInterface
     /**
      * @return \DateTimeZone
      */
-    public function getTimeZone(): \DateTimeZone
+    public function getTimeZone(): ? \DateTimeZone
     {
         return $this->timeZone;
     }

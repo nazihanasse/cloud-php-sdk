@@ -15,7 +15,7 @@ use SkyCentrics\Cloud\Security\AccountInterface;
  */
 class CloudCamera extends AbstractCloudDevice
 {
-        /**
+    /**
      * @var int
      *
      * @Property(key="i", to_type="int")
@@ -58,10 +58,10 @@ class CloudCamera extends AbstractCloudDevice
      *
      * @Property(key="h")
      */
-    protected $location;
+    protected $location = 0;
 
     /**
-     * @var int
+     * @var string
      *
      * @Property(key="mdl")
      */
@@ -75,7 +75,7 @@ class CloudCamera extends AbstractCloudDevice
     protected $auth;
 
     /**
-     * @var int
+     * @var string
      *
      * @Property(key="mfg")
      */
@@ -87,6 +87,32 @@ class CloudCamera extends AbstractCloudDevice
      * @Property(key="url")
      */
     protected $url;
+
+
+    /**
+     * AbstractCloudDevice constructor.
+     * @param int $userId
+     * @param string $name
+     * @param int $type
+     * @param string $mac
+     * @param string|null $model
+     */
+    public function __construct(
+        int $userId,
+        string $name,
+        int $type,
+        string $mac,
+        int $groupId = 0,
+        string $model = ''
+    )
+    {
+        $this->userId = $userId;
+        $this->name = $name;
+        $this->type=  $type;
+        $this->mac = $mac;
+        $this->model = $model;
+        $this->groupId = $groupId;
+    }
 
     /**
      * @return int
@@ -105,11 +131,20 @@ class CloudCamera extends AbstractCloudDevice
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getManufacturer()
     {
         return $this->manufacturer;
+    }
+
+
+    /**
+     * @param string $manufacturer
+     */
+    public function setManufacturer(string $manufacturer)
+    {
+        $this->manufacturer = $manufacturer;
     }
 
     /**
@@ -118,6 +153,22 @@ class CloudCamera extends AbstractCloudDevice
     public function getUrl()
     {
         return $this->url;
+    }
+
+    /**
+     * @param string $url
+     */
+    public function setUrl(string $url)
+    {
+        $this->url = $url;
+    }
+
+    /**
+     * @param string $auth
+     */
+    public function setAuth(string $auth)
+    {
+        $this->auth = $auth;
     }
 
     /**

@@ -5,7 +5,7 @@ namespace SkyCentrics\Cloud\Query\Device;
 
 
 use SkyCentrics\Cloud\DTO\Device\CloudDeviceID;
-use SkyCentrics\Cloud\DTO\Device\CloudDeviceInfo;
+use SkyCentrics\Cloud\DTO\Device\CloudDeviceVersion;
 use SkyCentrics\Cloud\Transport\Request\MultiRequestInterface;
 use SkyCentrics\Cloud\Transport\Request\Request;
 use SkyCentrics\Cloud\Transport\Request\RequestInterface;
@@ -50,6 +50,6 @@ class GetDeviceVersion extends AbstractDeviceQuery
      */
     public function mapResponse(ResponseInterface $response)
     {
-        return $this->map(CloudDeviceInfo::class, $response->getData());
+        return $this->map(CloudDeviceVersion::class, $response->getData());
     }
 }

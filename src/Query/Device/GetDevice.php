@@ -18,16 +18,16 @@ use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
 class GetDevice extends AbstractDeviceQuery
 {
     /**
-     * @var AbstractCloudDevice
+     * @var CloudDeviceID
      */
     protected $cloudDeviceID;
 
     /**
      * GetDeviceQuery constructor.
-     * @param AbstractCloudDevice $cloudDeviceID
+     * @param CloudDeviceID $cloudDeviceID
      */
     public function __construct(
-        AbstractCloudDevice $cloudDeviceID
+        CloudDeviceID $cloudDeviceID
     )
     {
         $this->cloudDeviceID = $cloudDeviceID;

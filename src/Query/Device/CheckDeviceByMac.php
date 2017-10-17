@@ -1,12 +1,9 @@
 <?php
 
 
-namespace SkyCentrics\Cloud\Query\User;
+namespace SkyCentrics\Cloud\Query\Device;
 
 
-use SkyCentrics\Cloud\Query\Device\AbstractDeviceQuery;
-use SkyCentrics\Cloud\Query\QueryInterface;
-use SkyCentrics\Cloud\Security\Account;
 use SkyCentrics\Cloud\Transport\Request\Request;
 use SkyCentrics\Cloud\Transport\Request\RequestInterface;
 use SkyCentrics\Cloud\Transport\Response\ResponseInterface;

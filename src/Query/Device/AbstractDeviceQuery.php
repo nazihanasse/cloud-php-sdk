@@ -32,6 +32,7 @@ abstract class AbstractDeviceQuery extends AbstractQuery
             DeviceTypeInterface::TYPE_AO_SMITH_ELECTRIC_RESISTANCE,
             DeviceTypeInterface::TYPE_AO_SMITH_HEAT_PUMP,
             DeviceTypeInterface::TYPE_GE,
+            DeviceTypeInterface::TYPE_VAUGHN,
             DeviceTypeInterface::TYPE_CLIPPER_CREEK,
             DeviceTypeInterface::TYPE_PENTAIR,
             DeviceTypeInterface::TYPE_GENERIC_WATER_HEATER,

@@ -46,7 +46,7 @@ class CheckDeviceByMac extends AbstractDeviceQuery
         return Request::createFromParams([
             'path' => sprintf('/%s/', $this->getPath($this->type)),
             'query' => [
-                'mac' => base64_encode($this->mac)
+                'mac' => $this->mac
             ]
         ]);
     }

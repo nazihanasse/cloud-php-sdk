@@ -3,6 +3,7 @@
 
 namespace SkyCentrics\Cloud\Query\Device\Schedule;
 
+use SkyCentrics\Cloud\DTO\Device\AbstractCloudDevice;
 use SkyCentrics\Cloud\DTO\Device\CloudDeviceID;
 use SkyCentrics\Cloud\Mapper\AnnotationMapper;
 use SkyCentrics\Cloud\Transport\Request\MultiRequestInterface;
@@ -10,27 +11,28 @@ use SkyCentrics\Cloud\Transport\Request\Request;
 use SkyCentrics\Cloud\Transport\Request\RequestInterface;
 use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
 use SkyCentrics\Cloud\Query\Device\AbstractDeviceQuery;
+use SkyCentrics\Cloud\Security\AccountInterface;
 
 /**
- * Class GetSchedule
+ * Class GetSchedules
  * @package SkyCentrics\Cloud\Query\Device
  */
-class GetSchedule extends AbstractDeviceQuery
+class GetSchedules extends AbstractDeviceQuery
 {
     /**
-     * @var GetSchedule
+     * @var AccountInterface
      */
-    protected $cloudDeviceId;
-
+    protected $account;
 
     /**
-     * GetDeviceDataQuery constructor.
-     * @param CloudDeviceID $cloudDeviceId
+     * GetSchedules constructor.
+     * @param AccountInterface $account
      */
-    public function __construct(CloudDeviceID $cloudDeviceId)
+    public function __construct(
+        AccountInterface $account
+    )
     {
-        $this->cloudDeviceId = $cloudDeviceId;
-
+        $this->account = $account;
     }
 
     /**
@@ -39,7 +41,8 @@ class GetSchedule extends AbstractDeviceQuery
     public function createRequest(): RequestInterface
     {
         return Request::createFromParams([
-            'path' => sprintf("/%s/%s/schedule", $this->getPath($this->cloudDeviceId->getType()), $this->cloudDeviceId->getId())
+            'path' => '/schedules/',
+            'query' => ['auth' => $this->account->getAuth()]
         ]);
     }
 

@@ -49,7 +49,7 @@ class GetSchedule extends AbstractDeviceQuery
      */
     public function mapResponse(ResponseInterface $response)
     {
-
+        return $response->getData();
     }
 
 }

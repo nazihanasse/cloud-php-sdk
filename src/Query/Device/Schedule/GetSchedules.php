@@ -52,7 +52,7 @@ class GetSchedules extends AbstractDeviceQuery
      */
     public function mapResponse(ResponseInterface $response)
     {
-
+        return $response->getData();
     }
 
 }

@@ -1,21 +1,19 @@
 <?php
 
 
-namespace SkyCentrics\Cloud\Query\Device\Schedule;
+namespace SkyCentrics\Cloud\Query\Scheduler;
 
-use SkyCentrics\Cloud\DTO\Device\AbstractCloudDevice;
-use SkyCentrics\Cloud\DTO\Device\CloudDeviceID;
-use SkyCentrics\Cloud\Mapper\AnnotationMapper;
+
 use SkyCentrics\Cloud\Transport\Request\MultiRequestInterface;
 use SkyCentrics\Cloud\Transport\Request\Request;
 use SkyCentrics\Cloud\Transport\Request\RequestInterface;
 use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
 use SkyCentrics\Cloud\Query\Device\AbstractDeviceQuery;
 use SkyCentrics\Cloud\Security\AccountInterface;
-
+use SkyCentrics\Cloud\DTO\CloudSchedule;
 /**
  * Class GetSchedules
- * @package SkyCentrics\Cloud\Query\Device
+ * @package SkyCentrics\Cloud\Query\Scheduler
  */
 class GetSchedules extends AbstractDeviceQuery
 {
@@ -52,7 +50,11 @@ class GetSchedules extends AbstractDeviceQuery
      */
     public function mapResponse(ResponseInterface $response)
     {
-        return $response->getData();
+        $schedules = [];
+        foreach ($response->getData() as $scheduleData){
+            $schedules[] = $this->map(CloudSchedule::class, $scheduleData);
+        }
+        return $schedules;
     }
 
 }

@@ -45,7 +45,7 @@ class CloudSchedule implements CloudDTOInterface
      *
      * @Property(key="d")
      */
-    protected $days;
+    protected $days = [];
 
     /**
      * CloudSchedule constructor.

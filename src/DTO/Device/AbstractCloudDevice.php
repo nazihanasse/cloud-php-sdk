@@ -266,4 +266,23 @@ abstract class AbstractCloudDevice implements CloudDTOInterface
         }
     }
 
+    /**
+     * @param int $deviceType
+     * @return string
+     */
+    public static function getDeviceKindFromType(int $deviceType)
+    {
+        switch ($deviceType){
+            case DeviceTypeInterface::TYPE_GENERIC_METERING_PLUG:
+            case DeviceTypeInterface::TYPE_SKYPLUG_110:
+            case DeviceTypeInterface::TYPE_PISNAP_3_DEPRECATED:
+            case DeviceTypeInterface::TYPE_PISNAP_3:
+                return DeviceKindInterface::KIND_SMARTPLUG;
+            case DeviceTypeInterface::TYPE_ISLAND_AIRE_PTAC:
+                return DeviceKindInterface::KIND_DEVICE;
+            default :
+                return DeviceKindInterface::KIND_THERMOSTAT;
+        }
+    }
+
 }

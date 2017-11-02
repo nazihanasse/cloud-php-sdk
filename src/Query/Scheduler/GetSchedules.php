@@ -10,7 +10,7 @@ use SkyCentrics\Cloud\Transport\Request\RequestInterface;
 use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
 use SkyCentrics\Cloud\Query\Device\AbstractDeviceQuery;
 use SkyCentrics\Cloud\Security\AccountInterface;
-use SkyCentrics\Cloud\DTO\CloudSchedule;
+use SkyCentrics\Cloud\DTO\Schedule\CloudSchedule;
 /**
  * Class GetSchedules
  * @package SkyCentrics\Cloud\Query\Scheduler

@@ -1,12 +1,14 @@
 <?php
 
 
-namespace SkyCentrics\Cloud\DTO;
+namespace SkyCentrics\Cloud\DTO\Schedule;
+
+use SkyCentrics\Cloud\DTO\CloudDTOInterface;
 
 
 /**
  * Class CloudSchedule
- * @package SkyCentrics\Cloud\DTO
+ * @package SkyCentrics\Cloud\DTO\Schedule
  */
 class CloudSchedule implements CloudDTOInterface
 {

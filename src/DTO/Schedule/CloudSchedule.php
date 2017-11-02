@@ -140,7 +140,7 @@ class CloudSchedule implements CloudDTOInterface
     /**
      * @param array $data
      */
-    public function setDays(array $data)
+    public function setData(array $data)
     {
         $this->data = $data;
     }

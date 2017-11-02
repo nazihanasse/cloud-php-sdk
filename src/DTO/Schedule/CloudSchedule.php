@@ -47,21 +47,21 @@ class CloudSchedule implements CloudDTOInterface
      *
      * @Property(key="d")
      */
-    protected $days = [];
+    protected $data = [];
 
     /**
      * CloudSchedule constructor.
      * @param string $name
      * @param int $user
      * @param int $type
-     * @param array $days
+     * @param array $data
      */
-    public function __construct($name, $user, $type, $days)
+    public function __construct($name, $user, $type, $data)
     {
         $this->name = $name;
         $this->user = $user;
         $this->type = $type;
-        $this->days = $days;
+        $this->data = $data;
     }
 
     /**
@@ -132,16 +132,16 @@ class CloudSchedule implements CloudDTOInterface
     /**
      * @return array
      */
-    public function getDays()
+    public function getData()
     {
-        return $this->days;
+        return $this->data;
     }
 
     /**
-     * @param array $days
+     * @param array $data
      */
-    public function setDays(array $days)
+    public function setDays(array $data)
     {
-        $this->days = $days;
+        $this->data = $data;
     }
 }

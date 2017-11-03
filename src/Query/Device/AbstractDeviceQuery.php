@@ -40,7 +40,8 @@ abstract class AbstractDeviceQuery extends AbstractQuery
             DeviceTypeInterface::TYPE_GENERIC_POOL_PUMP,
             DeviceTypeInterface::TYPE_SIEMENS,
             DeviceTypeInterface::TYPE_SIEMENS,
-            DeviceTypeInterface::TYPE_PISNAP_3
+            DeviceTypeInterface::TYPE_PISNAP_3,
+            DeviceTypeInterface::TYPE_6_DEPRECATED
         ],
         'thermostats' => [
             DeviceTypeInterface::TYPE_THERMOSTAT_DEPRECATED

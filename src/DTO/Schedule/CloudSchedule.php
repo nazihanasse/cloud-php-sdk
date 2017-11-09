@@ -54,7 +54,7 @@ class CloudSchedule implements CloudDTOInterface
      * @param string $name
      * @param int $user
      * @param int $type
-     * @param array $data
+     * @param object $data
      */
     public function __construct($name, $user, $type, $data)
     {

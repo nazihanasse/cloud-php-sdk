@@ -21,20 +21,27 @@ class SetSchedule extends AbstractDeviceQuery
     protected $cloudDeviceId;
 
     /**
-     * @var CloudSchedule
+     * @var array
      */
-    protected $cloudSchedule;
+    protected $data;
+
+    /**
+     * @var int
+     */
+    protected $day;
 
 
     /**
      * GetDeviceDataQuery constructor.
      * @param CloudDeviceID $cloudDeviceId
-     * @param CloudSchedule $cloudSchedule
+     * @param array $data
+     * @param int $day
      */
-    public function __construct(CloudDeviceID $cloudDeviceId, CloudSchedule $cloudSchedule)
+    public function __construct(CloudDeviceID $cloudDeviceId, array $data, int $day)
     {
         $this->cloudDeviceId = $cloudDeviceId;
-        $this->cloudSchedule = $cloudSchedule;
+        $this->data = $data;
+        $this->day = $day;
 
     }
 
@@ -43,25 +50,23 @@ class SetSchedule extends AbstractDeviceQuery
      */
     public function createRequest(): RequestInterface
     {
-
         return $this->addSecurityHeaders(Request::createFromParams([
             'path' => sprintf("/%s/%s/schedule", $this->getPath($this->cloudDeviceId->getType()), $this->cloudDeviceId->getId()),
             'method' => Request::METHOD_POST,
-            'data' => $this->map($this->cloudSchedule)
+            'query' => [
+                'd' => $this->day
+            ],
+            'data' => $this->data
         ]));
 
     }
 
     /**
      * @param ResponseInterface $response
-     * @return int|null
+     * @return mixed
      */
     public function mapResponse(ResponseInterface $response)
     {
-        $id = $response->getIdFromLocation();
-
-        $this->cloudSchedule->setId($id);
-
-        return $id;
+        return $response->getStatusCode();
     }
 }

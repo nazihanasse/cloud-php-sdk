@@ -52,7 +52,7 @@ class SetSchedule extends AbstractDeviceQuery
     {
         return $this->addSecurityHeaders(Request::createFromParams([
             'path' => sprintf("/%s/%s/schedule", $this->getPath($this->cloudDeviceId->getType()), $this->cloudDeviceId->getId()),
-            'method' => Request::METHOD_POST,
+            'method' => Request::METHOD_PUT,
             'query' => [
                 'd' => $this->day
             ],

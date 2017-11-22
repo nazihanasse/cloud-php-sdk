@@ -51,7 +51,7 @@ abstract class AbstractTransport implements TransportInterface
             if(!$response->isSuccess()){
 
                 if($isMulti){
-                    throw new CloudResponseException($response);
+                    unset($responses[$key]);
                 }else{
                     throw new CloudResponseException($response);
                 }

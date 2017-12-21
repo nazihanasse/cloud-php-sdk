@@ -26,22 +26,22 @@ class SetSchedule extends AbstractDeviceQuery
     protected $data;
 
     /**
-     * @var int
+     * @var array
      */
-    protected $day;
+    protected $parameters;
 
 
     /**
      * GetDeviceDataQuery constructor.
      * @param CloudDeviceID $cloudDeviceId
      * @param array $data
-     * @param int $day
+     * @param array $parameters
      */
-    public function __construct(CloudDeviceID $cloudDeviceId, array $data, int $day)
+    public function __construct(CloudDeviceID $cloudDeviceId, array $data, array $parameters)
     {
         $this->cloudDeviceId = $cloudDeviceId;
         $this->data = $data;
-        $this->day = $day;
+        $this->parameters = $parameters;
 
     }
 
@@ -53,9 +53,7 @@ class SetSchedule extends AbstractDeviceQuery
         return $this->addSecurityHeaders(Request::createFromParams([
             'path' => sprintf("/%s/%s/schedule", $this->getPath($this->cloudDeviceId->getType()), $this->cloudDeviceId->getId()),
             'method' => Request::METHOD_PUT,
-            'query' => [
-                'd' => $this->day
-            ],
+            'query' => $this->parameters,
             'data' => $this->data
         ]));
 

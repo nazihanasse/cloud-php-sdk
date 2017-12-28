@@ -15,7 +15,7 @@ use SkyCentrics\Cloud\Transport\Request\RequestInterface;
 class SetTempSetpoint extends AbstractPropertyQuery
 {
     const UNITS = 'F';
-    const TYPE = 0;
+    const TYPE = 10;
 
     /**
      * @var int

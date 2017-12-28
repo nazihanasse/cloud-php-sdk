@@ -113,7 +113,7 @@ class GuzzleHttpTransport extends AbstractTransport
             $request->getMethod(),
             $uri,
             $request->getHeaders(),
-            !empty($request->getData()) ? json_encode($request->getData(), JSON_FORCE_OBJECT) : null
+            !empty($request->getData()) ? json_encode($request->getData()) : null
             );
 
         return $guzzleRequest;

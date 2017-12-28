@@ -25,9 +25,9 @@ interface RequestInterface
 
     public function setHeaders(array $headers);
 
-    public function getData() : array;
+    public function getData();
 
-    public function setData(array $data);
+    public function setData($data);
 
     public function getQuery() : array;
 

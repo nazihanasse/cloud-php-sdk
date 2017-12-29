@@ -21,7 +21,7 @@ class SetSchedule extends AbstractDeviceQuery
     protected $cloudDeviceId;
 
     /**
-     * @var array
+     * @var array|object
      */
     protected $data;
 
@@ -34,10 +34,10 @@ class SetSchedule extends AbstractDeviceQuery
     /**
      * GetDeviceDataQuery constructor.
      * @param CloudDeviceID $cloudDeviceId
-     * @param array $data
+     * @param array|object $data
      * @param array $parameters
      */
-    public function __construct(CloudDeviceID $cloudDeviceId, array $data, array $parameters)
+    public function __construct(CloudDeviceID $cloudDeviceId, $data, array $parameters)
     {
         $this->cloudDeviceId = $cloudDeviceId;
         $this->data = $data;

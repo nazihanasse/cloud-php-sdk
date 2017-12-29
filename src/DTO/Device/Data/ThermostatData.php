@@ -21,13 +21,13 @@ class ThermostatData extends AbstractDeviceData
     protected $temperature;
 
     /**
-     * @var int
+     * @var int|null
      * @Property(key="thermostat_mode")
      */
     protected $thermostatMode;
 
     /**
-     * @var int
+     * @var int|null
      * @Property(key="fan_mode")
      */
     protected $fanMode;
@@ -205,9 +205,9 @@ class ThermostatData extends AbstractDeviceData
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getThermostatMode(): int
+    public function getThermostatMode(): ?int
     {
         return $this->thermostatMode;
     }
@@ -221,9 +221,9 @@ class ThermostatData extends AbstractDeviceData
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getFanMode(): int
+    public function getFanMode(): ?int
     {
         return $this->fanMode;
     }

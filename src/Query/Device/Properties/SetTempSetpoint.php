@@ -28,16 +28,23 @@ class SetTempSetpoint extends AbstractPropertyQuery
     protected $cool;
 
     /**
+     * @var int
+     */
+    protected $type;
+
+    /**
      * SetTempSetpoint constructor.
      * @param CloudDeviceID $deviceId
      * @param int $heat
      * @param int $cool
+     * @param int $type
      */
-    public function __construct(CloudDeviceID $deviceId, int $heat, int $cool)
+    public function __construct(CloudDeviceID $deviceId, int $heat, int $cool, int $type = self::TYPE)
     {
         parent::__construct($deviceId);
         $this->heat = $heat;
         $this->cool = $cool;
+        $this->type = $type;
     }
 
     /**
@@ -51,7 +58,7 @@ class SetTempSetpoint extends AbstractPropertyQuery
                 $this->cool
             ],
             'units' => self::UNITS,
-            'type' => self::TYPE
+            'type' => $this->type
         ]);
     }
 

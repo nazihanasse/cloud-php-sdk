@@ -21,6 +21,19 @@ class ThermostatData extends AbstractDeviceData
     protected $temperature;
 
     /**
+     * @var int
+     * @Property(key="thermostat_mode")
+     */
+    protected $thermostatMode;
+
+    /**
+     * @var int
+     * @Property(key="fan_mode")
+     */
+    protected $fanMode;
+
+
+    /**
      * @var array
      * @Property(key="setpoint")
      */
@@ -38,17 +51,6 @@ class ThermostatData extends AbstractDeviceData
      */
     protected $state;
 
-    /**
-     * @var int
-     * @Property(key="thermostat_mode")
-     */
-    protected $thermostatMode;
-
-    /**
-     * @var int
-     * @Property(key="fan_mode")
-     */
-    protected $fanMode;
 
     /**
      * @var int

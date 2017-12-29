@@ -40,6 +40,18 @@ class ThermostatData extends AbstractDeviceData
 
     /**
      * @var int
+     * @Property(key="thermostat_mode")
+     */
+    protected $thermostatMode;
+
+    /**
+     * @var int
+     * @Property(key="fan_mode")
+     */
+    protected $fanMode;
+
+    /**
+     * @var int
      * @Property(key="override")
      */
     protected $override;
@@ -189,6 +201,40 @@ class ThermostatData extends AbstractDeviceData
     {
         $this->commodities = $commodities;
     }
+
+    /**
+     * @return int
+     */
+    public function getThermostatMode(): int
+    {
+        return $this->thermostatMode;
+    }
+
+    /**
+     * @param int $thermostatMode
+     */
+    public function setThermostatMode(int $thermostatMode): void
+    {
+        $this->thermostatMode = $thermostatMode;
+    }
+
+    /**
+     * @return int
+     */
+    public function getFanMode(): int
+    {
+        return $this->fanMode;
+    }
+
+    /**
+     * @param int $fanMode
+     */
+    public function setFanMode(int $fanMode): void
+    {
+        $this->fanMode = $fanMode;
+    }
+
+
 
     public static function supportType(int $type): bool
     {

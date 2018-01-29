@@ -284,9 +284,9 @@ class CloudUser implements CloudDTOInterface
     }
 
     /**
-     * @param \DateTimeZone $timeZone
+     * @param \DateTimeZone|null $timeZone
      */
-    public function setTimeZone(\DateTimeZone $timeZone)
+    public function setTimeZone($timeZone)
     {
         $this->timeZone = $timeZone;
     }

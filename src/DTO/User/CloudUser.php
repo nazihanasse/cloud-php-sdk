@@ -296,7 +296,7 @@ class CloudUser implements CloudDTOInterface
      */
     public function getTimeZoneString()
     {
-        return $this->timeZone->getName();
+        return !(empty($this->timeZone) ? $this->timeZone->getName() : '');
     }
 
     /**

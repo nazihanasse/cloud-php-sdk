@@ -23,9 +23,9 @@ class SetThermostatHoldMode extends AbstractPropertyQuery
     /**
      * SetThermostatMode constructor.
      * @param CloudDeviceID $deviceId
-     * @param bool $mode
+     * @param int $mode
      */
-    public function __construct(CloudDeviceID $deviceId, bool $mode = false)
+    public function __construct(CloudDeviceID $deviceId, int $mode = 0)
     {
         parent::__construct($deviceId);
 

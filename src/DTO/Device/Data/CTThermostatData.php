@@ -44,6 +44,12 @@ class CTThermostatData extends AbstractDeviceData
     protected $setpoint;
 
     /**
+     * @var array
+     * @Property(key="status")
+     */
+    protected $status;
+
+    /**
      * @return array
      */
     public function getTemperature()
@@ -121,6 +127,22 @@ class CTThermostatData extends AbstractDeviceData
     public function setSetpoint(array $setpoint)
     {
         $this->setpoint = $setpoint;
+    }
+
+    /**
+     * @return array
+     */
+    public function getStatus(): array
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param array $status
+     */
+    public function setStatus(array $status): void
+    {
+        $this->status = $status;
     }
 
     /**

@@ -130,9 +130,9 @@ class CTThermostatData extends AbstractDeviceData
     }
 
     /**
-     * @return array
+     * @return array|null
      */
-    public function getStatus(): array
+    public function getStatus(): ?array
     {
         return $this->status;
     }

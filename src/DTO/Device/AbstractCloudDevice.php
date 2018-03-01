@@ -276,7 +276,6 @@ abstract class AbstractCloudDevice implements CloudDTOInterface
             case DeviceTypeInterface::TYPE_GENERIC_METERING_PLUG:
             case DeviceTypeInterface::TYPE_SKYPLUG_110:
             case DeviceTypeInterface::TYPE_PISNAP_3_DEPRECATED:
-            case DeviceTypeInterface::TYPE_PISNAP_3:
                 return DeviceKindInterface::KIND_SMARTPLUG;
             case DeviceTypeInterface::TYPE_ISLAND_AIRE_PTAC:
                 return DeviceKindInterface::KIND_DEVICE;

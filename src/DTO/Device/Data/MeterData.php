@@ -19,46 +19,44 @@ class MeterData extends AbstractDeviceData
      * @var float
      * @Property(key="current")
      */
-    protected $current;
+    protected $currentPower;
 
     /**
      * @var float
      * @Property(key="total")
      */
-    protected $total;
-
-
-    /**
-     * @return float
-     */
-    public function getCurrent()
-    {
-        return $this->current;
-    }
-
-    /**
-     * @param float $current
-     */
-    public function setCurrent(float $current)
-    {
-        $this->current = $current;
-    }
-
+    protected $energy;
 
     /**
      * @return float
      */
-    public function getTotal()
+    public function getCurrentPower(): float
     {
-        return $this->total;
+        return $this->currentPower;
     }
 
     /**
-     * @param float $total
+     * @param float $currentPower
      */
-    public function setTotal(float $total)
+    public function setCurrentPower(float $currentPower): void
     {
-        $this->total = $total;
+        $this->currentPower = $currentPower;
+    }
+
+    /**
+     * @return float
+     */
+    public function getEnergy(): float
+    {
+        return $this->energy;
+    }
+
+    /**
+     * @param float $energy
+     */
+    public function setEnergy(float $energy): void
+    {
+        $this->energy = $energy;
     }
 
 

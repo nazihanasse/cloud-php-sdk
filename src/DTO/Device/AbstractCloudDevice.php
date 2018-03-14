@@ -8,6 +8,7 @@ use SkyCentrics\Cloud\DTO\CloudDTOInterface;
 use SkyCentrics\Cloud\DTO\Device\Data\ChargerData;
 use SkyCentrics\Cloud\DTO\Device\Data\CTThermostatData;
 use SkyCentrics\Cloud\DTO\Device\Data\DeprecatedThermostatData;
+use SkyCentrics\Cloud\DTO\Device\Data\MeterData;
 use SkyCentrics\Cloud\DTO\Device\Data\PlugData;
 use SkyCentrics\Cloud\DTO\Device\Data\PoolPumpData;
 use SkyCentrics\Cloud\DTO\Device\Data\SkySnapData;
@@ -64,7 +65,7 @@ abstract class AbstractCloudDevice implements CloudDTOInterface
     protected $mac;
 
     /**
-     * @var int|null
+     * @var string|null
      */
     protected $model;
 
@@ -74,7 +75,8 @@ abstract class AbstractCloudDevice implements CloudDTOInterface
      * @param string $name
      * @param int $type
      * @param string $mac
-     * @param int|null $model
+     * @param int|null $groupId
+     * @param string|null $model
      */
     public function __construct(
         int $userId,
@@ -82,7 +84,7 @@ abstract class AbstractCloudDevice implements CloudDTOInterface
         int $type,
         string $mac,
         int $groupId = 0,
-        int $model = 0
+        string $model = ''
     )
     {
         $this->userId = $userId;
@@ -174,7 +176,7 @@ abstract class AbstractCloudDevice implements CloudDTOInterface
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getDeviceModel()
     {
@@ -182,9 +184,9 @@ abstract class AbstractCloudDevice implements CloudDTOInterface
     }
 
     /**
-     * @param int $model
+     * @param string $model
      */
-    public function setDeviceModel(int $model)
+    public function setDeviceModel(string $model)
     {
         $this->model = $model;
     }
@@ -213,7 +215,7 @@ abstract class AbstractCloudDevice implements CloudDTOInterface
         return new CloudDeviceID($this->getId(), $this->getDeviceType());
     }
 
-        /**
+    /**
      * @param $type
      * @return string
      * @throws CloudQueryException
@@ -221,30 +223,31 @@ abstract class AbstractCloudDevice implements CloudDTOInterface
     public static function getDeviceDataDTO($type)
     {
         foreach ([
-                    ThermostatData::class,
-                    SkySnapData::class,
-                    PlugData::class,
-                    PoolPumpData::class,
-                    WaterHeaterData::class,
-                    ChargerData::class,
-                    CTThermostatData::class,
-                    DeprecatedThermostatData::class
-                ] as $className){
-           if(!class_exists($className)){
-               throw new CloudQueryException();
-           }
+                     ThermostatData::class,
+                     SkySnapData::class,
+                     PlugData::class,
+                     PoolPumpData::class,
+                     WaterHeaterData::class,
+                     ChargerData::class,
+                     CTThermostatData::class,
+                     DeprecatedThermostatData::class,
+                     MeterData::class
+                 ] as $className){
+            if(!class_exists($className)){
+                throw new CloudQueryException();
+            }
 
-           if($className::supportType($type)){
-               $cloudDataClass = $className;
-               break;
-           }
-       }
+            if($className::supportType($type)){
+                $cloudDataClass = $className;
+                break;
+            }
+        }
 
-       if(empty($cloudDataClass)){
-           throw new CloudQueryException(sprintf("Missing data class for the type %s !", $type));
-       }
+        if(empty($cloudDataClass)){
+            throw new CloudQueryException(sprintf("Missing data class for the type %s !", $type));
+        }
 
-       return $cloudDataClass;
+        return $cloudDataClass;
     }
 
     /**
@@ -261,6 +264,8 @@ abstract class AbstractCloudDevice implements CloudDTOInterface
                 return CloudSmartplug::class;
             case DeviceTypeInterface::TYPE_CAMERAS:
                 return CloudCamera::class;
+            case DeviceTypeInterface::TYPE_METERS_0:
+                return CloudMeter::class;
             default :
                 return CloudDevice::class;
         }

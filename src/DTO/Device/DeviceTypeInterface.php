@@ -38,4 +38,6 @@ interface DeviceTypeInterface
     const TYPE_6_DEPRECATED = 6;
 
     const TYPE_CAMERAS = 0;
+
+    const TYPE_METERS_0 = 350;
 }

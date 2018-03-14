@@ -9,6 +9,7 @@ use SkyCentrics\Cloud\DTO\Device\CloudDevice;
 use SkyCentrics\Cloud\DTO\Device\Data\ChargerData;
 use SkyCentrics\Cloud\DTO\Device\CloudDeviceID;
 use SkyCentrics\Cloud\DTO\Device\Data\CTThermostatData;
+use SkyCentrics\Cloud\DTO\Device\Data\MeterData;
 use SkyCentrics\Cloud\DTO\Device\Data\PlugData;
 use SkyCentrics\Cloud\DTO\Device\Data\PoolPumpData;
 use SkyCentrics\Cloud\DTO\Device\Data\SkySnapData;
@@ -43,9 +44,9 @@ class GetDeviceData extends AbstractDeviceQuery
      */
     public function __construct(CloudDeviceID $cloudDeviceId)
     {
-       $this->cloudDeviceId = $cloudDeviceId;
+        $this->cloudDeviceId = $cloudDeviceId;
 
-       $this->cloudDataClass = AbstractCloudDevice::getDeviceDataDTO($cloudDeviceId->getType());
+        $this->cloudDataClass = AbstractCloudDevice::getDeviceDataDTO($cloudDeviceId->getType());
     }
 
     /**
@@ -64,7 +65,12 @@ class GetDeviceData extends AbstractDeviceQuery
      */
     public function mapResponse(ResponseInterface $response)
     {
-        return $this->map($this->cloudDataClass, $response->getData());
+        $data = $response->getData();
+
+        if($this->cloudDataClass == MeterData::class){
+            $data['time'] = (new \DateTime())->setTimestamp($data['time'])->format('Y-m-d\TH:i:s');
+        }
+        return $this->map($this->cloudDataClass, $data);
     }
 
 }

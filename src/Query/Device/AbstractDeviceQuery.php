@@ -53,6 +53,9 @@ abstract class AbstractDeviceQuery extends AbstractQuery
         ],
         'cameras' => [
             0
+        ],
+        'meters' => [
+            DeviceTypeInterface::TYPE_METERS_0
         ]
     ];
 

@@ -6,6 +6,7 @@ namespace SkyCentrics\Cloud\Query\Device;
 
 use SkyCentrics\Cloud\DTO\Device\AbstractCloudDevice;
 use SkyCentrics\Cloud\DTO\Device\CloudDeviceID;
+use SkyCentrics\Cloud\DTO\Device\DeviceTypeInterface;
 use SkyCentrics\Cloud\Parameters\ParameterBag;
 use SkyCentrics\Cloud\Transport\Request\MultiRequestInterface;
 use SkyCentrics\Cloud\Transport\Request\RequestInterface;
@@ -69,11 +70,14 @@ class GetDeviceDataLog extends GetDeviceData
     {
         $request = parent::createRequest();
 
-        $request->setQuery([
+        $query = [
             'b' => $this->begin->format('Y-m-d') . 'T' . $this->begin->format('H:i:s'),
-            'e' => $this->end->format('Y-m-d') . 'T' . $this->end->format('H:i:s'),
-            'g' => $this->gap
-        ]);
+            'e' => $this->end->format('Y-m-d') . 'T' . $this->end->format('H:i:s')
+        ];
+        if($this->cloudDeviceId->getType() != DeviceTypeInterface::TYPE_METERS_0){
+            $query['g'] = $this->gap;
+        }
+        $request->setQuery($query);
 
         $headers = $request->getHeaders();
 
@@ -92,7 +96,6 @@ class GetDeviceDataLog extends GetDeviceData
     public function mapResponse(ResponseInterface $response)
     {
         $responseData = $response->getData();
-
         if(!$this->asArray) {
 
             return (function () use ($responseData) {

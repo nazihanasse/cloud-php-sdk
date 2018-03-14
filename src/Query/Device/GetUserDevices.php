@@ -7,6 +7,7 @@ namespace SkyCentrics\Cloud\Query\Device;
 use SkyCentrics\Cloud\DTO\Device\AbstractCloudDevice;
 use SkyCentrics\Cloud\DTO\Device\CloudCamera;
 use SkyCentrics\Cloud\DTO\Device\CloudDevice;
+use SkyCentrics\Cloud\DTO\Device\CloudMeter;
 use SkyCentrics\Cloud\DTO\Device\CloudSmartplug;
 use SkyCentrics\Cloud\DTO\Device\CloudThermostat;
 use SkyCentrics\Cloud\Query\QueryInterface;
@@ -69,7 +70,8 @@ class GetUserDevices extends AbstractDeviceQuery
             'devices' => CloudDevice::class,
             'smartplugs' => CloudSmartplug::class,
             'thermostats' => CloudThermostat::class,
-            'cameras' => CloudCamera::class
+            'cameras' => CloudCamera::class,
+            'meters' => CloudMeter::class
         ][trim($response->getRequest()->getPath(), '/')];
 
         foreach ($response->getData() as $deviceData){

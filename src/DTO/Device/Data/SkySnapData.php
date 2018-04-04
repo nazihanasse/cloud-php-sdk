@@ -3,7 +3,6 @@
 
 namespace SkyCentrics\Cloud\DTO\Device\Data;
 
-use SkyCentrics\Cloud\Annotation\Method;
 use SkyCentrics\Cloud\Annotation\Property;
 use SkyCentrics\Cloud\DTO\Device\AbstractDeviceData;
 use SkyCentrics\Cloud\DTO\Device\DeviceTypeInterface;
@@ -36,7 +35,6 @@ class SkySnapData extends AbstractDeviceData
 
     /**
      * @param array $currentTransformers
-     * @Method(property="ct", type="array")
      */
     public function setCurrentTransformers(array $currentTransformers)
     {

@@ -72,11 +72,10 @@ class GetDeviceDataLog extends GetDeviceData
 
         $query = [
             'b' => $this->begin->format('Y-m-d') . 'T' . $this->begin->format('H:i:s'),
-            'e' => $this->end->format('Y-m-d') . 'T' . $this->end->format('H:i:s')
+            'e' => $this->end->format('Y-m-d') . 'T' . $this->end->format('H:i:s'),
+            'g' => $this->gap
         ];
-        if($this->cloudDeviceId->getType() != DeviceTypeInterface::TYPE_METERS_0){
-            $query['g'] = $this->gap;
-        }
+
         $request->setQuery($query);
 
         $headers = $request->getHeaders();

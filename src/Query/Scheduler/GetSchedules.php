@@ -52,6 +52,9 @@ class GetSchedules extends AbstractDeviceQuery
     {
         $schedules = [];
         foreach ($response->getData() as $scheduleData){
+            if(!empty($scheduleData['d'])){
+                ksort($scheduleData['d']);
+            }
             $schedules[] = $this->map(CloudSchedule::class, $scheduleData);
         }
         return $schedules;

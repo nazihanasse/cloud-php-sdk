@@ -4,7 +4,7 @@
 namespace SkyCentrics\Cloud\Query\Device;
 
 
-use SkyCentrics\Cloud\DTO\Device\AbstractCloudDevice;
+use SkyCentrics\Cloud\DTO\Device\CloudDeviceID;
 use SkyCentrics\Cloud\Transport\Request\MultiRequestInterface;
 use SkyCentrics\Cloud\Transport\Request\Request;
 use SkyCentrics\Cloud\Transport\Request\RequestInterface;
@@ -18,7 +18,7 @@ use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
 class UpdateFirmware extends AbstractDeviceQuery
 {
     /**
-     * @var AbstractCloudDevice
+     * @var CloudDeviceID
      */
     protected $cloudDevice;
 
@@ -29,11 +29,11 @@ class UpdateFirmware extends AbstractDeviceQuery
 
     /**
      * UpdateDevice constructor.
-     * @param AbstractCloudDevice $cloudDevice
+     * @param CloudDeviceID $cloudDevice
      * @param array $data
      */
     public function __construct(
-        AbstractCloudDevice $cloudDevice,
+        CloudDeviceID $cloudDevice,
         array $data
     )
     {
@@ -41,13 +41,15 @@ class UpdateFirmware extends AbstractDeviceQuery
         $this->data = $data;
     }
 
+
     /**
      * @return RequestInterface|MultiRequestInterface
+     * @throws \SkyCentrics\Cloud\Exception\CloudQueryException
      */
     public function createRequest(): RequestInterface
     {
         return Request::createFromParams([
-            'path' => sprintf('/%s/%s/update', $this->getPath($this->cloudDevice->getDeviceType()), $this->cloudDevice->getId()),
+            'path' => sprintf('/%s/%s/update', $this->getPath($this->cloudDevice->getType()), $this->cloudDevice->getId()),
             'method' => Request::METHOD_PUT,
             'data' => $this->data
         ]);

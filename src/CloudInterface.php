@@ -19,6 +19,7 @@ use SkyCentrics\Cloud\Transport\TransportInterface;
 interface CloudInterface
 {
     const SKYCENTRICS_API_URI = 'http://api.skycentrics.com/api/';
+    const SKYCENTRICS_IOT_URI = 'https://iot.skycentrics.com/';
 
     /**
      * @param QueryInterface|array $query

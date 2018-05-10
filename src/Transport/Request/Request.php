@@ -53,10 +53,11 @@ class Request implements RequestInterface
      * @param array $query
      * @param string $method
      * @param array $headers
+     * @param string $uri
      */
-    public function __construct(string $path, $data =[], array $query = [], string $method = self::METHOD_GET, array $headers = [])
+    public function __construct(string $path, $data =[], array $query = [], string $method = self::METHOD_GET, array $headers = [], $uri = CloudInterface::SKYCENTRICS_API_URI)
     {
-        $this->uri = CloudInterface::SKYCENTRICS_API_URI;
+        $this->uri = $uri;
 
         $this->path = $path;
         $this->method = $method;
@@ -82,7 +83,8 @@ class Request implements RequestInterface
             'data' => [],
             'query' => [],
             'method' => self::METHOD_GET,
-            'headers' => []
+            'headers' => [],
+            'uri' => CloudInterface::SKYCENTRICS_API_URI
         ], array_filter($params));
 
         return new self(
@@ -90,7 +92,8 @@ class Request implements RequestInterface
             $params['data'],
             $params['query'],
             $params['method'],
-            $params['headers']
+            $params['headers'],
+            $params['uri']
         );
     }
 

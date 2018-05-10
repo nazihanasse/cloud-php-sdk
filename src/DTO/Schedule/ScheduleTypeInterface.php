@@ -10,5 +10,6 @@ interface ScheduleTypeInterface
     const TYPE_SMARTPLUG = 2;
     const TYPE_DEVICE = 3;
     const TYPE_DEVICE_WH = 4;
+    const TYPE_MITSUBISHI = 5;
 
 }

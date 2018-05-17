@@ -67,7 +67,7 @@ class GetDeviceData extends AbstractDeviceQuery
     {
         $data = $response->getData();
 
-        if($this->cloudDataClass == MeterData::class){
+        if($this->cloudDataClass == MeterData::class && isset($data['time'])){
             $data['time'] = (new \DateTime())->setTimestamp($data['time'])->format('Y-m-d\TH:i:s');
         }
         return $this->map($this->cloudDataClass, $data);

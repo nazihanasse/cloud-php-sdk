@@ -59,7 +59,7 @@ class CloudMeter extends AbstractCloudDevice
      *
      * @Property(key="i.mdl")
      */
-    protected $model;
+    protected $model = 'RFA-Z109 EAGLE';
 
 
     /**
@@ -98,7 +98,6 @@ class CloudMeter extends AbstractCloudDevice
         $this->name = $name;
         $this->type = $type;
         $this->mac = $mac;
-        $this->model = $model;
         $this->groupId = $groupId;
     }
 

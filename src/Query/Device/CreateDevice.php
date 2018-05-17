@@ -4,6 +4,7 @@
 namespace SkyCentrics\Cloud\Query\Device;
 
 
+use SkyCentrics\Cloud\DTO\Device\AbstractCloudDevice;
 use SkyCentrics\Cloud\DTO\Device\CloudDevice;
 use SkyCentrics\Cloud\DTO\Device\CloudDeviceID;
 use SkyCentrics\Cloud\Transport\Request\MultiRequestInterface;
@@ -19,15 +20,15 @@ use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
 class CreateDevice extends AbstractDeviceQuery
 {
     /**
-     * @var CloudDevice
+     * @var AbstractCloudDevice
      */
     protected $cloudDevice;
 
     /**
      * CreateDevice constructor.
-     * @param CloudDevice $cloudDevice
+     * @param AbstractCloudDevice $cloudDevice
      */
-    public function __construct(CloudDevice $cloudDevice)
+    public function __construct(AbstractCloudDevice $cloudDevice)
     {
         $this->cloudDevice = $cloudDevice;
     }
@@ -38,10 +39,10 @@ class CreateDevice extends AbstractDeviceQuery
     public function createRequest(): RequestInterface
     {
         return $this->addSecurityHeaders(Request::createFromParams([
-                'path' => sprintf('/%s/', $this->getPath($this->cloudDevice->getDeviceType())),
-                'method' => Request::METHOD_POST,
-                'data' => $this->map($this->cloudDevice)
-            ]));
+            'path' => sprintf('/%s/', $this->getPath($this->cloudDevice->getDeviceType())),
+            'method' => Request::METHOD_POST,
+            'data' => $this->map($this->cloudDevice)
+        ]));
     }
 
     /**

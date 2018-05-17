@@ -50,7 +50,6 @@ class CloudMeter extends AbstractCloudDevice
     /**
      * @var int
      *
-     * @Property(key="t", to_type="int")
      */
     protected $type = DeviceTypeInterface::TYPE_METERS_0;
 
@@ -68,14 +67,14 @@ class CloudMeter extends AbstractCloudDevice
      *
      * @Property(key="i.mfg")
      */
-    protected $manufacturer;
+    protected $manufacturer = 'Rainforest Automation, Inc.';
 
     /**
      * @var string
      *
      * @Property(key="i.url")
      */
-    protected $url;
+    protected $url = '';
 
 
     /**

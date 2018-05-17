@@ -10,146 +10,52 @@ use SkyCentrics\Cloud\Annotation\Property;
  * Class CloudMeter
  * @package SkyCentrics\Cloud\DTO\Device
  */
-class CloudMeter extends AbstractCloudDevice
+class CloudMeter
 {
+
     /**
-     * @var int
+     * @var CloudMeterGeneralData
      *
-     * @Property(key="i", to_type="int")
+     * @Property(key="d", map="SkyCentrics\Cloud\DTO\Device\CloudMeterGeneralData")
      */
-    protected $id = 0;
+    protected $data;
 
     /**
-     * @var int
+     * @var CloudMeterInfo
      *
-     * @Property(key="u", to_type="int")
+     * @Property(key="i", map="SkyCentrics\Cloud\DTO\Device\CloudMeterInfo")
      */
-    protected $userId;
+    protected $info;
 
     /**
-     * @var int
-     *
-     * @Property(key="g", to_type="int")
+     * @return CloudMeterGeneralData
      */
-    protected $groupId = 0;
-
-    /**
-     * @var string
-     *
-     * @Property(key="n", to_type="string")
-     */
-    protected $name;
-
-    /**
-     * @var int
-     *
-     * @Property(key="m", to_type="string")
-     */
-    protected $mac = 0;
-
-    /**
-     * @var int
-     *
-     * @Property(key="t", to_type="int")
-     */
-    protected $type = 0;
-
-
-    /**
-     * @var string
-     *
-     * @Property(key="mdl")
-     */
-    protected $model;
-
-
-    /**
-     * @var string
-     *
-     * @Property(key="mfg")
-     */
-    protected $manufacturer;
-
-    /**
-     * @var string
-     *
-     * @Property(key="url")
-     */
-    protected $url;
-
-
-    /**
-     * AbstractCloudDevice constructor.
-     * @param int $userId
-     * @param string $name
-     * @param int $type
-     * @param string $mac
-     * @param string|null $model
-     */
-    public function __construct(
-        int $userId,
-        string $name,
-        int $type,
-        string $mac,
-        int $groupId = 0,
-        string $model = ''
-    )
+    public function getData(): CloudMeterGeneralData
     {
-        $this->userId = $userId;
-        $this->name = $name;
-        $this->type=  $type;
-        $this->mac = $mac;
-        $this->model = $model;
-        $this->groupId = $groupId;
+        return $this->data;
     }
 
     /**
-     * @return int
+     * @param CloudMeterGeneralData $data
      */
-    public function getLocation()
+    public function setData(CloudMeterGeneralData $data): void
     {
-        return $this->location;
+        $this->data = $data;
     }
 
     /**
-     * @return string
+     * @return CloudMeterInfo
      */
-    public function getAuth()
+    public function getInfo(): CloudMeterInfo
     {
-        return $this->auth;
+        return $this->info;
     }
 
     /**
-     * @return string
+     * @param CloudMeterInfo $info
      */
-    public function getManufacturer()
+    public function setInfo(CloudMeterInfo $info): void
     {
-        return $this->manufacturer;
+        $this->info = $info;
     }
-
-
-    /**
-     * @param string $manufacturer
-     */
-    public function setManufacturer(string $manufacturer)
-    {
-        $this->manufacturer = $manufacturer;
-    }
-
-    /**
-     * @return string
-     */
-    public function getUrl()
-    {
-        return $this->url;
-    }
-
-    /**
-     * @param string $url
-     */
-    public function setUrl(string $url)
-    {
-        $this->url = $url;
-    }
-
 }

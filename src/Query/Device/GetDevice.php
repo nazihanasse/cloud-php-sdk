@@ -51,12 +51,7 @@ class GetDevice extends AbstractDeviceQuery
      */
     public function mapResponse(ResponseInterface $response)
     {
-        $deviceClass = AbstractCloudDevice::getDeviceClassFromType($this->cloudDeviceID->getType());
         $deviceData = $response->getData();
-        if($deviceClass == CloudMeter::class){
-            $deviceData = array_merge($response->getData()['i'], $response->getData()['d']);
-            $deviceData['t'] = $this->cloudDeviceID->getType();
-        }
         return $this->map(
             AbstractCloudDevice::getDeviceClassFromType($this->cloudDeviceID->getType()),
             $deviceData

@@ -24,13 +24,28 @@ use SkyCentrics\Cloud\Transport\Response\ResponseInterface;
 class GetWeather extends AbstractQuery
 {
     /**
+     * @var array
+     */
+    protected $query;
+
+    /**
+     * GetWeather constructor.
+     * @param array $query
+     */
+    public function __construct(array $query = [])
+    {
+        $this->query = $query;
+    }
+
+    /**
      * @return RequestInterface
      */
     public function createRequest(): RequestInterface
     {
         return Request::createFromParams([
             'path' => '/weather/',
-            'uri' => CloudInterface::SKYCENTRICS_IOT_URI
+            'uri' => CloudInterface::SKYCENTRICS_IOT_URI,
+            'query' => $this->query
         ]);
     }
 

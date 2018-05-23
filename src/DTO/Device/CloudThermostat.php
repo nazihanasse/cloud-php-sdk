@@ -66,6 +66,8 @@ class CloudThermostat extends AbstractCloudDevice
 
     /**
      * @var int
+     *
+     * @Property(key="hold_mode.data", to_type="int")
      */
     protected $holdMode;
 

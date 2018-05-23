@@ -77,6 +77,13 @@ class ThermostatData extends AbstractDeviceData
     protected $commodities;
 
     /**
+     * @var int
+     *
+     * @Property(key="hold_mode.data", to_type="int")
+     */
+    protected $holdMode;
+
+    /**
      * @return array
      */
     public function getTemperature()
@@ -236,7 +243,21 @@ class ThermostatData extends AbstractDeviceData
         $this->fanMode = $fanMode;
     }
 
+    /**
+     * @return int
+     */
+    public function getHoldMode(): int
+    {
+        return $this->holdMode;
+    }
 
+    /**
+     * @param int $holdMode
+     */
+    public function setHoldMode(int $holdMode): void
+    {
+        $this->holdMode = $holdMode;
+    }
 
     public static function supportType(int $type): bool
     {

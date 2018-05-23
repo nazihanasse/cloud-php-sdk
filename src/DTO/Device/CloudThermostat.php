@@ -65,13 +65,6 @@ class CloudThermostat extends AbstractCloudDevice
     protected $backlight = 0;
 
     /**
-     * @var int
-     *
-     * @Property(key="hold_mode.data", to_type="int")
-     */
-    protected $holdMode;
-
-    /**
      * @return int
      */
     public function getLocation()
@@ -85,21 +78,5 @@ class CloudThermostat extends AbstractCloudDevice
     public function getBacklight()
     {
         return $this->backlight;
-    }
-
-    /**
-     * @return int
-     */
-    public function getHoldMode(): int
-    {
-        return $this->holdMode;
-    }
-
-    /**
-     * @param int $holdMode
-     */
-    public function setHoldMode(int $holdMode): void
-    {
-        $this->holdMode = $holdMode;
     }
 }

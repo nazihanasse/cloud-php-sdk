@@ -84,6 +84,20 @@ class ThermostatData extends AbstractDeviceData
     protected $holdMode;
 
     /**
+     * @var float
+     *
+     * @Property(key="commodity.cumulative", setter="setTotalSource")
+     */
+    protected $total;
+
+    /**
+     * @var int
+     *
+     * @Property(key="commodity.instantaneous", to_type="int", setter="setPowerSource")
+     */
+    protected $power;
+
+    /**
      * @return array
      */
     public function getTemperature()
@@ -257,6 +271,46 @@ class ThermostatData extends AbstractDeviceData
     public function setHoldMode(int $holdMode): void
     {
         $this->holdMode = $holdMode;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTotal(): int
+    {
+        return $this->total;
+    }
+
+    /**
+     * @param int $total
+     */
+    public function setTotal(int $total): void
+    {
+        $this->total = $total;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPower(): int
+    {
+        return $this->power;
+    }
+
+    /**
+     * @param int $power
+     */
+    public function setPower(int $power): void
+    {
+        $this->power = $power;
+    }
+
+    public function setPowerSource(int $power){
+        $this->power = round($power/1000);
+    }
+
+    public function setTotalSource(int $total){
+        $this->total = $total/1000;
     }
 
     public static function supportType(int $type): bool

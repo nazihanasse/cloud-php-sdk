@@ -81,7 +81,7 @@ class PropertyHandler implements AnnotationHandlerInterface
         }
 
         if($annotation->getSetter()){
-            $setterName = $annotation->getGetter();
+            $setterName = $annotation->getSetter();
 
             if(!method_exists($target, $setterName)){
                 throw new CloudAnnotationException(sprintf("Method %s doesn't exists int the target class %s .", $setterName, get_class($target)));

@@ -86,14 +86,14 @@ class ThermostatData extends AbstractDeviceData
     /**
      * @var float
      *
-     * @Property(key="commodity.cumulative", to_type="int")
+     * @Property(key="commodity.cumulative", setter="setTotalSource")
      */
     protected $total;
 
     /**
      * @var int
      *
-     * @Property(key="commodity.instantaneous", to_type="int")
+     * @Property(key="commodity.instantaneous", to_type="int", setter="setPowerSource")
      */
     protected $power;
 

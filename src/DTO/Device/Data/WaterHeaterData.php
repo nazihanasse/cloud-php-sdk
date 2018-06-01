@@ -197,7 +197,6 @@ class WaterHeaterData extends AbstractDeviceData
             DeviceTypeInterface::TYPE_AO_SMITH_HEAT_PUMP,
             DeviceTypeInterface::TYPE_GE,
             DeviceTypeInterface::TYPE_VAUGHN,
-            DeviceTypeInterface::TYPE_EMERSON_SWITCH,
             DeviceTypeInterface::TYPE_GENERIC_WATER_HEATER
         ],true);
     }

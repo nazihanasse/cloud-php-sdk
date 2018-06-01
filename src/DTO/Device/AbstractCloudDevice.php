@@ -8,6 +8,7 @@ use SkyCentrics\Cloud\DTO\CloudDTOInterface;
 use SkyCentrics\Cloud\DTO\Device\Data\ChargerData;
 use SkyCentrics\Cloud\DTO\Device\Data\CTThermostatData;
 use SkyCentrics\Cloud\DTO\Device\Data\DeprecatedThermostatData;
+use SkyCentrics\Cloud\DTO\Device\Data\EmersonWaterHeaterData;
 use SkyCentrics\Cloud\DTO\Device\Data\MeterData;
 use SkyCentrics\Cloud\DTO\Device\Data\PlugData;
 use SkyCentrics\Cloud\DTO\Device\Data\PoolPumpData;
@@ -228,6 +229,7 @@ abstract class AbstractCloudDevice implements CloudDTOInterface
                      PlugData::class,
                      PoolPumpData::class,
                      WaterHeaterData::class,
+                     EmersonWaterHeaterData::class,
                      ChargerData::class,
                      CTThermostatData::class,
                      DeprecatedThermostatData::class,

@@ -306,14 +306,26 @@ class ThermostatData extends AbstractDeviceData
         $this->power = $power;
     }
 
-    public function setPowerSource(int $power){
-        $this->power = round($power/1000);
+    /**
+     * @param int $power
+     */
+    public function setPowerSource(int $power)
+    {
+        $this->power = round($power / 1000);
     }
 
-    public function setTotalSource(int $total){
-        $this->total = $total/1000;
+    /**
+     * @param float $total
+     */
+    public function setTotalSource(float $total)
+    {
+        $this->total = $this->numberFormatPrecision($total, 3, '.')/1000;
     }
 
+    /**
+     * @param int $type
+     * @return bool
+     */
     public static function supportType(int $type): bool
     {
         return in_array($type, [
@@ -321,6 +333,23 @@ class ThermostatData extends AbstractDeviceData
             DeviceTypeInterface::TYPE_EMERSON,
             DeviceTypeInterface::TYPE_MITSUBISHI,
             DeviceTypeInterface::TYPE_GENERIC_THERMOSTAT
-        ],true);
+        ], true);
+    }
+
+    /**
+     * @param $number
+     * @param int $precision
+     * @param string $separator
+     * @return string
+     */
+    public function numberFormatPrecision($number, $precision = 2, $separator = '.')
+    {
+        $numberParts = explode($separator, $number);
+        $response = $numberParts[0];
+        if (count($numberParts) > 1) {
+            $response .= $separator;
+            $response .= substr($numberParts[1], 0, $precision);
+        }
+        return $response;
     }
 }

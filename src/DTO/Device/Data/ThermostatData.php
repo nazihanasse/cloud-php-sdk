@@ -319,7 +319,8 @@ class ThermostatData extends AbstractDeviceData
      */
     public function setTotalSource(float $total)
     {
-        $this->total = $this->numberFormatPrecision($total, 3, '.')/1000;
+        $total = $this->numberFormatPrecision($total, 3, '.')/1000;
+        $this->total = round($total, 3);
     }
 
     /**

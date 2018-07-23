@@ -90,7 +90,7 @@ abstract class AbstractCloudDevice implements CloudDTOInterface
     {
         $this->userId = $userId;
         $this->name = $name;
-        $this->type=  $type;
+        $this->type = $type;
         $this->mac = $mac;
         $this->model = $model;
         $this->groupId = $groupId;
@@ -133,7 +133,7 @@ abstract class AbstractCloudDevice implements CloudDTOInterface
      */
     public function getDeviceName()
     {
-        return$this->name;
+        return $this->name;
     }
 
     /**
@@ -234,18 +234,18 @@ abstract class AbstractCloudDevice implements CloudDTOInterface
                      CTThermostatData::class,
                      DeprecatedThermostatData::class,
                      MeterData::class
-                 ] as $className){
-            if(!class_exists($className)){
+                 ] as $className) {
+            if (!class_exists($className)) {
                 throw new CloudQueryException();
             }
 
-            if($className::supportType($type)){
+            if ($className::supportType($type)) {
                 $cloudDataClass = $className;
                 break;
             }
         }
 
-        if(empty($cloudDataClass)){
+        if (empty($cloudDataClass)) {
             throw new CloudQueryException(sprintf("Missing data class for the type %s !", $type));
         }
 
@@ -258,7 +258,7 @@ abstract class AbstractCloudDevice implements CloudDTOInterface
      */
     public static function getDeviceClassFromType(int $deviceType)
     {
-        switch ($deviceType){
+        switch ($deviceType) {
             case DeviceTypeInterface::TYPE_THERMOSTAT_DEPRECATED:
                 return CloudThermostat::class;
             case DeviceTypeInterface::TYPE_GENERIC_METERING_PLUG:
@@ -273,22 +273,24 @@ abstract class AbstractCloudDevice implements CloudDTOInterface
         }
     }
 
-    /**
-     * @param int $deviceType
-     * @return string
-     */
-    public static function getDeviceKindFromType(int $deviceType)
+    public static function isCTA2045Device(int $deviceType)
     {
-        switch ($deviceType){
-            case DeviceTypeInterface::TYPE_GENERIC_METERING_PLUG:
-            case DeviceTypeInterface::TYPE_SKYPLUG_110:
-            case DeviceTypeInterface::TYPE_PISNAP_3_DEPRECATED:
-                return DeviceKindInterface::KIND_SMARTPLUG;
-            case DeviceTypeInterface::TYPE_ISLAND_AIRE_PTAC:
-                return DeviceKindInterface::KIND_DEVICE;
-            default :
-                return DeviceKindInterface::KIND_THERMOSTAT;
-        }
+        return in_array($deviceType, [
+            DeviceTypeInterface::TYPE_AO_SMITH_ELECTRIC_RESISTANCE,
+            DeviceTypeInterface::TYPE_AO_SMITH_HEAT_PUMP,
+            DeviceTypeInterface::TYPE_EMERSON_SWITCH,
+            DeviceTypeInterface::TYPE_GE,
+            DeviceTypeInterface::TYPE_VAUGHN,
+            DeviceTypeInterface::TYPE_GENERIC_WATER_HEATER,
+            DeviceTypeInterface::TYPE_CLIPPER_CREEK,
+            DeviceTypeInterface::TYPE_SIEMENS,
+            DeviceTypeInterface::TYPE_GENERIC_EV_CHARGER,
+            DeviceTypeInterface::TYPE_PENTAIR,
+            DeviceTypeInterface::TYPE_GENERIC_POOL_PUMP,
+            DeviceTypeInterface::TYPE_SKYPLUG_110,
+            DeviceTypeInterface::TYPE_GENERIC_METERING_PLUG,
+            DeviceTypeInterface::TYPE_PISNAP_3,
+        ]);
     }
 
 }

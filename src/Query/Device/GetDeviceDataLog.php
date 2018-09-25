@@ -40,19 +40,27 @@ class GetDeviceDataLog extends GetDeviceData
     protected $asArray;
 
     /**
+     * @var false
+     */
+    protected $asSource;
+
+    /**
      * GetDeviceDataLog constructor.
      * @param CloudDeviceID $cloudDeviceID
      * @param \DateTime $begin
      * @param \DateTime $end
      * @param int
      * @param bool $asArray
+     * @param bool $asSource
      */
     public function __construct(
         CloudDeviceID $cloudDeviceID,
         \DateTime $begin,
         \DateTime $end,
         int $gap,
-        $asArray = false)
+        $asArray = false,
+        $asSource = false
+    )
     {
         parent::__construct($cloudDeviceID);
 
@@ -61,6 +69,7 @@ class GetDeviceDataLog extends GetDeviceData
         $this->gap = $gap;
 
         $this->asArray = $asArray;
+        $this->asSource = $asSource;
     }
 
     /**
@@ -95,7 +104,7 @@ class GetDeviceDataLog extends GetDeviceData
     public function mapResponse(ResponseInterface $response)
     {
         $responseData = $response->getData();
-        if(!$this->asArray) {
+        if(!$this->asArray && !$this->asSource) {
 
             return (function () use ($responseData) {
                 foreach ($responseData as $time => $data) {
@@ -110,6 +119,10 @@ class GetDeviceDataLog extends GetDeviceData
         }
 
         $result = [];
+
+        if($this->asSource){
+            return $responseData;
+        }
 
         foreach ($responseData as $time => $data){
             if(!isset($data['time'])){

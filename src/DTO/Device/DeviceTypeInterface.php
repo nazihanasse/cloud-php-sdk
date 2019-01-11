@@ -40,6 +40,4 @@ interface DeviceTypeInterface
     const TYPE_CAMERAS = 0;
 
     const TYPE_METERS_0 = 350;
-
-    const TYPE_DEVICE_TYPE_255 = 255;
 }

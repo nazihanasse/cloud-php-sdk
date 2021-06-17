@@ -132,12 +132,12 @@ class Response implements ResponseInterface
     public function getIdFromLocation()
     {
         $headers = $this->getHeaders();
-
-        if(!isset($headers['Location'])){
+        $headers = array_change_key_case($headers);
+        if(!isset($headers['location'])){
             throw new CloudQueryException('Location header is missing !');
         }
 
-        preg_match_all("/([\d]+)/", current($headers['Location']), $matches);
+        preg_match_all("/([\d]+)/", current($headers['location']), $matches);
 
         return !empty($matches[0][0]) ? (int)$matches[0][0] : null;
     }

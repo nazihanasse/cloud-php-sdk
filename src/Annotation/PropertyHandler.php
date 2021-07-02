@@ -184,6 +184,7 @@ class PropertyHandler implements AnnotationHandlerInterface
                 $value = (int)$value; break;
             case 'string':
                 $value = (string)$value; break;
+            case 'real':
             case 'float':
                 $value = (float)$value; break;
             case 'bool':
@@ -191,8 +192,6 @@ class PropertyHandler implements AnnotationHandlerInterface
                 $value = (bool)$value; break;
             case 'double':
                 $value = (double)$value; break;
-            case 'real':
-                $value = (real)$value; break;
             case 'object':
                 $value = (object)$value; break;
             case 'array':
